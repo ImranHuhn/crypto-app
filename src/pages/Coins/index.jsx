@@ -2,7 +2,7 @@ import React from "react";
 
 class Coins extends React.Component {
   render() {
-    return <div>Home page test</div>;
+    return <div className="text">Home page test</div>;
   }
 }
 
