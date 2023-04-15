@@ -6,6 +6,10 @@ import Coins from "./pages/Coins";
 import Portfolio from "./pages/Portfolio";
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    list-style-type: none;
+    text-decoration: none;
+  }
   body {
     background: ${(props) => props.theme.main};
   }
