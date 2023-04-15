@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import Home from "./pages/Home";
+import Coins from "./pages/Coins";
 
-function App() {
-  const [count, setCount] = useState(0)
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: ${(props) => props.theme.main};
+  }
+  div {
+    color: ${(props) => props.theme.text}
+  }
+`;
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+const lightTheme = {
+  main: "white",
+  text: "black"
+};
+
+const darkTheme = {
+  main: "black",
+  text: "white"
+};
+class App extends React.Component {
+  state = {
+    on: false,
+  };
+
+  handleClick = () => {
+    this.setState({ on: !this.state.on });
+  };
+
+  render() {
+    return (
+      <ThemeProvider theme={this.state.on ? lightTheme : darkTheme }>
+        <GlobalStyle/>
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/Coins">Coins</Link>
+                </li>
+              </ul>
+              <button onClick={this.handleClick}>{this.state.on ? "ON" : "OFF"}</button>
+            </nav>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/Coins" component={Coins} />
+            </Switch>
+          </div>
+        </Router>
+      </ThemeProvider>
+    );
+  }
 }
 
-export default App
+export default App;
