@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
 import Coins from "./pages/Coins";
 
@@ -37,7 +38,8 @@ class App extends React.Component {
         <GlobalStyle/>
         <Router>
           <div>
-            <nav>
+            <Navbar handleClick={this.handleClick} on={this.state.on} />
+            {/* <nav>
               <ul>
                 <li>
                   <Link to="/">Home</Link>
@@ -47,7 +49,7 @@ class App extends React.Component {
                 </li>
               </ul>
               <button onClick={this.handleClick}>{this.state.on ? "ON" : "OFF"}</button>
-            </nav>
+            </nav> */}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/Coins" component={Coins} />
