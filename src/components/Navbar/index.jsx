@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {ReactComponent as ReactTheme} from "../../assets/theme.svg"
+import { DarkTheme, MagnifyIcon } from "../IconComponent";
 
 class Navbar extends React.Component {
   render() {
@@ -14,19 +14,22 @@ class Navbar extends React.Component {
       >
         <ul style={{ display: "flex" }}>
           <li>
-            <Link className="text" to="/">Coins</Link>
+            <Link className="text" to="/">
+              Coins
+            </Link>
           </li>
           <li>
-            <Link className="text" to="/portfolio">Portfolio</Link>
+            <Link className="text" to="/portfolio">
+              Portfolio
+            </Link>
           </li>
         </ul>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div className="text">
-            MagnifyIcon
+            <MagnifyIcon/>
             <input placeholder="Search..." />
           </div>
           <div>
-            <ReactTheme/>
             <button>(Currency Icon) Currency</button>
             <ul style={{ display: "none" }}>
               <li>USD</li>
@@ -38,7 +41,8 @@ class Navbar extends React.Component {
           </div>
           <div>
             <button onClick={this.props.handleClick}>
-              {this.props.on ? "Icon ON" : "Icon OFF"}
+              {/* {this.props.on ? "Icon ON" : "Icon OFF"} */}
+              <DarkTheme/>
             </button>
           </div>
         </div>
