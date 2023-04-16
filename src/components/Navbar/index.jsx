@@ -1,6 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { DarkTheme, MagnifyIcon } from "../IconComponent";
+import styled from "styled-components";
+import { DarkTheme, MagnifyIcon, ChevronDown } from "../IconComponent";
+
+const StyledLink = styled(Link)`
+  background-color: red;
+  margin: auto 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  height: 100%
+`;
 
 class Navbar extends React.Component {
   render() {
@@ -10,27 +23,54 @@ class Navbar extends React.Component {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          height: "40px"
         }}
       >
-        <ul style={{ display: "flex" }}>
-          <li>
-            <Link className="text" to="/">
+        <div style={{ display: "flex", height:"100%" }}>
+          <div
+            style={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "center",
+              height:"100%"
+            }}
+          >
+            <StyledLink className="text" to="/">
               Coins
-            </Link>
-          </li>
-          <li>
-            <Link className="text" to="/portfolio">
-              Portfolio
-            </Link>
-          </li>
-        </ul>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div className="text">
-            <MagnifyIcon/>
-            <input placeholder="Search..." />
+            </StyledLink>
           </div>
-          <div>
-            <button>(Currency Icon) Currency</button>
+          <div
+            style={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <StyledLink className="text" to="/portfolio">
+              Portfolio
+            </StyledLink>
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", height:"100%" }}>
+          <div
+            className="text"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              position: "relative",
+              height: "100%"
+            }}
+          >
+            <MagnifyIcon
+              style={{ width: "20px", position: "absolute", color: "black" }}
+            />
+            <input style={{ paddingLeft: "20px", height:"100%" }} placeholder="Search..." />
+          </div>
+          <div style={{height:"100%"}}>
+            <button style={{ display: "flex", alignItems:"center", height:"100%" }}>
+              (Currency Icon) Currency
+              <ChevronDown style={{ width: "20px" }} />
+            </button>
             <ul style={{ display: "none" }}>
               <li>USD</li>
               <li>GBP</li>
@@ -39,10 +79,10 @@ class Navbar extends React.Component {
               <li>ETH</li>
             </ul>
           </div>
-          <div>
-            <button onClick={this.props.handleClick}>
+          <div style={{height:"100%"}}>
+            <button style={{height:"100%", width:"40px"}} onClick={this.props.handleClick}>
               {/* {this.props.on ? "Icon ON" : "Icon OFF"} */}
-              <DarkTheme/>
+              <DarkTheme style={{ height: "18px" }} />
             </button>
           </div>
         </div>

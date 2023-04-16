@@ -7,8 +7,10 @@ import Portfolio from "./pages/Portfolio";
 
 const GlobalStyle = createGlobalStyle`
   * {
+    box-sizing: border-box;
     list-style-type: none;
     text-decoration: none;
+    font-family: sans-serif;
   }
   body {
     background: ${(props) => props.theme.main};
