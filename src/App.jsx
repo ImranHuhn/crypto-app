@@ -14,20 +14,39 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: ${(props) => props.theme.main};
+    margin: 0;
   }
   .text {
-    color: ${(props) => props.theme.text}
+    color: ${(props) => props.theme.text};
+  }
+
+  .button {
+    background-color: ${(props) => props.theme.secondary}
+  }
+
+  ::placeholder {
+    color: ${(props) => props.theme.text};
+  }
+
+  :-ms-input-placeholder {
+    color: ${(props) => props.theme.text};
+  }
+
+  ::-ms-input-placeholder {
+    color: ${(props) => props.theme.text};
   }
 `;
 
 const lightTheme = {
-  main: "white",
-  text: "black",
+  main: "#d3d3d3",
+  secondary: "#d3d3d3",
+  text: "#000",
 };
 
 const darkTheme = {
-  main: "black",
-  text: "white",
+  main: "#1f2128",
+  secondary: "#2c2f36",
+  text: "#fff",
 };
 class App extends React.Component {
   state = {
