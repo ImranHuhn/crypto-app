@@ -1,5 +1,7 @@
 import React from "react";
 import { getCoins } from "../../utils/api";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 class Coins extends React.Component {
   state = {
@@ -53,45 +55,45 @@ class Coins extends React.Component {
           <tbody>
             {Object.keys(this.state.allCoins).map((key) => {
               return (
-                <tr>
-                  <td>{this.state.allCoins[key].market_cap_rank}</td>
+                <tr key={crypto.randomUUID()}>
+                  <td>
+                    {this.state.allCoins[key]?.market_cap_rank || <Skeleton />}
+                  </td>
                   <td>
                     <img
-                      src={this.state.allCoins[key].image}
+                      src={this.state.allCoins[key]?.image || <Skeleton />}
                       style={{ width: "24px" }}
                     />
-                    {this.state.allCoins[key].id} (
-                    {this.state.allCoins[key].symbol})
-                  </td>
-                  <td>{this.state.allCoins[key].current_price}</td>
-                  <td>
-                    {
-                      this.state.allCoins[key]
-                        .price_change_percentage_1h_in_currency
-                    }
+                    {this.state.allCoins[key]?.id || <Skeleton />} (
+                    {this.state.allCoins[key]?.symbol || <Skeleton />})
                   </td>
                   <td>
-                    {
-                      this.state.allCoins[key]
-                        .price_change_percentage_24h_in_currency
-                    }
+                    {this.state.allCoins[key]?.current_price || <Skeleton />}
                   </td>
                   <td>
-                    {
-                      this.state.allCoins[key]
-                        .price_change_percentage_7d_in_currency
-                    }
+                    {this.state.allCoins[key]
+                      ?.price_change_percentage_1h_in_currency || <Skeleton />}
                   </td>
                   <td>
-                    {this.state.allCoins[key].total_volume}
+                    {this.state.allCoins[key]
+                      ?.price_change_percentage_24h_in_currency || <Skeleton />}
+                  </td>
+                  <td>
+                    {this.state.allCoins[key]
+                      ?.price_change_percentage_7d_in_currency || <Skeleton />}
+                  </td>
+                  <td>
+                    {this.state.allCoins[key]?.total_volume || <Skeleton />}
                     {" / "}
-                    {this.state.allCoins[key].market_cap}
+                    {this.state.allCoins[key]?.market_cap || <Skeleton />}
                   </td>
                   <td>
                     {" "}
-                    {this.state.allCoins[key].circulating_supply}
+                    {this.state.allCoins[key]?.circulating_supply || (
+                      <Skeleton />
+                    )}
                     {" / "}
-                    {this.state.allCoins[key].total_supply}
+                    {this.state.allCoins[key]?.total_supply || <Skeleton />}
                   </td>
                   <td>9</td>
                 </tr>
