@@ -106,7 +106,7 @@ class Navbar extends React.Component {
                   height: "44px",
                   borderRadius: "8px",
                   border: "none",
-                  margin: "0 20px",
+                  margin: "0 10px",
                   width: "100px",
                 }}
               >
@@ -131,7 +131,7 @@ class Navbar extends React.Component {
                 border: "none",
                 position: "absolute",
                 right: "0",
-                margin: "0 20px",
+                margin: "0 8px",
               }}
               onClick={this.props.handleClick}
             >

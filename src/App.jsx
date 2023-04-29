@@ -16,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme.main};
     margin: 0;
   }
+
+  th,td {
+    text-align: left;
+  }
+
   .text {
     color: ${(props) => props.theme.text};
   }
