@@ -19,7 +19,7 @@ class Coins extends React.Component {
   componentDidMount = () => {
     const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
     this.handleStorageData(storageData);
-    this.handleAllCoins();
+    // this.handleAllCoins();
   };
   render() {
     console.log("$$$", this.state.allCoins);
@@ -54,14 +54,45 @@ class Coins extends React.Component {
             {Object.keys(this.state.allCoins).map((key) => {
               return (
                 <tr>
-                  <td>this.state.allCoins[key].id</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                  <td>6</td>
-                  <td>7</td>
-                  <td>8</td>
+                  <td>{this.state.allCoins[key].market_cap_rank}</td>
+                  <td>
+                    <img
+                      src={this.state.allCoins[key].image}
+                      style={{ width: "24px" }}
+                    />
+                    {this.state.allCoins[key].id} (
+                    {this.state.allCoins[key].symbol})
+                  </td>
+                  <td>{this.state.allCoins[key].current_price}</td>
+                  <td>
+                    {
+                      this.state.allCoins[key]
+                        .price_change_percentage_1h_in_currency
+                    }
+                  </td>
+                  <td>
+                    {
+                      this.state.allCoins[key]
+                        .price_change_percentage_24h_in_currency
+                    }
+                  </td>
+                  <td>
+                    {
+                      this.state.allCoins[key]
+                        .price_change_percentage_7d_in_currency
+                    }
+                  </td>
+                  <td>
+                    {this.state.allCoins[key].total_volume}
+                    {" / "}
+                    {this.state.allCoins[key].market_cap}
+                  </td>
+                  <td>
+                    {" "}
+                    {this.state.allCoins[key].circulating_supply}
+                    {" / "}
+                    {this.state.allCoins[key].total_supply}
+                  </td>
                   <td>9</td>
                 </tr>
               );
