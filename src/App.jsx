@@ -25,8 +25,20 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.text};
   }
 
-  .button {
-    background-color: ${(props) => props.theme.secondary}
+  .color1 {
+    background: ${(props) => props.theme.main};
+  }
+
+  .color2 {
+    background-color: ${(props) => props.theme.second}
+  }
+
+  .color3 {
+    background-color: ${(props) => props.theme.third}
+  }
+
+  .fill {
+    fill: ${(props) => props.theme.fill}
   }
 
   ::placeholder {
@@ -43,15 +55,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const lightTheme = {
-  main: "#d3d3d3",
-  secondary: "#d3d3d3",
+  main: "#F2F2F2",
+  second: "#F2F2F2",
+  third: "#fff",
   text: "#000",
+  fill: "#000",
 };
 
 const darkTheme = {
   main: "#1f2128",
-  secondary: "#2c2f36",
+  second: "#2c2f36",
+  third: "#191b1f",
   text: "#fff",
+  fill: "#fff",
 };
 class App extends React.Component {
   state = {

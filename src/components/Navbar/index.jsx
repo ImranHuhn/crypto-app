@@ -47,7 +47,7 @@ class Navbar extends React.Component {
                 margin: "0 10px",
               }}
             >
-              <StyledLink className="text button" to="/">
+              <StyledLink className="text color2" to="/">
                 Coins
               </StyledLink>
             </div>
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
                 margin: "0 10px",
               }}
             >
-              <StyledLink className="text button" to="/portfolio">
+              <StyledLink className="text color2" to="/portfolio">
                 Portfolio
               </StyledLink>
             </div>
@@ -78,27 +78,26 @@ class Navbar extends React.Component {
               }}
             >
               <MagnifyIcon
+              className="text"
                 style={{
                   width: "20px",
                   position: "absolute",
-                  color: `${this.props.on ? "#000" : "#fff"}`,
                   left: "10px",
                 }}
               />
               <input
+              className="text color2"
                 style={{
                   paddingLeft: "35px",
                   height: "44px",
                   borderRadius: "8px",
                   border: "none",
-                  backgroundColor: `${this.props.on ? "#d3d3d3" : "#2c2f36"}`,
-                  color: `${this.props.on ? "#000" : "#fff"}`,
                   width: "400px",
                 }}
                 placeholder="Search..."
               />
               <button
-                className="text button"
+                className="text color2"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -123,7 +122,7 @@ class Navbar extends React.Component {
               </ul>
             </div>
             <button
-              className="button"
+              className="color2"
               style={{
                 height: "44px",
                 width: "40px",
@@ -136,9 +135,9 @@ class Navbar extends React.Component {
               onClick={this.props.handleClick}
             >
               <DarkThemeIcon
+              className="fill"
                 style={{
                   height: "18px",
-                  fill: `${this.props.on ? "#000" : "#fff"}`,
                 }}
               />
             </button>
