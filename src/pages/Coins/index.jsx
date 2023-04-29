@@ -1,11 +1,31 @@
 import React from "react";
+import { getCoins } from "../../utils/api";
 
 class Coins extends React.Component {
+  state = {
+    allCoins: {},
+  };
+
+  handleAllCoins = async () => {
+    const newAllCoins = await getCoins();
+    this.setState({ allCoins: newAllCoins });
+  };
   render() {
+    console.log("$$$",this.state.allCoins)
     return (
-      <div className="text" style={{ width:"95%", margin:"0 auto", padding:"0 10px"}}>
+      <div
+        className="text"
+        style={{ width: "95%", margin: "0 auto", padding: "0 10px" }}
+      >
         <h1>Your overview</h1>
-        <table style={{margin:"0 auto", width:"100%", backgroundColor:"#191b1f", borderRadius:"10px"}}>
+        <table
+          style={{
+            margin: "0 auto",
+            width: "100%",
+            backgroundColor: "#191b1f",
+            borderRadius: "10px",
+          }}
+        >
           <tr>
             <th>#</th>
             <th>Name</th>
