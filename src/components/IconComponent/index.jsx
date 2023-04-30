@@ -1,7 +1,6 @@
-export const DarkThemeIcon = (props) => {
+export const DarkThemeIcon = () => {
   return (
     <svg
-      {...props}
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +17,9 @@ export const DarkThemeIcon = (props) => {
   );
 };
 
-export const MagnifyIcon = (props) => {
+export const MagnifyIcon = () => {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -38,10 +36,9 @@ export const MagnifyIcon = (props) => {
   );
 };
 
-export const ChevronIcon = (props) => {
+export const ChevronIcon = () => {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -58,10 +55,9 @@ export const ChevronIcon = (props) => {
   );
 };
 
-export const DollarIcon = (props) => {
+export const DollarIcon = () => {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
