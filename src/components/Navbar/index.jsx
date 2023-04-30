@@ -15,6 +15,7 @@ import {
   ChevronIconWrapper,
   CurrencyList,
   DarkThemeIconWrapper,
+  SubNav,
 } from "./Navbar.styles";
 import {
   DarkThemeIcon,
@@ -26,7 +27,7 @@ import {
 class Navbar extends React.Component {
   render() {
     return (
-      <Container $on={this.props.on}>
+      <Container className="third" $on={this.props.on}>
         <Nav>
           <LinkContainer>
             <LinkWrapper>
@@ -42,10 +43,10 @@ class Navbar extends React.Component {
           </LinkContainer>
           <RightNavbarWrapper>
             <InputWrapper>
-              <MagnifyIconWrapper $on={this.props.on}>
+              <MagnifyIconWrapper className="text" $on={this.props.on}>
                 <MagnifyIcon />
               </MagnifyIconWrapper>
-              <Input $on={this.props.on} placeholder="Search..." />
+              <Input className="text second" $on={this.props.on} placeholder="Search..." />
               <CurrencyButton className="text button">
                 <DollarIconWrapper>
                   <DollarIcon />
@@ -64,12 +65,22 @@ class Navbar extends React.Component {
               </CurrencyList>
             </InputWrapper>
             <ThemeButton className="button" onClick={this.props.handleClick}>
-              <DarkThemeIconWrapper $on={this.props.on}>
+              <DarkThemeIconWrapper className="fill" $on={this.props.on}>
                 <DarkThemeIcon />
               </DarkThemeIconWrapper>
             </ThemeButton>
           </RightNavbarWrapper>
         </Nav>
+        <SubNav className="text third">
+          <div>Coins: 7884</div>
+          <div>Exchange: 622</div>
+          <div>()</div>
+          <div>$1.69T ^</div>
+          <div>()</div>
+          <div>$124.45B ======</div>
+          <div>() 44% ======</div>
+          <div>() 21% ======</div>
+        </SubNav>
       </Container>
     );
   }

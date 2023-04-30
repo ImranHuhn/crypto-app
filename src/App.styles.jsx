@@ -7,16 +7,30 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     font-family: sans-serif;
   }
+
   body {
     background: ${(props) => props.theme.main};
     margin: 0;
   }
+
   .text {
     color: ${(props) => props.theme.text};
   }
 
-  .button {
-    background-color: ${(props) => props.theme.secondary}
+  .fill {
+    fill: ${(props) => props.theme.text};
+  }
+
+  .main {
+    background: ${(props) => props.theme.main};
+  }
+
+  .second, .button {
+    background-color: ${(props) => props.theme.second}
+  }
+
+  .third {
+    background-color: ${(props) => props.theme.third}
   }
 
   ::placeholder {
@@ -34,12 +48,14 @@ export const GlobalStyle = createGlobalStyle`
 
 export const lightTheme = {
   main: "#d3d3d3",
-  secondary: "#d3d3d3",
+  second: "#d3d3d3",
+  third: "#fff",
   text: "#000",
 };
 
 export const darkTheme = {
   main: "#1f2128",
-  secondary: "#2c2f36",
+  second: "#2c2f36",
+  third: "#191b1f",
   text: "#fff",
 };

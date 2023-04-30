@@ -11,7 +11,6 @@ export const StyledLink = styled(Link)`
 `;
 
 export const Container = styled.div`
-  background-color: ${(props) => (props.$on ? "#fff;" : "#191b1f;")};
   position: relative;
 `;
 
@@ -56,8 +55,6 @@ padding-left: 35px;
 height: 44px;
 border-radius: 8px;
 border: none;
-background-color: ${(props) => (props.$on ? "#d3d3d3;" : "#2c2f36;")}
-color: ${(props) => (props.$on ? "#000;" : "#fff;")}
 width: 400px;
 `;
 
@@ -89,7 +86,6 @@ export const DollarIconWrapper = styled.div`
 export const MagnifyIconWrapper = styled.div`
 width: 20px;
 position: absolute;
-color: ${(props) => (props.$on ? "#000;" : "#fff;")}
 left: 10px;
 `;
 
@@ -106,5 +102,18 @@ export const DarkThemeIconWrapper = styled.div`
   justify-content: center;
   margin: auto;
   width: 24px;
-  fill: ${(props) => (props.$on ? "#000;" : "#fff;")};
+`;
+
+export const SubNav = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #191b1f;
+  width: 50%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
