@@ -1,4 +1,5 @@
 import React from "react";
+import { getMarketData } from "../../utils/api";
 import {
   StyledLink,
   Container,
@@ -25,7 +26,30 @@ import {
 } from "../IconComponent";
 
 class Navbar extends React.Component {
+  state = {
+    coins: "",
+    exchanges: "",
+    bitcoin: "",
+    ethereum: "",
+  };
+
+  handleMarketData = async () => {
+    const newData = await getMarketData();
+    // console.log(newData.data.market_cap_percentage.btc);
+    this.setState({
+      coins: newData.data.active_cryptocurrencies,
+      exchanges: newData.data.markets,
+      bitcoin: newData.data.market_cap_percentage.btc,
+      ethereum: newData.data.market_cap_percentage.eth,
+    });
+  };
+
+  componentDidMount = () => {
+    this.handleMarketData();
+  };
+
   render() {
+    console.log("$$$", this.state);
     return (
       <Container className="third" $on={this.props.on}>
         <Nav>
@@ -46,7 +70,11 @@ class Navbar extends React.Component {
               <MagnifyIconWrapper className="text" $on={this.props.on}>
                 <MagnifyIcon />
               </MagnifyIconWrapper>
-              <Input className="text second" $on={this.props.on} placeholder="Search..." />
+              <Input
+                className="text second"
+                $on={this.props.on}
+                placeholder="Search..."
+              />
               <CurrencyButton className="text button">
                 <DollarIconWrapper>
                   <DollarIcon />
@@ -72,14 +100,14 @@ class Navbar extends React.Component {
           </RightNavbarWrapper>
         </Nav>
         <SubNav className="text third">
-          <div>Coins: 7884</div>
-          <div>Exchange: 622</div>
-          <div>•</div>
+          <div>Coins {this.state.coins}</div>
+          <div>Exchange {this.state.exchanges}</div>
+          <h2 style={{ margin: "auto 5px" }}>•</h2>
           <div>$1.69T ^</div>
-          <div>•</div>
+          <h2 style={{ margin: "auto 5px" }}>•</h2>
           <div>$124.45B ======</div>
-          <div>() 44% ======</div>
-          <div>() 21% ======</div>
+          <div>() {this.state.bitcoin}% ======</div>
+          <div>() {this.state.ethereum}% ======</div>
         </SubNav>
       </Container>
     );

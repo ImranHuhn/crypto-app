@@ -7,6 +7,15 @@ export const getCoins = async (page) => {
     );
     return data;
   } catch (error) {
-    alert(error);
+    console.log(error);
+  }
+};
+
+export const getMarketData = async () => {
+  try {
+    const { data } = await axios(`https://api.coingecko.com/api/v3/global`);
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };
