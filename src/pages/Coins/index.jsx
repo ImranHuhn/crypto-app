@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 
 let page = 0;
+
 class Coins extends React.Component {
   state = {
     allCoins: [],
@@ -14,7 +15,7 @@ class Coins extends React.Component {
   handleInfiniteScroll = async () => {
     const newData = await getCoins(parseInt(page));
     const newAllCoins = [...this.state.allCoins, ...newData];
-    if (this.state.allCoins.length - 1 >= 50) {
+    if (this.state.allCoins.length - 1 >= this.props.totalCoins) {
       this.setState({ hasMore: false });
     }
     setTimeout(() => {
@@ -40,7 +41,7 @@ class Coins extends React.Component {
           }
           endMessage={
             <h1 style={{ textAlign: "center" }} className="text">
-              All data have been loaded!
+              All coins have been loaded!
             </h1>
           }
         >

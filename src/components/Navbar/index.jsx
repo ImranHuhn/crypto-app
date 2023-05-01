@@ -1,5 +1,4 @@
 import React from "react";
-import { getMarketData } from "../../utils/api";
 import {
   StyledLink,
   Container,
@@ -26,30 +25,7 @@ import {
 } from "../IconComponent";
 
 class Navbar extends React.Component {
-  state = {
-    coins: "",
-    exchanges: "",
-    bitcoin: "",
-    ethereum: "",
-  };
-
-  handleMarketData = async () => {
-    const newData = await getMarketData();
-    // console.log(newData.data.market_cap_percentage.btc);
-    this.setState({
-      coins: newData.data.active_cryptocurrencies,
-      exchanges: newData.data.markets,
-      bitcoin: newData.data.market_cap_percentage.btc,
-      ethereum: newData.data.market_cap_percentage.eth,
-    });
-  };
-
-  componentDidMount = () => {
-    this.handleMarketData();
-  };
-
   render() {
-    console.log("$$$", this.state);
     return (
       <Container className="third" $on={this.props.on}>
         <Nav>
@@ -100,14 +76,24 @@ class Navbar extends React.Component {
           </RightNavbarWrapper>
         </Nav>
         <SubNav className="text third">
-          <div>Coins {this.state.coins}</div>
-          <div>Exchange {this.state.exchanges}</div>
+          <div>Coins {this.props.totalCoins}</div>
+          <div>Exchange {this.props.totalExchanges}</div>
           <h2 style={{ margin: "auto 5px" }}>•</h2>
-          <div>$1.69T ^</div>
+          <div>
+            ${this.props.marketCap?.usd}T
+            {/* selected currency from nav for "total_market_cap" */}
+          </div>
+          <div>
+            ^
+            {/* arrow up down with determine if value is positive or negative for "market_cap_change_percentage_24h_usd" */}
+          </div>
           <h2 style={{ margin: "auto 5px" }}>•</h2>
-          <div>$124.45B ======</div>
-          <div>() {this.state.bitcoin}% ======</div>
-          <div>() {this.state.ethereum}% ======</div>
+          <div>
+            ${this.props.marketVolume?.usd}B
+            {/* selected currency from nav for "total_volume" */} ======
+          </div>
+          <div>() {this.props.marketCap?.btc}% ======</div>
+          <div>() {this.props.marketCap?.eth}% ======</div>
         </SubNav>
       </Container>
     );
