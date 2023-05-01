@@ -51,11 +51,11 @@ export const InputWrapper = styled.div`
 `;
 
 export const Input = styled.input`
-padding-left: 35px;
-height: 44px;
-border-radius: 8px;
-border: none;
-width: 400px;
+  padding-left: 35px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  width: 400px;
 `;
 
 export const CurrencyButton = styled.button`
@@ -84,13 +84,16 @@ export const DollarIconWrapper = styled.div`
 `;
 
 export const MagnifyIconWrapper = styled.div`
-width: 20px;
-position: absolute;
-left: 10px;
+  width: 20px;
+  position: absolute;
+  left: 10px;
 `;
 
 export const ChevronIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: 20px;
+  transform: rotate(180deg);
 `;
 
 export const CurrencyList = styled.ul`

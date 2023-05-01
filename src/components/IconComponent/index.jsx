@@ -39,18 +39,17 @@ export const MagnifyIcon = () => {
 export const ChevronIcon = () => {
   return (
     <svg
+      fill="#000000"
+      version="1.1"
+      id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className="w-6 h-6"
+      xmlSpace="preserve"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-      />
+      <path d="M18.5,15.5l-6-7l-6,7H18.5z" />
+      <rect fill="none" width="24" height="24" />
+      <rect fill="none" width="24" height="24" />
     </svg>
   );
 };
