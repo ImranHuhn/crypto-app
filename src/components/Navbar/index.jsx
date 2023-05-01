@@ -90,7 +90,7 @@ class Navbar extends React.Component {
           <h2 style={{ margin: "auto 5px" }}>•</h2>
           <div>
             ${this.props.marketVolume?.usd}B
-            {/* selected currency from nav for "total_volume" */} ======
+            {/* selected currency from nav for "total_volume" */} {/* bar = total volume / total market cap */}
           </div>
           <div>() {this.props.marketCap?.btc}% ======</div>
           <div>() {this.props.marketCap?.eth}% ======</div>

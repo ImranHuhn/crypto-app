@@ -6,7 +6,7 @@ import { getCoins } from "../../utils/api";
 
 let page = 0;
 
-class Coins extends React.Component {
+class Landing extends React.Component {
   state = {
     allCoins: [],
     hasMore: true,
@@ -79,57 +79,44 @@ class Coins extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {Object.keys(this.state.allCoins).map((key) => {
+                {this.state.allCoins.map((item) => {
                   return (
                     <tr style={{ height: "100px" }} key={crypto.randomUUID()}>
-                      <td>
-                        {this.state.allCoins[key]?.market_cap_rank || (
-                          <Skeleton />
-                        )}
-                      </td>
+                      <td>{item?.market_cap_rank || <Skeleton />}</td>
                       <td>
                         <img
-                          src={this.state.allCoins[key]?.image || <Skeleton />}
+                          src={item?.image || <Skeleton />}
                           style={{ width: "24px" }}
                         />
-                        {this.state.allCoins[key]?.id || <Skeleton />} (
-                        {this.state.allCoins[key]?.symbol || <Skeleton />})
+                        {item?.id || <Skeleton />} (
+                        {item?.symbol || <Skeleton />})
                       </td>
+                      <td>{item?.current_price || <Skeleton />}</td>
                       <td>
-                        {this.state.allCoins[key]?.current_price || (
+                        {item?.price_change_percentage_1h_in_currency || (
                           <Skeleton />
                         )}
                       </td>
                       <td>
-                        {this.state.allCoins[key]
-                          ?.price_change_percentage_1h_in_currency || (
+                        {item?.price_change_percentage_24h_in_currency || (
                           <Skeleton />
                         )}
                       </td>
                       <td>
-                        {this.state.allCoins[key]
-                          ?.price_change_percentage_24h_in_currency || (
+                        {item?.price_change_percentage_7d_in_currency || (
                           <Skeleton />
                         )}
                       </td>
                       <td>
-                        {this.state.allCoins[key]
-                          ?.price_change_percentage_7d_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {this.state.allCoins[key]?.total_volume || <Skeleton />}
+                        {item?.total_volume || <Skeleton />}
                         {" / "}
-                        {this.state.allCoins[key]?.market_cap || <Skeleton />}
+                        {item?.market_cap || <Skeleton />}
                       </td>
                       <td>
                         {" "}
-                        {this.state.allCoins[key]?.circulating_supply || (
-                          <Skeleton />
-                        )}
+                        {item?.circulating_supply || <Skeleton />}
                         {" / "}
-                        {this.state.allCoins[key]?.total_supply || <Skeleton />}
+                        {item?.total_supply || <Skeleton />}
                       </td>
                       <td>9</td>
                     </tr>
@@ -144,4 +131,4 @@ class Coins extends React.Component {
   }
 }
 
-export default Coins;
+export default Landing;
