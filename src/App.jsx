@@ -12,8 +12,16 @@ class App extends React.Component {
   };
 
   handleClick = () => {
-    this.setState({ on: !this.state.on });
+    const themeSetting = !this.state.on
+    this.setState({ on: themeSetting });
+    localStorage.setItem("themeSetting", JSON.stringify(themeSetting))
   };
+
+  componentDidMount = () => {
+    const storageSetting = JSON.parse(localStorage.getItem("themeSetting"))
+    console.log(storageSetting)
+    this.setState({ on: storageSetting})
+  }
 
   render() {
     return (

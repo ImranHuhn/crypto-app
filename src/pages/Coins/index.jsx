@@ -27,7 +27,6 @@ class Coins extends React.Component {
     this.handleInfiniteScroll();
   };
   render() {
-    console.log("$$$", this.state.allCoins);
     return (
       <div style={{ overflow: "auto" }}>
         <InfiniteScroll

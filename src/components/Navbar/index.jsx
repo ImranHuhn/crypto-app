@@ -74,9 +74,9 @@ class Navbar extends React.Component {
         <SubNav className="text third">
           <div>Coins: 7884</div>
           <div>Exchange: 622</div>
-          <div>()</div>
+          <div>•</div>
           <div>$1.69T ^</div>
-          <div>()</div>
+          <div>•</div>
           <div>$124.45B ======</div>
           <div>() 44% ======</div>
           <div>() 21% ======</div>
