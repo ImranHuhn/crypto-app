@@ -1,140 +1,145 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import InfiniteScroll from "react-infinite-scroller";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 
+let page = 0;
 class Coins extends React.Component {
   state = {
-    allCoins: Array.from({ length: 10 }),
+    allCoins: [],
     hasMore: true,
   };
 
-  handleLoadMore = async () => {
-    console.log("loading");
-    if (this.state.allCoins.length < 50) {
-      // const newData = await this.handleAllCoins();
-      setTimeout(() => {
-        this.setState({
-          allCoins: this.state.allCoins.concat(Array.from({ length: 10 })),
-        });
-      }, 1500);
+  handleInfiniteScroll = async () => {
+    const newData = await getCoins(parseInt(page));
+    const newAllCoins = [...this.state.allCoins, ...newData];
+    if (this.state.allCoins.length - 1 >= 50) {
+      this.setState({ hasMore: false });
     }
+    setTimeout(() => {
+      this.setState({ allCoins: newAllCoins });
+    }, 1500);
+    page++;
   };
 
-  handleAllCoins = async () => {
-    const newAllCoins = await getCoins();
-    this.setState({ allCoins: newAllCoins });
-    localStorage.setItem("allCoins", JSON.stringify(newAllCoins));
-  };
-
-  handleStorageData = (storageData) => {
-    this.setState({ allCoins: storageData });
-  };
-
-  componentDidMount = () => {
-    const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
-    this.handleStorageData(storageData);
-    // this.handleAllCoins();
+  componentDidMount = async () => {
+    this.handleInfiniteScroll();
   };
   render() {
     console.log("$$$", this.state.allCoins);
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.handleLoadMore}
-        hasMore={true || false}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-      >
-        <div
-          className="text"
-          style={{ width: "95%", margin: "0 auto", padding: "0 10px", overflow:"auto" }}
+      <div style={{ overflow: "auto" }}>
+        <InfiniteScroll
+          dataLength={this.state.allCoins.length}
+          next={this.handleInfiniteScroll}
+          hasMore={this.state.hasMore}
+          loader={
+            <h4 style={{ textAlign: "center" }} className="text">
+              Loading...
+            </h4>
+          }
+          endMessage={
+            <h1 style={{ textAlign: "center" }} className="text">
+              All data have been loaded!
+            </h1>
+          }
         >
-          <h1 className="text">Your overview</h1>
-          <table
-            className="color3"
+          <div
+            className="text"
             style={{
+              width: "95%",
               margin: "0 auto",
-              width: "100%",
-              borderRadius: "10px",
+              padding: "0 10px",
+              overflow: "auto",
             }}
           >
-            <thead>
-              <tr style={{ height: "80px" }}>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>1h%</th>
-                <th>24h%</th>
-                <th>7d%</th>
-                <th>24h Volume/Market Cap</th>
-                <th>Circulating/Total Supply</th>
-                <th>Last 7d</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(this.state.allCoins).map((key) => {
-                return (
-                  <tr style={{ height: "80px" }} key={crypto.randomUUID()}>
-                    <td>
-                      {this.state.allCoins[key]?.market_cap_rank || (
-                        <Skeleton />
-                      )}
-                    </td>
-                    <td>
-                      <img
-                        src={this.state.allCoins[key]?.image || <Skeleton />}
-                        style={{ width: "24px" }}
-                      />
-                      {this.state.allCoins[key]?.id || <Skeleton />} (
-                      {this.state.allCoins[key]?.symbol || <Skeleton />})
-                    </td>
-                    <td>
-                      {this.state.allCoins[key]?.current_price || <Skeleton />}
-                    </td>
-                    <td>
-                      {this.state.allCoins[key]
-                        ?.price_change_percentage_1h_in_currency || (
-                        <Skeleton />
-                      )}
-                    </td>
-                    <td>
-                      {this.state.allCoins[key]
-                        ?.price_change_percentage_24h_in_currency || (
-                        <Skeleton />
-                      )}
-                    </td>
-                    <td>
-                      {this.state.allCoins[key]
-                        ?.price_change_percentage_7d_in_currency || (
-                        <Skeleton />
-                      )}
-                    </td>
-                    <td>
-                      {this.state.allCoins[key]?.total_volume || <Skeleton />}
-                      {" / "}
-                      {this.state.allCoins[key]?.market_cap || <Skeleton />}
-                    </td>
-                    <td>
-                      {" "}
-                      {this.state.allCoins[key]?.circulating_supply || (
-                        <Skeleton />
-                      )}
-                      {" / "}
-                      {this.state.allCoins[key]?.total_supply || <Skeleton />}
-                    </td>
-                    <td>9</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </InfiniteScroll>
+            <h1 className="text">Your Overview</h1>
+            <table
+              className="third"
+              style={{
+                margin: "0 auto",
+                width: "100%",
+                borderRadius: "10px",
+                padding: "0 25px",
+                height: "100vh",
+              }}
+            >
+              <thead>
+                <tr style={{ height: "100px" }}>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>1h%</th>
+                  <th>24h%</th>
+                  <th>7d%</th>
+                  <th>24h Volume/Market Cap</th>
+                  <th>Circulating/Total Supply</th>
+                  <th>Last 7d</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(this.state.allCoins).map((key) => {
+                  return (
+                    <tr style={{ height: "100px" }} key={crypto.randomUUID()}>
+                      <td>
+                        {this.state.allCoins[key]?.market_cap_rank || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        <img
+                          src={this.state.allCoins[key]?.image || <Skeleton />}
+                          style={{ width: "24px" }}
+                        />
+                        {this.state.allCoins[key]?.id || <Skeleton />} (
+                        {this.state.allCoins[key]?.symbol || <Skeleton />})
+                      </td>
+                      <td>
+                        {this.state.allCoins[key]?.current_price || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {this.state.allCoins[key]
+                          ?.price_change_percentage_1h_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {this.state.allCoins[key]
+                          ?.price_change_percentage_24h_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {this.state.allCoins[key]
+                          ?.price_change_percentage_7d_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {this.state.allCoins[key]?.total_volume || <Skeleton />}
+                        {" / "}
+                        {this.state.allCoins[key]?.market_cap || <Skeleton />}
+                      </td>
+                      <td>
+                        {" "}
+                        {this.state.allCoins[key]?.circulating_supply || (
+                          <Skeleton />
+                        )}
+                        {" / "}
+                        {this.state.allCoins[key]?.total_supply || <Skeleton />}
+                      </td>
+                      <td>9</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </InfiniteScroll>
+      </div>
     );
   }
 }
