@@ -4,30 +4,30 @@ import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 
-let page = 0;
-
 class Landing extends React.Component {
   state = {
     allCoins: [],
     hasMore: true,
+    page: 0,
   };
 
   handleInfiniteScroll = async () => {
-    const newData = await getCoins(parseInt(page));
-    const newAllCoins = [...this.state.allCoins, ...newData];
+    const newPage = this.state.page + 1;
+    const newData = await getCoins(parseInt(newPage));
+    const newAllCoins = [...this.state.allCoins, newData];
     if (this.state.allCoins.length - 1 >= this.props.totalCoins) {
       this.setState({ hasMore: false });
     }
     setTimeout(() => {
-      this.setState({ allCoins: newAllCoins });
-    }, 1500);
-    page++;
+      this.setState({ allCoins: newAllCoins, page: newPage });
+    }, 2000);
   };
 
   componentDidMount = async () => {
     this.handleInfiniteScroll();
   };
   render() {
+    console.log(this.state);
     return (
       <div style={{ overflow: "auto" }}>
         <InfiniteScroll
