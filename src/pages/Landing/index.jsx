@@ -14,7 +14,7 @@ class Landing extends React.Component {
   handleInfiniteScroll = async () => {
     const newPage = this.state.page + 1;
     const newData = await getCoins(parseInt(newPage));
-    const newAllCoins = [...this.state.allCoins, newData];
+    const newAllCoins = [...this.state.allCoins, ...newData];
     if (this.state.allCoins.length - 1 >= this.props.totalCoins) {
       this.setState({ hasMore: false });
     }
@@ -84,29 +84,13 @@ class Landing extends React.Component {
                     <tr style={{ height: "100px" }} key={crypto.randomUUID()}>
                       <td>{item?.market_cap_rank || <Skeleton />}</td>
                       <td>
-                        <img
-                          src={item?.image || <Skeleton />}
-                          style={{ width: "24px" }}
-                        />
-                        {item?.id || <Skeleton />} (
-                        {item?.symbol || <Skeleton />})
+                        <img src={item?.image} style={{ width: "24px" }} />
+                        {item?.id || <Skeleton />} ({item?.symbol || <Skeleton />})
                       </td>
                       <td>{item?.current_price || <Skeleton />}</td>
-                      <td>
-                        {item?.price_change_percentage_1h_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {item?.price_change_percentage_24h_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {item?.price_change_percentage_7d_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
+                      <td>{item?.price_change_percentage_1h_in_currency || <Skeleton />}</td>
+                      <td>{item?.price_change_percentage_24h_in_currency || <Skeleton />}</td>
+                      <td>{item?.price_change_percentage_7d_in_currency || <Skeleton />}</td>
                       <td>
                         {item?.total_volume || <Skeleton />}
                         {" / "}
