@@ -23,17 +23,19 @@ class Landing extends React.Component {
   };
 
   sortingManager = () => {
+    let newSort;
     switch (this.state.sort) {
       case null:
-        this.setState({ sort: true });
+        newSort = true;
         break;
       case true:
-        this.setState({ sort: false });
+        newSort = false;
         break;
       case false:
-        this.setState({ sort: null });
+        newSort = null;
         break;
     }
+    this.setState({ sort: newSort });
   };
   // sortingManager = (selection) => {
   //   switch (this.state.sort) {
@@ -109,13 +111,11 @@ class Landing extends React.Component {
     sortedAllCoins.sort((a, b) => {
       switch (this.state.sort) {
         case true:
-          a.market_cap_rank > b.market_cap_rank;
-          break;
+          return a.market_cap_rank - b.market_cap_rank;
         case false:
-          a.market_cap_rank < b.market_cap_rank;
+          return b.market_cap_rank - a.market_cap_rank;
         default:
-          sortedAllCoins;
-          break;
+          return sortedAllCoins;
       }
     });
 
