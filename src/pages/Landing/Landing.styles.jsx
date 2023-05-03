@@ -25,4 +25,6 @@ export const Table = styled.table`
 
 export const TableRow = styled.tr`
   height: 100px;
+  display: flex;
+  justify-content: space-between;
 `;

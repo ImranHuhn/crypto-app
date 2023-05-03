@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
+import { SortIcon } from "../../components/IconComponent";
 import {
   Container,
   ScrollMessage,
@@ -17,6 +18,61 @@ class Landing extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
+    // selection: "",
+    sort: null,
+  };
+
+  sortingManager = () => {
+    switch (this.state.sort) {
+      case null:
+        this.setState({ sort: true });
+        break;
+      case true:
+        this.setState({ sort: false });
+        break;
+      case false:
+        this.setState({ sort: null });
+        break;
+    }
+  };
+  // sortingManager = (selection) => {
+  //   switch (this.state.sort) {
+  //     case null:
+  //       this.setState({ sort: true, selection });
+  //       break;
+  //     case true:
+  //       this.setState({ sort: false, selection });
+  //       break;
+  //     case false:
+  //       this.setState({ sort: null, selection });
+  //       break;
+  //   }
+  // };
+
+  sortRank = () => {
+    console.log("Sorting by rank");
+    this.sortingManager();
+    // this.sortingManager("rank");
+  };
+
+  sortName = () => {
+    console.log("Sorting by name");
+  };
+
+  sortPrice = () => {
+    console.log("Sorting by price");
+  };
+
+  sortOneHour = () => {
+    console.log("Sorting by 1h");
+  };
+
+  sortTwentyFourHour = () => {
+    console.log("Sorting by 24h");
+  };
+
+  sortSevenDays = () => {
+    console.log("Sorting by 7d");
   };
 
   handleInfiniteScroll = async () => {
@@ -36,7 +92,24 @@ class Landing extends React.Component {
     this.handleInfiniteScroll();
   };
   render() {
-    const hasCoins = !this.state.isLoading && this.state.allCoins;
+    // const hasCoins = !this.state.isLoading && this.state.allCoins;
+    console.log(this.state.sort, " ", this.state.selection);
+
+    let sortedAllCoins = this.state.allCoins.map((item) => item);
+
+    sortedAllCoins.sort((a, b) => {
+      switch (this.state.sort) {
+        case true:
+          a.market_cap_rank > b.market_cap_rank;
+          break;
+        case false:
+          a.market_cap_rank < b.market_cap_rank;
+        default: 
+          sortedAllCoins;
+          break;
+      }
+    });
+
     return (
       <Container>
         <InfiniteScroll
@@ -55,19 +128,112 @@ class Landing extends React.Component {
             <Table className="third">
               <thead>
                 <TableRow>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>1h%</th>
-                  <th>24h%</th>
-                  <th>7d%</th>
-                  <th>24h Volume/Market Cap</th>
-                  <th>Circulating/Total Supply</th>
-                  <th>Last 7d</th>
+                  <th
+                    onClick={this.sortRank}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>#</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    onClick={this.sortName}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>Name</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    onClick={this.sortPrice}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>Price</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    onClick={this.sortOneHour}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>1h%</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    onClick={this.sortTwentyFourHour}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>24h%</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    onClick={this.sortSevenDays}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>7d%</h3>
+                    <div style={{ width: "20px", height: "20px" }}>
+                      <SortIcon />
+                    </div>
+                  </th>
+                  <th
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>24h Volume/Market Cap</h3>
+                  </th>
+                  <th
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>Circulating/Total Supply</h3>
+                  </th>
+                  <th
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h3>Last 7d</h3>
+                  </th>
                 </TableRow>
               </thead>
               <tbody>
-                {this.state.allCoins.map((item) => {
+                {sortedAllCoins.map((item) => {
                   return (
                     <TableRow key={crypto.randomUUID()}>
                       <td>{item?.market_cap_rank}</td>
