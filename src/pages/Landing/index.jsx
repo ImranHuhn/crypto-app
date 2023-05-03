@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
-import { SortIcon } from "../../components/IconComponent";
+import { UnsortIcon } from "../../components/IconComponent";
 import {
   Container,
   ScrollMessage,
@@ -85,11 +85,20 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
+
+      /////////////////////////////////////////////////////////////////
+      localStorage.setItem("allCoins", JSON.stringify(newAllCoins));
+      /////////////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = async () => {
     this.handleInfiniteScroll();
+
+    /////////////////////////////////////////////////////////////////
+    const storage = JSON.parse(localStorage.getItem("allCoins")) || [];
+    this.setState({ allCoins: storage });
+    /////////////////////////////////////////////////////////////////
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;
@@ -104,7 +113,7 @@ class Landing extends React.Component {
           break;
         case false:
           a.market_cap_rank < b.market_cap_rank;
-        default: 
+        default:
           sortedAllCoins;
           break;
       }
@@ -138,7 +147,7 @@ class Landing extends React.Component {
                   >
                     <h3>#</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
@@ -151,7 +160,7 @@ class Landing extends React.Component {
                   >
                     <h3>Name</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
@@ -164,7 +173,7 @@ class Landing extends React.Component {
                   >
                     <h3>Price</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
@@ -177,7 +186,7 @@ class Landing extends React.Component {
                   >
                     <h3>1h%</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
@@ -190,7 +199,7 @@ class Landing extends React.Component {
                   >
                     <h3>24h%</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
@@ -203,7 +212,7 @@ class Landing extends React.Component {
                   >
                     <h3>7d%</h3>
                     <div style={{ width: "20px", height: "20px" }}>
-                      <SortIcon />
+                      <UnsortIcon />
                     </div>
                   </th>
                   <th
