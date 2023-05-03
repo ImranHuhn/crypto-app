@@ -3,6 +3,13 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
+import {
+  Container,
+  ScrollMessage,
+  TableWrapper,
+  Table,
+  TableRow,
+} from "./Landing.styles";
 
 class Landing extends React.Component {
   state = {
@@ -20,53 +27,31 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage });
-    }, 2000);
+    }, 1500);
   };
 
   componentDidMount = async () => {
     this.handleInfiniteScroll();
   };
   render() {
-    console.log(this.state);
     return (
-      <div style={{ overflow: "auto" }}>
+      <Container>
         <InfiniteScroll
           dataLength={this.state.allCoins.length}
           next={this.handleInfiniteScroll}
           hasMore={this.state.hasMore}
-          loader={
-            <h4 style={{ textAlign: "center" }} className="text">
-              Loading...
-            </h4>
-          }
+          loader={<ScrollMessage className="text">Loading...</ScrollMessage>}
           endMessage={
-            <h1 style={{ textAlign: "center" }} className="text">
+            <ScrollMessage className="text">
               All coins have been loaded!
-            </h1>
+            </ScrollMessage>
           }
         >
-          <div
-            className="text"
-            style={{
-              width: "95%",
-              margin: "0 auto",
-              padding: "0 10px",
-              overflow: "auto",
-            }}
-          >
+          <TableWrapper className="text">
             <h1 className="text">Your Overview</h1>
-            <table
-              className="third"
-              style={{
-                margin: "0 auto",
-                width: "100%",
-                borderRadius: "10px",
-                padding: "0 25px",
-                height: "100vh",
-              }}
-            >
+            <Table className="third">
               <thead>
-                <tr style={{ height: "100px" }}>
+                <TableRow>
                   <th>#</th>
                   <th>Name</th>
                   <th>Price</th>
@@ -76,21 +61,34 @@ class Landing extends React.Component {
                   <th>24h Volume/Market Cap</th>
                   <th>Circulating/Total Supply</th>
                   <th>Last 7d</th>
-                </tr>
+                </TableRow>
               </thead>
               <tbody>
                 {this.state.allCoins.map((item) => {
                   return (
-                    <tr style={{ height: "100px" }} key={crypto.randomUUID()}>
+                    <TableRow key={crypto.randomUUID()}>
                       <td>{item?.market_cap_rank || <Skeleton />}</td>
                       <td>
                         <img src={item?.image} style={{ width: "24px" }} />
-                        {item?.id || <Skeleton />} ({item?.symbol || <Skeleton />})
+                        {item?.id || <Skeleton />} (
+                        {item?.symbol || <Skeleton />})
                       </td>
                       <td>{item?.current_price || <Skeleton />}</td>
-                      <td>{item?.price_change_percentage_1h_in_currency || <Skeleton />}</td>
-                      <td>{item?.price_change_percentage_24h_in_currency || <Skeleton />}</td>
-                      <td>{item?.price_change_percentage_7d_in_currency || <Skeleton />}</td>
+                      <td>
+                        {item?.price_change_percentage_1h_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {item?.price_change_percentage_24h_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
+                      <td>
+                        {item?.price_change_percentage_7d_in_currency || (
+                          <Skeleton />
+                        )}
+                      </td>
                       <td>
                         {item?.total_volume || <Skeleton />}
                         {" / "}
@@ -103,14 +101,14 @@ class Landing extends React.Component {
                         {item?.total_supply || <Skeleton />}
                       </td>
                       <td>9</td>
-                    </tr>
+                    </TableRow>
                   );
                 })}
               </tbody>
-            </table>
-          </div>
+            </Table>
+          </TableWrapper>
         </InfiniteScroll>
-      </div>
+      </Container>
     );
   }
 }
