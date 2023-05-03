@@ -16,9 +16,11 @@ class Landing extends React.Component {
     allCoins: [],
     hasMore: true,
     page: 0,
+    isLoading: false,
   };
 
   handleInfiniteScroll = async () => {
+    this.setState({ isLoading: true });
     const newPage = this.state.page + 1;
     const newData = await getCoins(parseInt(newPage));
     const newAllCoins = [...this.state.allCoins, ...newData];
@@ -26,7 +28,7 @@ class Landing extends React.Component {
       this.setState({ hasMore: false });
     }
     setTimeout(() => {
-      this.setState({ allCoins: newAllCoins, page: newPage });
+      this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
     }, 1500);
   };
 
@@ -34,6 +36,7 @@ class Landing extends React.Component {
     this.handleInfiniteScroll();
   };
   render() {
+    const hasCoins = !this.state.isLoading && this.state.allCoins;
     return (
       <Container>
         <InfiniteScroll
@@ -67,7 +70,7 @@ class Landing extends React.Component {
                 {this.state.allCoins.map((item) => {
                   return (
                     <TableRow key={crypto.randomUUID()}>
-                      <td>{item?.market_cap_rank || <Skeleton />}</td>
+                      <td>{item?.market_cap_rank}</td>
                       <td>
                         <img src={item?.image} style={{ width: "24px" }} />
                         {item?.id || <Skeleton />} (
