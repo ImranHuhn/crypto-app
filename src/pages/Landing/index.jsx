@@ -9,7 +9,8 @@ import {
   ScrollMessage,
   TableWrapper,
   Table,
-  TableRow,
+  HeadTableRow,
+  BodyTableRow,
 } from "./Landing.styles";
 
 class Landing extends React.Component {
@@ -18,11 +19,11 @@ class Landing extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
-    // selection: "",
+    selection: "",
     sort: null,
   };
 
-  sortingManager = () => {
+  sortingManager = (selection) => {
     let newSort;
     switch (this.state.sort) {
       case null:
@@ -35,46 +36,53 @@ class Landing extends React.Component {
         newSort = null;
         break;
     }
-    this.setState({ sort: newSort });
+    this.setState({ sort: newSort, selection });
   };
-  // sortingManager = (selection) => {
+  // sortingManager = () => {
+  //   let newSort;
   //   switch (this.state.sort) {
   //     case null:
-  //       this.setState({ sort: true, selection });
+  //       newSort = true;
   //       break;
   //     case true:
-  //       this.setState({ sort: false, selection });
+  //       newSort = false;
   //       break;
   //     case false:
-  //       this.setState({ sort: null, selection });
+  //       newSort = null;
   //       break;
   //   }
+  //   this.setState({ sort: newSort });
   // };
 
   sortRank = () => {
     console.log("Sorting by rank");
-    this.sortingManager();
-    // this.sortingManager("rank");
+    // this.sortingManager();
+    this.sortingManager("rank");
   };
 
   sortName = () => {
     console.log("Sorting by name");
+    this.sortingManager("name");
   };
 
   sortPrice = () => {
     console.log("Sorting by price");
+    this.sortingManager("price");
   };
 
   sortOneHour = () => {
     console.log("Sorting by 1h");
+    this.sortingManager("one-hour");
   };
 
   sortTwentyFourHour = () => {
     console.log("Sorting by 24h");
+    this.sortingManager("twentyfour-hours");
   };
 
   sortSevenDays = () => {
     console.log("Sorting by 7d");
+    this.sortingManager("seven-days");
   };
 
   handleInfiniteScroll = async () => {
@@ -89,7 +97,9 @@ class Landing extends React.Component {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
 
       /////////////////////////////////////////////////////////////////
-      localStorage.setItem("allCoins", JSON.stringify(newAllCoins));
+      if (this.state.allCoins.length < 100) {
+        localStorage.setItem("allCoins", JSON.stringify(newAllCoins));
+      }
       /////////////////////////////////////////////////////////////////
     }, 1500);
   };
@@ -104,18 +114,77 @@ class Landing extends React.Component {
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;
+    console.log(this.state);
     console.log(this.state.sort, " ", this.state.selection);
 
     let sortedAllCoins = this.state.allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
-      switch (this.state.sort) {
-        case true:
-          return a.market_cap_rank - b.market_cap_rank;
-        case false:
-          return b.market_cap_rank - a.market_cap_rank;
-        default:
-          return sortedAllCoins;
+      if (this.state.sort === true && this.state.selection === "rank") {
+        return a.market_cap_rank - b.market_cap_rank;
+      } else if (this.state.sort === false && this.state.selection === "rank") {
+        return b.market_cap_rank - a.market_cap_rank;
+      } else if (this.state.sort === true && this.state.selection === "name") {
+        return a.id.localeCompare(b.id);
+      } else if (this.state.sort === false && this.state.selection === "name") {
+        return b.id.localeCompare(a.id);
+      } else if (this.state.sort === true && this.state.selection === "price") {
+        return a.current_price - b.current_price;
+      } else if (
+        this.state.sort === false &&
+        this.state.selection === "price"
+      ) {
+        return b.current_price - a.current_price;
+      } else if (
+        this.state.sort === true &&
+        this.state.selection === "one-hour"
+      ) {
+        return (
+          a.price_change_percentage_1h_in_currency -
+          b.price_change_percentage_1h_in_currency
+        );
+      } else if (
+        this.state.sort === false &&
+        this.state.selection === "one-hour"
+      ) {
+        return (
+          b.price_change_percentage_1h_in_currency -
+          a.price_change_percentage_1h_in_currency
+        );
+      } else if (
+        this.state.sort === true &&
+        this.state.selection === "twentyfour-hours"
+      ) {
+        return (
+          a.price_change_percentage_24h_in_currency -
+          b.price_change_percentage_24h_in_currency
+        );
+      } else if (
+        this.state.sort === false &&
+        this.state.selection === "twentyfour-hours"
+      ) {
+        return (
+          b.price_change_percentage_24h_in_currency -
+          a.price_change_percentage_24h_in_currency
+        );
+      } else if (
+        this.state.sort === true &&
+        this.state.selection === "seven-days"
+      ) {
+        return (
+          a.price_change_percentage_7d_in_currency -
+          b.price_change_percentage_7d_in_currency
+        );
+      } else if (
+        this.state.sort === false &&
+        this.state.selection === "tseven-days"
+      ) {
+        return (
+          b.price_change_percentage_7d_in_currency -
+          a.price_change_percentage_7d_in_currency
+        );
+      } else {
+        return sortedAllCoins;
       }
     });
 
@@ -136,115 +205,127 @@ class Landing extends React.Component {
             <h1 className="text">Your Overview</h1>
             <Table className="third">
               <thead>
-                <TableRow>
+                <HeadTableRow>
                   <th
                     onClick={this.sortRank}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>#</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      #
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     onClick={this.sortName}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>Name</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      Name
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     onClick={this.sortPrice}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>Price</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      Price
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     onClick={this.sortOneHour}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>1h%</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      1h%
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     onClick={this.sortTwentyFourHour}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>24h%</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      24h%
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     onClick={this.sortSevenDays}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>7d%</h3>
-                    <div style={{ width: "20px", height: "20px" }}>
-                      <UnsortIcon />
+                    <div style={{ display: "flex" }}>
+                      7d%
+                      <div style={{ width: "20px", height: "20px" }}>
+                        <UnsortIcon />
+                      </div>
                     </div>
                   </th>
                   <th
                     style={{
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>24h Volume/Market Cap</h3>
+                    24h Volume/Market Cap
                   </th>
                   <th
                     style={{
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>Circulating/Total Supply</h3>
+                    Circulating/Total Supply
                   </th>
                   <th
                     style={{
-                      display: "flex",
-                      alignItems: "center",
+                      textAlign: "left",
+                      minWidth: "50px",
                     }}
                   >
-                    <h3>Last 7d</h3>
+                    Last 7d
                   </th>
-                </TableRow>
+                </HeadTableRow>
               </thead>
               <tbody>
                 {sortedAllCoins.map((item) => {
                   return (
-                    <TableRow key={crypto.randomUUID()}>
+                    <BodyTableRow key={crypto.randomUUID()}>
                       <td>{item?.market_cap_rank}</td>
                       <td>
                         <img src={item?.image} style={{ width: "24px" }} />
@@ -279,7 +360,7 @@ class Landing extends React.Component {
                         {item?.total_supply || <Skeleton />}
                       </td>
                       <td>9</td>
-                    </TableRow>
+                    </BodyTableRow>
                   );
                 })}
               </tbody>

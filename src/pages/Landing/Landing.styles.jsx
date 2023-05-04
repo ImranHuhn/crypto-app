@@ -12,7 +12,7 @@ export const TableWrapper = styled.div`
   width: 95%;
   margin: 0 auto;
   padding: 0 10px;
-  overflow: auto;
+  // overflow: auto;
 `;
 
 export const Table = styled.table`
@@ -23,8 +23,10 @@ export const Table = styled.table`
   height: 100vh;
 `;
 
-export const TableRow = styled.tr`
+export const HeadTableRow = styled.tr`
   height: 100px;
-  display: flex;
-  justify-content: space-between;
+`;
+
+export const BodyTableRow = styled.tr`
+  height: 100px;
 `;
