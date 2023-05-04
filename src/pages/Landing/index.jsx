@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
-import { UnsortIcon } from "../../components/IconComponent";
+import { SortIcon } from "../../components/IconComponent";
 import {
   Container,
   ScrollMessage,
@@ -177,7 +177,7 @@ class Landing extends React.Component {
         );
       } else if (
         this.state.sort === false &&
-        this.state.selection === "tseven-days"
+        this.state.selection === "seven-days"
       ) {
         return (
           b.price_change_percentage_7d_in_currency -
@@ -217,7 +217,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       #
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
@@ -232,7 +232,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       Name
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
@@ -247,7 +247,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       Price
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
@@ -262,7 +262,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       1h%
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
@@ -277,7 +277,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       24h%
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
@@ -292,7 +292,7 @@ class Landing extends React.Component {
                     <div style={{ display: "flex" }}>
                       7d%
                       <div style={{ width: "20px", height: "20px" }}>
-                        <UnsortIcon />
+                        <SortIcon />
                       </div>
                     </div>
                   </th>
