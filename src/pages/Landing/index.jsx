@@ -38,50 +38,28 @@ class Landing extends React.Component {
     }
     this.setState({ sort: newSort, selection });
   };
-  // sortingManager = () => {
-  //   let newSort;
-  //   switch (this.state.sort) {
-  //     case null:
-  //       newSort = true;
-  //       break;
-  //     case true:
-  //       newSort = false;
-  //       break;
-  //     case false:
-  //       newSort = null;
-  //       break;
-  //   }
-  //   this.setState({ sort: newSort });
-  // };
 
   sortRank = () => {
-    console.log("Sorting by rank");
-    // this.sortingManager();
     this.sortingManager("rank");
   };
 
   sortName = () => {
-    console.log("Sorting by name");
     this.sortingManager("name");
   };
 
   sortPrice = () => {
-    console.log("Sorting by price");
     this.sortingManager("price");
   };
 
   sortOneHour = () => {
-    console.log("Sorting by 1h");
     this.sortingManager("one-hour");
   };
 
   sortTwentyFourHour = () => {
-    console.log("Sorting by 24h");
     this.sortingManager("twentyfour-hours");
   };
 
   sortSevenDays = () => {
-    console.log("Sorting by 7d");
     this.sortingManager("seven-days");
   };
 
@@ -95,22 +73,11 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
-
-      /////////////////////////////////////////////////////////////////
-      if (this.state.allCoins.length < 100) {
-        localStorage.setItem("allCoins", JSON.stringify(newAllCoins));
-      }
-      /////////////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = async () => {
     this.handleInfiniteScroll();
-
-    /////////////////////////////////////////////////////////////////
-    const storage = JSON.parse(localStorage.getItem("allCoins")) || [];
-    this.setState({ allCoins: storage });
-    /////////////////////////////////////////////////////////////////
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;

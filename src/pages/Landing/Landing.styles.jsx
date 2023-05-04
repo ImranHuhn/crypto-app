@@ -12,7 +12,6 @@ export const TableWrapper = styled.div`
   width: 95%;
   margin: 0 auto;
   padding: 0 10px;
-  // overflow: auto;
 `;
 
 export const Table = styled.table`
