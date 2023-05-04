@@ -26,6 +26,6 @@ export const HeadTableRow = styled.tr`
   height: 100px;
 `;
 
-export const BodyTableRow = styled.tr`
-  height: 100px;
-`;
+// export const DataTableRow = styled.tr`
+//   height: 100px;
+// `;

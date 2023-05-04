@@ -1,17 +1,17 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
+// import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 import TableHead from "../../components/TableHead";
-import { SortIcon } from "../../components/IconComponent";
+// import { SortIcon } from "../../components/IconComponent";
 import {
   Container,
   ScrollMessage,
   TableWrapper,
   Table,
   HeadTableRow,
-  BodyTableRow,
+  // DataTableRow,
 } from "./Landing.styles";
 
 class Landing extends React.Component {
@@ -51,30 +51,6 @@ class Landing extends React.Component {
     this.setState({ sort: newSort, selection });
   };
 
-  sortRank = () => {
-    this.sortingManager("rank");
-  };
-
-  sortName = () => {
-    this.sortingManager("name");
-  };
-
-  sortPrice = () => {
-    this.sortingManager("price");
-  };
-
-  sortOneHour = () => {
-    this.sortingManager("one-hour");
-  };
-
-  sortTwentyFourHour = () => {
-    this.sortingManager("twentyfour-hours");
-  };
-
-  sortSevenDays = () => {
-    this.sortingManager("seven-days");
-  };
-
   handleInfiniteScroll = async () => {
     this.setState({ isLoading: true });
     const newPage = this.state.page + 1;
@@ -88,8 +64,8 @@ class Landing extends React.Component {
     }, 1500);
   };
 
-  componentDidMount = async () => {
-    // this.handleInfiniteScroll();
+  componentDidMount = () => {
+    this.handleInfiniteScroll();
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;
@@ -186,163 +162,56 @@ class Landing extends React.Component {
               <thead>
                 <HeadTableRow>
                   {this.state.tableHeadColumns.map((item) => {
-                    return <TableHead item={item} />;
+                    return (
+                      <TableHead
+                        item={item}
+                        sortingManager={this.sortingManager}
+                        key={crypto.randomUUID()}
+                      />
+                    );
                   })}
-                  {/* <th
-                    onClick={this.sortRank}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      #
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    onClick={this.sortName}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      Name
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    onClick={this.sortPrice}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      Price
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    onClick={this.sortOneHour}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      1h%
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    onClick={this.sortTwentyFourHour}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      24h%
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    onClick={this.sortSevenDays}
-                    style={{
-                      cursor: "pointer",
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    <div style={{ display: "flex" }}>
-                      7d%
-                      <div style={{ width: "20px", height: "20px" }}>
-                        <SortIcon />
-                      </div>
-                    </div>
-                  </th>
-                  <th
-                    style={{
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    24h Volume/Market Cap
-                  </th>
-                  <th
-                    style={{
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    Circulating/Total Supply
-                  </th>
-                  <th
-                    style={{
-                      textAlign: "left",
-                      minWidth: "50px",
-                    }}
-                  >
-                    Last 7d
-                  </th> */}
                 </HeadTableRow>
               </thead>
               <tbody>
                 {sortedAllCoins.map((item) => {
                   return (
-                    <BodyTableRow key={crypto.randomUUID()}>
-                      <td>{item?.market_cap_rank}</td>
-                      <td>
-                        <img src={item?.image} style={{ width: "24px" }} />
-                        {item?.id || <Skeleton />} (
-                        {item?.symbol || <Skeleton />})
-                      </td>
-                      <td>{item?.current_price || <Skeleton />}</td>
-                      <td>
-                        {item?.price_change_percentage_1h_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {item?.price_change_percentage_24h_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {item?.price_change_percentage_7d_in_currency || (
-                          <Skeleton />
-                        )}
-                      </td>
-                      <td>
-                        {item?.total_volume || <Skeleton />}
-                        {" / "}
-                        {item?.market_cap || <Skeleton />}
-                      </td>
-                      <td>
-                        {" "}
-                        {item?.circulating_supply || <Skeleton />}
-                        {" / "}
-                        {item?.total_supply || <Skeleton />}
-                      </td>
-                      <td>9</td>
-                    </BodyTableRow>
+                    <TableData item={item} key={crypto.randomUUID()} />
+                    // <DataTableRow key={crypto.randomUUID()}>
+                    //   <td>{item?.market_cap_rank}</td>
+                    //   <td>
+                    //     <img src={item?.image} style={{ width: "24px" }} />
+                    //     {item?.id || <Skeleton />} (
+                    //     {item?.symbol || <Skeleton />})
+                    //   </td>
+                    //   <td>{item?.current_price || <Skeleton />}</td>
+                    //   <td>
+                    //     {item?.price_change_percentage_1h_in_currency || (
+                    //       <Skeleton />
+                    //     )}
+                    //   </td>
+                    //   <td>
+                    //     {item?.price_change_percentage_24h_in_currency || (
+                    //       <Skeleton />
+                    //     )}
+                    //   </td>
+                    //   <td>
+                    //     {item?.price_change_percentage_7d_in_currency || (
+                    //       <Skeleton />
+                    //     )}
+                    //   </td>
+                    //   <td>
+                    //     {item?.total_volume || <Skeleton />}
+                    //     {" / "}
+                    //     {item?.market_cap || <Skeleton />}
+                    //   </td>
+                    //   <td>
+                    //     {" "}
+                    //     {item?.circulating_supply || <Skeleton />}
+                    //     {" / "}
+                    //     {item?.total_supply || <Skeleton />}
+                    //   </td>
+                    //   <td>9</td>
+                    // </DataTableRow>
                   );
                 })}
               </tbody>
