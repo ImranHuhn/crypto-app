@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
+import TableHead from "../../components/TableHead";
 import { SortIcon } from "../../components/IconComponent";
 import {
   Container,
@@ -19,6 +20,17 @@ class Landing extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
+    tableHeadColumns: [
+      "#",
+      "Name",
+      "Price",
+      "1h",
+      "24h",
+      "7d",
+      "24h Volume / Market Cap",
+      "Circulating / Total Supply",
+      "Last 7d",
+    ],
     selection: "",
     sort: null,
   };
@@ -77,7 +89,7 @@ class Landing extends React.Component {
   };
 
   componentDidMount = async () => {
-    this.handleInfiniteScroll();
+    // this.handleInfiniteScroll();
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;
@@ -154,7 +166,7 @@ class Landing extends React.Component {
         return sortedAllCoins;
       }
     });
-
+    // console.log(this.state.tableHeadColumns)
     return (
       <Container>
         <InfiniteScroll
@@ -173,7 +185,10 @@ class Landing extends React.Component {
             <Table className="third">
               <thead>
                 <HeadTableRow>
-                  <th
+                  {this.state.tableHeadColumns.map((item) => {
+                    return <TableHead item={item} />;
+                  })}
+                  {/* <th
                     onClick={this.sortRank}
                     style={{
                       cursor: "pointer",
@@ -286,7 +301,7 @@ class Landing extends React.Component {
                     }}
                   >
                     Last 7d
-                  </th>
+                  </th> */}
                 </HeadTableRow>
               </thead>
               <tbody>
