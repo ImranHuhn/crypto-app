@@ -7,13 +7,9 @@ class TableHead extends React.Component {
     this.props.sortingManager(this.props.item);
   };
   render() {
-    const hasSort =
-      this.props.item === "#" ||
-      this.props.item === "Name" ||
-      this.props.item === "Price" ||
-      this.props.item === "1h" ||
-      this.props.item === "24h" ||
-      this.props.item === "7d";
+    const hasSort = this.props.tableColumns
+      .slice(0, 6)
+      .includes(this.props.item);
     return (
       <>
         {hasSort && (

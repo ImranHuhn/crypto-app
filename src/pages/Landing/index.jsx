@@ -4,6 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 import TableHead from "../../components/TableHead";
+import TableData from "../../components/TableData";
 // import { SortIcon } from "../../components/IconComponent";
 import {
   Container,
@@ -20,7 +21,7 @@ class Landing extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
-    tableHeadColumns: [
+    tableColumns: [
       "#",
       "Name",
       "Price",
@@ -61,11 +62,20 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
+
+      //////////////////////////////////////////////////////////
+      localStorage.setItem("allCoins", JSON.stringify(newData));
+      //////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = () => {
     this.handleInfiniteScroll();
+
+    ///////////////////////////////////////////////////
+    const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
+    this.setState({ allCoins: storageData });
+    ///////////////////////////////////////////////////
   };
   render() {
     // const hasCoins = !this.state.isLoading && this.state.allCoins;
@@ -142,7 +152,6 @@ class Landing extends React.Component {
         return sortedAllCoins;
       }
     });
-    // console.log(this.state.tableHeadColumns)
     return (
       <Container>
         <InfiniteScroll
@@ -161,10 +170,11 @@ class Landing extends React.Component {
             <Table className="third">
               <thead>
                 <HeadTableRow>
-                  {this.state.tableHeadColumns.map((item) => {
+                  {this.state.tableColumns.map((item) => {
                     return (
                       <TableHead
                         item={item}
+                        tableColumns={this.state.tableColumns}
                         sortingManager={this.sortingManager}
                         key={crypto.randomUUID()}
                       />
@@ -175,7 +185,7 @@ class Landing extends React.Component {
               <tbody>
                 {sortedAllCoins.map((item) => {
                   return (
-                    <TableData item={item} key={crypto.randomUUID()} />
+                    <TableData item={item} allCoins={this.state.allCoins} key={crypto.randomUUID()} />
                     // <DataTableRow key={crypto.randomUUID()}>
                     //   <td>{item?.market_cap_rank}</td>
                     //   <td>
