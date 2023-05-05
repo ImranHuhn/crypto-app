@@ -83,7 +83,7 @@ export const Navbar = ({
           totalCoins={totalCoins}
           totalExchanges={totalExchanges}
           marketCap={marketCap}
-          marketVolume={marketVolume}
+          usdVolume={marketVolume?.usd}
         />
       </SubNavbarWrapper>
     </Container>

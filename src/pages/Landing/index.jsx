@@ -68,22 +68,22 @@ class Landing extends React.Component {
 
   render() {
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
-    const ascendByRank = sort === true && selection === tableColumns[0],
-      descendByRank = sort === false && selection === tableColumns[0],
-      ascendByName = sort === true && selection === tableColumns[1],
-      descendByName = sort === false && selection === tableColumns[1],
-      ascendByPrice = sort === true && selection === tableColumns[2],
-      descendByPrice = sort === false && selection === tableColumns[2],
-      ascendBy1h = sort === true && selection === tableColumns[3],
-      descendBy1h = sort === false && selection === tableColumns[3],
-      ascendBy24h = sort === true && selection === tableColumns[4],
-      descendBy24h = sort === false && selection === tableColumns[4],
-      ascendBy7d = sort === true && selection === tableColumns[5],
-      descendBy7d = sort === false && selection === tableColumns[5];
 
     let sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
+      const ascendByRank = sort === true && selection === tableColumns[0];
+      const descendByRank = sort === false && selection === tableColumns[0];
+      const ascendByName = sort === true && selection === tableColumns[1];
+      const descendByName = sort === false && selection === tableColumns[1];
+      const ascendByPrice = sort === true && selection === tableColumns[2];
+      const descendByPrice = sort === false && selection === tableColumns[2];
+      const ascendBy1h = sort === true && selection === tableColumns[3];
+      const descendBy1h = sort === false && selection === tableColumns[3];
+      const ascendBy24h = sort === true && selection === tableColumns[4];
+      const descendBy24h = sort === false && selection === tableColumns[4];
+      const ascendBy7d = sort === true && selection === tableColumns[5];
+      const descendBy7d = sort === false && selection === tableColumns[5];
       const rankA = a.market_cap_rank;
       const rankB = b.market_cap_rank;
       const nameAtoZ = a.id.localeCompare(b.id);
