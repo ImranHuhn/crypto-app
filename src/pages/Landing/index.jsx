@@ -84,49 +84,43 @@ class Landing extends React.Component {
     let sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
+      const rankA = a.market_cap_rank;
+      const rankB = b.market_cap_rank;
+      const nameAtoZ = a.id.localeCompare(b.id);
+      const nameZtoA = b.id.localeCompare(a.id);
+      const priceA = a.current_price;
+      const priceB = b.current_price;
+      const oneHourA = a.price_change_percentage_1h_in_currency;
+      const oneHourB = b.price_change_percentage_1h_in_currency;
+      const twentyFourHoursA = a.price_change_percentage_24h_in_currency;
+      const twentyFourHoursB = b.price_change_percentage_24h_in_currency;
+      const sevenDaysA = a.price_change_percentage_7d_in_currency;
+      const sevenDaysB = b.price_change_percentage_7d_in_currency;
       switch (true) {
         case ascendByRank:
-          return a.market_cap_rank - b.market_cap_rank;
+          return rankA - rankB;
         case descendByRank:
-          return b.market_cap_rank - a.market_cap_rank;
+          return rankB - rankA;
         case ascendByName:
-          return a.id.localeCompare(b.id);
+          return nameAtoZ;
         case descendByName:
-          return b.id.localeCompare(a.id);
+          return nameZtoA;
         case ascendByPrice:
-          return a.current_price - b.current_price;
+          return priceA - priceB;
         case descendByPrice:
-          return b.current_price - a.current_price;
+          return priceB - priceA;
         case ascendBy1h:
-          return (
-            a.price_change_percentage_1h_in_currency -
-            b.price_change_percentage_1h_in_currency
-          );
+          return oneHourA - oneHourB;
         case descendBy1h:
-          return (
-            b.price_change_percentage_1h_in_currency -
-            a.price_change_percentage_1h_in_currency
-          );
+          return oneHourB - oneHourA;
         case ascendBy24h:
-          return (
-            a.price_change_percentage_24h_in_currency -
-            b.price_change_percentage_24h_in_currency
-          );
+          return twentyFourHoursA - twentyFourHoursB;
         case descendBy24h:
-          return (
-            b.price_change_percentage_24h_in_currency -
-            a.price_change_percentage_24h_in_currency
-          );
+          return twentyFourHoursB - twentyFourHoursA;
         case ascendBy7d:
-          return (
-            a.price_change_percentage_7d_in_currency -
-            b.price_change_percentage_7d_in_currency
-          );
+          return sevenDaysA - sevenDaysB;
         case descendBy7d:
-          return (
-            b.price_change_percentage_7d_in_currency -
-            a.price_change_percentage_7d_in_currency
-          );
+          return sevenDaysB - sevenDaysA;
         default:
           return sortedAllCoins;
       }
