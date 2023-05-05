@@ -78,56 +78,57 @@ class Landing extends React.Component {
       descendBy1h = sort === false && selection === tableColumns[3],
       ascendBy24h = sort === true && selection === tableColumns[4],
       descendBy24h = sort === false && selection === tableColumns[4],
-      ascednBy7d = sort === true && selection === tableColumns[5],
+      ascendBy7d = sort === true && selection === tableColumns[5],
       descendBy7d = sort === false && selection === tableColumns[5];
 
     let sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
-      if (ascendByRank) {
-        return a.market_cap_rank - b.market_cap_rank;
-      } else if (descendByRank) {
-        return b.market_cap_rank - a.market_cap_rank;
-      } else if (ascendByName) {
-        return a.id.localeCompare(b.id);
-      } else if (descendByName) {
-        return b.id.localeCompare(a.id);
-      } else if (ascendByPrice) {
-        return a.current_price - b.current_price;
-      } else if (descendByPrice) {
-        return b.current_price - a.current_price;
-      } else if (ascendBy1h) {
-        return (
-          a.price_change_percentage_1h_in_currency -
-          b.price_change_percentage_1h_in_currency
-        );
-      } else if (descendBy1h) {
-        return (
-          b.price_change_percentage_1h_in_currency -
-          a.price_change_percentage_1h_in_currency
-        );
-      } else if (ascendBy24h) {
-        return (
-          a.price_change_percentage_24h_in_currency -
-          b.price_change_percentage_24h_in_currency
-        );
-      } else if (descendBy24h) {
-        return (
-          b.price_change_percentage_24h_in_currency -
-          a.price_change_percentage_24h_in_currency
-        );
-      } else if (ascednBy7d) {
-        return (
-          a.price_change_percentage_7d_in_currency -
-          b.price_change_percentage_7d_in_currency
-        );
-      } else if (descendBy7d) {
-        return (
-          b.price_change_percentage_7d_in_currency -
-          a.price_change_percentage_7d_in_currency
-        );
-      } else {
-        return sortedAllCoins;
+      switch (true) {
+        case ascendByRank:
+          return a.market_cap_rank - b.market_cap_rank;
+        case descendByRank:
+          return b.market_cap_rank - a.market_cap_rank;
+        case ascendByName:
+          return a.id.localeCompare(b.id);
+        case descendByName:
+          return b.id.localeCompare(a.id);
+        case ascendByPrice:
+          return a.current_price - b.current_price;
+        case descendByPrice:
+          return b.current_price - a.current_price;
+        case ascendBy1h:
+          return (
+            a.price_change_percentage_1h_in_currency -
+            b.price_change_percentage_1h_in_currency
+          );
+        case descendBy1h:
+          return (
+            b.price_change_percentage_1h_in_currency -
+            a.price_change_percentage_1h_in_currency
+          );
+        case ascendBy24h:
+          return (
+            a.price_change_percentage_24h_in_currency -
+            b.price_change_percentage_24h_in_currency
+          );
+        case descendBy24h:
+          return (
+            b.price_change_percentage_24h_in_currency -
+            a.price_change_percentage_24h_in_currency
+          );
+        case ascendBy7d:
+          return (
+            a.price_change_percentage_7d_in_currency -
+            b.price_change_percentage_7d_in_currency
+          );
+        case descendBy7d:
+          return (
+            b.price_change_percentage_7d_in_currency -
+            a.price_change_percentage_7d_in_currency
+          );
+        default:
+          return sortedAllCoins;
       }
     });
 
