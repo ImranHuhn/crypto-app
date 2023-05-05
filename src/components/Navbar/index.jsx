@@ -1,4 +1,5 @@
 import React from "react";
+import SubNavbar from "../SubNavbar";
 import {
   StyledLink,
   Container,
@@ -15,7 +16,7 @@ import {
   ChevronIconWrapper,
   CurrencyList,
   DarkThemeIconWrapper,
-  SubNav,
+  SubNavbarWrapper,
 } from "./Navbar.styles";
 import {
   DarkThemeIcon,
@@ -23,8 +24,8 @@ import {
   ChevronIcon,
   DollarIcon,
 } from "../IconComponent";
-import bitcoin from "../../assets/bitcoin.webp";
-import ethereum from "../../assets/ethereum.webp";
+// import bitcoin from "../../assets/bitcoin.webp";
+// import ethereum from "../../assets/ethereum.webp";
 
 class Navbar extends React.Component {
   render() {
@@ -77,53 +78,14 @@ class Navbar extends React.Component {
             </ThemeButton>
           </RightNavbarWrapper>
         </Nav>
-        <SubNav className="text third">
-          <div style={{ display: "flex" }}>
-            <div>Coins</div>
-            <div>{this.props.totalCoins}</div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <div>Exchange</div>
-            <div>{this.props.totalExchanges}</div>
-          </div>
-          <h2 style={{ margin: "auto 5px" }}>•</h2>
-          <div>
-            ${this.props.marketCap?.usd}T
-            {/* selected currency from nav for "total_market_cap" */}
-          </div>
-          <div>
-            <ChevronIcon />
-            {/* arrow up down with determine if value is positive or negative for "market_cap_change_percentage_24h_usd" */}
-          </div>
-          <h2 style={{ margin: "auto 5px" }}>•</h2>
-          <div>
-            ${this.props.marketVolume?.usd}B
-            {/* selected currency from nav for "total_volume" */}{" "}
-            {/* bar = total volume / total market cap */}
-          </div>
-          <div>
-            <div>
-              <img style={{ width: "24px" }} src={bitcoin} alt="bitcoin" />
-            </div>
-            <div>
-              <div>{this.props.marketCap?.btc}%</div>
-              <div>
-                <div>bar</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img style={{ width: "24px" }} src={ethereum} alt="ethereum" />
-            </div>
-            <div>
-              <div>{this.props.marketCap?.eth}%</div>
-              <div>
-                <div>bar</div>
-              </div>
-            </div>
-          </div>
-        </SubNav>
+        <SubNavbarWrapper className="text third">
+          <SubNavbar
+            totalCoins={this.props.totalCoins}
+            totalExchanges={this.props.totalExchanges}
+            marketCap={this.props.marketCap}
+            marketVolume={this.props.marketVolume}
+          />
+        </SubNavbarWrapper>
       </Container>
     );
   }

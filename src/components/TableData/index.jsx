@@ -1,6 +1,6 @@
 import React from "react";
 // import Skeleton from "react-loading-skeleton";
-import { TableRow } from "./TableData.styles";
+import { TableRow, Image } from "./TableData.styles";
 
 class TableData extends React.Component {
   render() {
@@ -8,7 +8,7 @@ class TableData extends React.Component {
       <TableRow>
         <td>{this.props.item?.market_cap_rank}</td>
         <td>
-          <img src={this.props.item?.image} style={{ width: "24px" }} />
+          <Image src={this.props.item?.image} />
           {this.props.item?.id} ({this.props.item?.symbol})
         </td>
         <td>{this.props.item?.current_price}</td>

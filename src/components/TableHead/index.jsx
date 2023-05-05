@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  TableHeader,
+  TitleWrapper,
+  IconWrapper,
+  TableHeaderSort,
+} from "./TableHead.styles";
 import { SortIcon } from "../IconComponent";
 
 class TableHead extends React.Component {
@@ -12,31 +18,19 @@ class TableHead extends React.Component {
     return (
       <>
         {hasSort && (
-          <th
-            onClick={this.handleClick}
-            style={{
-              cursor: "pointer",
-              textAlign: "left",
-              minWidth: "50px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
+          <TableHeaderSort onClick={this.handleClick}>
+            <TitleWrapper>
               {this.props.item}
-              <div style={{ width: "20px", height: "20px" }}>
+              <IconWrapper>
                 <SortIcon />
-              </div>
-            </div>
-          </th>
+              </IconWrapper>
+            </TitleWrapper>
+          </TableHeaderSort>
         )}
         {!hasSort && (
-          <th
-            style={{
-              textAlign: "left",
-              minWidth: "50px",
-            }}
-          >
-            <div style={{ display: "flex" }}>{this.props.item}</div>
-          </th>
+          <TableHeader>
+            <TitleWrapper>{this.props.item}</TitleWrapper>
+          </TableHeader>
         )}
       </>
     );
