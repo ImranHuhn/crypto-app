@@ -59,22 +59,11 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
-
-      //////////////////////////////////////////////////////////
-      // used for testing
-      // localStorage.setItem("allCoins", JSON.stringify(newData));
-      //////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = () => {
     this.handleInfiniteScroll();
-
-    ///////////////////////////////////////////////////
-    //used for testing
-    // const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
-    // this.setState({ allCoins: storageData });
-    ///////////////////////////////////////////////////
   };
 
   render() {

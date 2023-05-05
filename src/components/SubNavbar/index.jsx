@@ -5,8 +5,8 @@ import bitcoin from "../../assets/bitcoin.webp";
 import ethereum from "../../assets/ethereum.webp";
 
 export const SubNavbar = (props) => {
-  const {totalCoins, totalExchanges} = props
-  const {usd, btc, eth} = props.marketCap || {}
+  const { totalCoins, totalExchanges } = props;
+  const { usd, btc, eth } = props.marketCap || {};
   return (
     <>
       <Wrapper>
@@ -19,8 +19,7 @@ export const SubNavbar = (props) => {
       </Wrapper>
       <Dot>&#9679;</Dot>
       <div>
-        ${usd}T
-        {/* selected currency from nav for "total_market_cap" */}
+        ${usd}T{/* selected currency from nav for "total_market_cap" */}
       </div>
       <div>
         <ChevronIcon />
