@@ -3,7 +3,6 @@ import { SortIcon } from "../IconComponent";
 
 class TableHead extends React.Component {
   handleClick = () => {
-    // console.log("clicked", this.props.item);
     this.props.sortingManager(this.props.item);
   };
   render() {
