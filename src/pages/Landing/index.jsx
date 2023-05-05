@@ -1,6 +1,4 @@
 import React from "react";
-// import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
 import { TableHead } from "../../components/TableHead";
@@ -18,7 +16,7 @@ class Landing extends React.Component {
     allCoins: [],
     hasMore: true,
     page: 0,
-    // isLoading: false,
+    isLoading: false,
     tableColumns: [
       "#",
       "Name",
@@ -63,7 +61,8 @@ class Landing extends React.Component {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
 
       //////////////////////////////////////////////////////////
-      localStorage.setItem("allCoins", JSON.stringify(newData));
+      // used for testing
+      // localStorage.setItem("allCoins", JSON.stringify(newData));
       //////////////////////////////////////////////////////////
     }, 1500);
   };
@@ -72,10 +71,12 @@ class Landing extends React.Component {
     this.handleInfiniteScroll();
 
     ///////////////////////////////////////////////////
-    const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
-    this.setState({ allCoins: storageData });
+    //used for testing
+    // const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
+    // this.setState({ allCoins: storageData });
     ///////////////////////////////////////////////////
   };
+
   render() {
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
     const ascendByRank = sort === true && selection === tableColumns[0],
@@ -175,6 +176,7 @@ class Landing extends React.Component {
                 {sortedAllCoins.map((item) => {
                   return (
                     <TableData
+                      isLoading={this.state.isLoading}
                       item={item}
                       allCoins={allCoins}
                       sort={sort}

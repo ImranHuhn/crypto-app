@@ -1,5 +1,6 @@
 import React from "react";
-// import Skeleton from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { TableRow, Image } from "./TableData.styles";
 
 export const TableData = (props) => {
@@ -19,25 +20,25 @@ export const TableData = (props) => {
   } = props.item || {};
   return (
     <TableRow>
-      <td>{market_cap_rank}</td>
+      <td>{market_cap_rank || <Skeleton />}</td>
       <td>
         <Image src={image} />
-        {id} ({symbol})
+        {id || <Skeleton />} ({symbol || <Skeleton />})
       </td>
-      <td>{current_price}</td>
-      <td>{price_change_percentage_1h_in_currency}</td>
-      <td>{price_change_percentage_24h_in_currency}</td>
-      <td>{price_change_percentage_7d_in_currency}</td>
+      <td>{current_price || <Skeleton />}</td>
+      <td>{price_change_percentage_1h_in_currency || <Skeleton />}</td>
+      <td>{price_change_percentage_24h_in_currency || <Skeleton />}</td>
+      <td>{price_change_percentage_7d_in_currency || <Skeleton />}</td>
       <td>
-        {total_volume}
+        {total_volume || <Skeleton />}
         {" / "}
-        {market_cap}
+        {market_cap || <Skeleton />}
       </td>
       <td>
         {" "}
-        {circulating_supply}
+        {circulating_supply || <Skeleton />}
         {" / "}
-        {total_supply}
+        {total_supply || <Skeleton />}
       </td>
       <td>9</td>
     </TableRow>
