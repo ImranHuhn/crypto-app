@@ -3,8 +3,8 @@ import React from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
-import TableHead from "../../components/TableHead";
-import TableData from "../../components/TableData";
+import { TableHead } from "../../components/TableHead";
+import { TableData } from "../../components/TableData";
 import {
   Container,
   ScrollMessage,

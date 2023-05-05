@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { getMarketData } from "./utils/api";
 import { GlobalStyle, lightTheme, darkTheme } from "./App.styles";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 import Landing from "./pages/Landing";
 import Portfolio from "./pages/Portfolio";
 
