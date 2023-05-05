@@ -25,9 +25,16 @@ import {
   DollarIcon,
 } from "../IconComponent";
 
-export const Navbar = (props) => {
+export const Navbar = ({
+  on,
+  handleClick,
+  totalCoins,
+  totalExchanges,
+  marketCap,
+  marketVolume,
+}) => {
   return (
-    <Container className="third" $on={props.on}>
+    <Container className="third" $on={on}>
       <Nav>
         <LinkContainer>
           <LinkWrapper>
@@ -43,14 +50,10 @@ export const Navbar = (props) => {
         </LinkContainer>
         <RightNavbarWrapper>
           <InputWrapper>
-            <MagnifyIconWrapper className="text" $on={props.on}>
+            <MagnifyIconWrapper className="text" $on={on}>
               <MagnifyIcon />
             </MagnifyIconWrapper>
-            <Input
-              className="text second"
-              $on={props.on}
-              placeholder="Search..."
-            />
+            <Input className="text second" $on={on} placeholder="Search..." />
             <CurrencyButton className="text button">
               <DollarIconWrapper>
                 <DollarIcon />
@@ -68,8 +71,8 @@ export const Navbar = (props) => {
               <li>ETH</li>
             </CurrencyList>
           </InputWrapper>
-          <ThemeButton className="button" onClick={props.handleClick}>
-            <DarkThemeIconWrapper className="fill" $on={props.on}>
+          <ThemeButton className="button" onClick={handleClick}>
+            <DarkThemeIconWrapper className="fill" $on={on}>
               <DarkThemeIcon />
             </DarkThemeIconWrapper>
           </ThemeButton>
@@ -77,10 +80,10 @@ export const Navbar = (props) => {
       </Nav>
       <SubNavbarWrapper className="text third">
         <SubNavbar
-          totalCoins={props.totalCoins}
-          totalExchanges={props.totalExchanges}
-          marketCap={props.marketCap}
-          marketVolume={props.marketVolume}
+          totalCoins={totalCoins}
+          totalExchanges={totalExchanges}
+          marketCap={marketCap}
+          marketVolume={marketVolume}
         />
       </SubNavbarWrapper>
     </Container>

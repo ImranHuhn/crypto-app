@@ -51,11 +51,12 @@ class Landing extends React.Component {
   };
 
   handleInfiniteScroll = async () => {
+    const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
-    const newPage = this.state.page + 1;
+    const newPage = page + 1;
     const newData = await getCoins(parseInt(newPage));
-    const newAllCoins = [...this.state.allCoins, ...newData];
-    if (this.state.allCoins.length - 1 >= this.props.totalCoins) {
+    const newAllCoins = [...allCoins, ...newData];
+    if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
     }
     setTimeout(() => {
@@ -76,83 +77,61 @@ class Landing extends React.Component {
     ///////////////////////////////////////////////////
   };
   render() {
-    let sortedAllCoins = this.state.allCoins.map((item) => item);
+    const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
+    const ascendByRank = sort === true && selection === tableColumns[0],
+      descendByRank = sort === false && selection === tableColumns[0],
+      ascendByName = sort === true && selection === tableColumns[1],
+      descendByName = sort === false && selection === tableColumns[1],
+      ascendByPrice = sort === true && selection === tableColumns[2],
+      descendByPrice = sort === false && selection === tableColumns[2],
+      ascendBy1h = sort === true && selection === tableColumns[3],
+      descendBy1h = sort === false && selection === tableColumns[3],
+      ascendBy24h = sort === true && selection === tableColumns[4],
+      descendBy24h = sort === false && selection === tableColumns[4],
+      ascednBy7d = sort === true && selection === tableColumns[5],
+      descendBy7d = sort === false && selection === tableColumns[5];
+
+    let sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
-      if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[0]
-      ) {
+      if (ascendByRank) {
         return a.market_cap_rank - b.market_cap_rank;
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[0]
-      ) {
+      } else if (descendByRank) {
         return b.market_cap_rank - a.market_cap_rank;
-      } else if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[1]
-      ) {
+      } else if (ascendByName) {
         return a.id.localeCompare(b.id);
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[1]
-      ) {
+      } else if (descendByName) {
         return b.id.localeCompare(a.id);
-      } else if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[2]
-      ) {
+      } else if (ascendByPrice) {
         return a.current_price - b.current_price;
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[2]
-      ) {
+      } else if (descendByPrice) {
         return b.current_price - a.current_price;
-      } else if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[3]
-      ) {
+      } else if (ascendBy1h) {
         return (
           a.price_change_percentage_1h_in_currency -
           b.price_change_percentage_1h_in_currency
         );
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[3]
-      ) {
+      } else if (descendBy1h) {
         return (
           b.price_change_percentage_1h_in_currency -
           a.price_change_percentage_1h_in_currency
         );
-      } else if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[4]
-      ) {
+      } else if (ascendBy24h) {
         return (
           a.price_change_percentage_24h_in_currency -
           b.price_change_percentage_24h_in_currency
         );
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[4]
-      ) {
+      } else if (descendBy24h) {
         return (
           b.price_change_percentage_24h_in_currency -
           a.price_change_percentage_24h_in_currency
         );
-      } else if (
-        this.state.sort === true &&
-        this.state.selection === this.state.tableColumns[5]
-      ) {
+      } else if (ascednBy7d) {
         return (
           a.price_change_percentage_7d_in_currency -
           b.price_change_percentage_7d_in_currency
         );
-      } else if (
-        this.state.sort === false &&
-        this.state.selection === this.state.tableColumns[5]
-      ) {
+      } else if (descendBy7d) {
         return (
           b.price_change_percentage_7d_in_currency -
           a.price_change_percentage_7d_in_currency
@@ -165,9 +144,9 @@ class Landing extends React.Component {
     return (
       <Container>
         <InfiniteScroll
-          dataLength={this.state.allCoins.length}
+          dataLength={allCoins.length}
           next={this.handleInfiniteScroll}
-          hasMore={this.state.hasMore}
+          hasMore={hasMore}
           loader={<ScrollMessage className="text">Loading...</ScrollMessage>}
           endMessage={
             <ScrollMessage className="text">
@@ -180,11 +159,11 @@ class Landing extends React.Component {
             <Table className="third">
               <thead>
                 <HeadTableRow>
-                  {this.state.tableColumns.map((item) => {
+                  {tableColumns.map((item) => {
                     return (
                       <TableHead
                         item={item}
-                        tableColumns={this.state.tableColumns}
+                        tableColumns={tableColumns}
                         sortingManager={this.sortingManager}
                         key={crypto.randomUUID()}
                       />
@@ -197,9 +176,9 @@ class Landing extends React.Component {
                   return (
                     <TableData
                       item={item}
-                      allCoins={this.state.allCoins}
-                      sort={this.state.sort}
-                      selection={this.state.selection}
+                      allCoins={allCoins}
+                      sort={sort}
+                      selection={selection}
                       key={crypto.randomUUID()}
                     />
                   );

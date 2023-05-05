@@ -7,17 +7,17 @@ import {
 } from "./TableHead.styles";
 import { SortIcon } from "../IconComponent";
 
-export const TableHead = (props) => {
+export const TableHead = ({ sortingManager, tableColumns, item }) => {
   const handleClick = () => {
-    props.sortingManager(props.item);
+    sortingManager(item);
   };
-  const hasSort = props.tableColumns.slice(0, 6).includes(props.item);
+  const hasSort = tableColumns.slice(0, 6).includes(item);
   return (
     <>
       {hasSort && (
         <TableHeaderSort onClick={handleClick}>
           <TitleWrapper>
-            {props.item}
+            {item}
             <IconWrapper>
               <SortIcon />
             </IconWrapper>
@@ -26,7 +26,7 @@ export const TableHead = (props) => {
       )}
       {!hasSort && (
         <TableHeader>
-          <TitleWrapper>{props.item}</TitleWrapper>
+          <TitleWrapper>{item}</TitleWrapper>
         </TableHeader>
       )}
     </>

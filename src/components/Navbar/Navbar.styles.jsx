@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledLink = styled(Link)`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  width: 100%;
   height: 100%;
+  border-radius: 8px;
 `;
 
 export const Container = styled.div`
@@ -25,14 +25,14 @@ export const Nav = styled.nav`
 
 export const LinkContainer = styled.div`
   display: flex;
-  height: 100%;
   align-items: center;
+  height: 100%;
 `;
 
 export const LinkWrapper = styled.div`
-  width: 135px;
   display: flex;
   justify-content: center;
+  width: 135px;
   height: 44px;
   margin: 0 10px;
 `;

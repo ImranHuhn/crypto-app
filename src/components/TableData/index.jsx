@@ -3,27 +3,41 @@ import React from "react";
 import { TableRow, Image } from "./TableData.styles";
 
 export const TableData = (props) => {
+  const {
+    market_cap_rank,
+    image,
+    id,
+    symbol,
+    current_price,
+    price_change_percentage_1h_in_currency,
+    price_change_percentage_24h_in_currency,
+    price_change_percentage_7d_in_currency,
+    total_volume,
+    market_cap,
+    circulating_supply,
+    total_supply,
+  } = props.item || {};
   return (
     <TableRow>
-      <td>{props.item?.market_cap_rank}</td>
+      <td>{market_cap_rank}</td>
       <td>
-        <Image src={props.item?.image} />
-        {props.item?.id} ({props.item?.symbol})
+        <Image src={image} />
+        {id} ({symbol})
       </td>
-      <td>{props.item?.current_price}</td>
-      <td>{props.item?.price_change_percentage_1h_in_currency}</td>
-      <td>{props.item?.price_change_percentage_24h_in_currency}</td>
-      <td>{props.item?.price_change_percentage_7d_in_currency}</td>
+      <td>{current_price}</td>
+      <td>{price_change_percentage_1h_in_currency}</td>
+      <td>{price_change_percentage_24h_in_currency}</td>
+      <td>{price_change_percentage_7d_in_currency}</td>
       <td>
-        {props.item?.total_volume}
+        {total_volume}
         {" / "}
-        {props.item?.market_cap}
+        {market_cap}
       </td>
       <td>
         {" "}
-        {props.item?.circulating_supply}
+        {circulating_supply}
         {" / "}
-        {props.item?.total_supply}
+        {total_supply}
       </td>
       <td>9</td>
     </TableRow>

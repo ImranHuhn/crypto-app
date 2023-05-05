@@ -21,7 +21,8 @@ class App extends React.Component {
   };
 
   handleClick = () => {
-    const themeSetting = !this.state.on;
+    const { on } = this.state;
+    const themeSetting = !on;
     this.setState({ on: themeSetting });
     localStorage.setItem("themeSetting", JSON.stringify(themeSetting));
   };
@@ -33,18 +34,21 @@ class App extends React.Component {
   };
 
   render() {
+    const { on } = this.state;
+    const { active_cryptocurrencies, markets, total_market_cap, total_volume } =
+      this.state.marketData || {};
     return (
-      <ThemeProvider theme={this.state.on ? lightTheme : darkTheme}>
+      <ThemeProvider theme={on ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router>
           <div>
             <Navbar
               handleClick={this.handleClick}
-              on={this.state.on}
-              totalCoins={this.state.marketData?.active_cryptocurrencies}
-              totalExchanges={this.state.marketData?.markets}
-              marketCap={this.state.marketData?.total_market_cap}
-              marketVolume={this.state.marketData?.total_volume}
+              on={on}
+              totalCoins={active_cryptocurrencies}
+              totalExchanges={markets}
+              marketCap={total_market_cap}
+              marketVolume={total_volume}
             />
             <Switch>
               <Route
@@ -53,7 +57,7 @@ class App extends React.Component {
                 component={(props) => (
                   <Landing
                     {...props}
-                    totalCoins={this.state.marketData?.active_cryptocurrencies} // need this for handleInfiniteScroll function in coins page
+                    totalCoins={active_cryptocurrencies} // need this for handleInfiniteScroll function in coins page
                   />
                 )}
               />
