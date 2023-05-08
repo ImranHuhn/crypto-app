@@ -17,22 +17,23 @@ class Landing extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
-    tableColumns: [
-      "#",
-      "Name",
-      "Price",
-      "1h",
-      "24h",
-      "7d",
-      "24h Volume / Market Cap",
-      "Circulating / Total Supply",
-      "Last 7d",
-    ],
+    tableColumns: {
+      market_cap_rank: "#",
+      id: "Name",
+      current_price: "Price",
+      price_change_percentage_1h_in_currency: "1h",
+      price_change_percentage_24h_in_currency: "24h",
+      price_change_percentage_7d_in_currency: "7d",
+      volume_and_market_cap: "24h Volume / Market Cap",
+      circulating_and_supply: "Circulating / Total Supply",
+      total_supply: "Last 7d",
+    },
     selection: "",
     sort: null,
   };
 
   sortingManager = (selection) => {
+    console.log(selection);
     let newSort;
     switch (this.state.sort) {
       case null:
@@ -59,11 +60,20 @@ class Landing extends React.Component {
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
+      //////////////////////////////////////////////////////////
+      // used for testing
+      localStorage.setItem("allCoins", JSON.stringify(newData));
+      //////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = () => {
-    this.handleInfiniteScroll();
+    // this.handleInfiniteScroll();
+    ///////////////////////////////////////////////////
+    //used for testing
+    const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
+    this.setState({ allCoins: storageData });
+    ///////////////////////////////////////////////////
   };
 
   render() {
@@ -72,55 +82,16 @@ class Landing extends React.Component {
     let sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
-      const ascendByRank = sort === true && selection === tableColumns[0];
-      const descendByRank = sort === false && selection === tableColumns[0];
-      const ascendByName = sort === true && selection === tableColumns[1];
-      const descendByName = sort === false && selection === tableColumns[1];
-      const ascendByPrice = sort === true && selection === tableColumns[2];
-      const descendByPrice = sort === false && selection === tableColumns[2];
-      const ascendBy1h = sort === true && selection === tableColumns[3];
-      const descendBy1h = sort === false && selection === tableColumns[3];
-      const ascendBy24h = sort === true && selection === tableColumns[4];
-      const descendBy24h = sort === false && selection === tableColumns[4];
-      const ascendBy7d = sort === true && selection === tableColumns[5];
-      const descendBy7d = sort === false && selection === tableColumns[5];
-      const rankA = a.market_cap_rank;
-      const rankB = b.market_cap_rank;
-      const nameAtoZ = a.id.localeCompare(b.id);
-      const nameZtoA = b.id.localeCompare(a.id);
-      const priceA = a.current_price;
-      const priceB = b.current_price;
-      const oneHourA = a.price_change_percentage_1h_in_currency;
-      const oneHourB = b.price_change_percentage_1h_in_currency;
-      const twentyFourHoursA = a.price_change_percentage_24h_in_currency;
-      const twentyFourHoursB = b.price_change_percentage_24h_in_currency;
-      const sevenDaysA = a.price_change_percentage_7d_in_currency;
-      const sevenDaysB = b.price_change_percentage_7d_in_currency;
-      switch (true) {
-        case ascendByRank:
-          return rankA - rankB;
-        case descendByRank:
-          return rankB - rankA;
-        case ascendByName:
-          return nameAtoZ;
-        case descendByName:
-          return nameZtoA;
-        case ascendByPrice:
-          return priceA - priceB;
-        case descendByPrice:
-          return priceB - priceA;
-        case ascendBy1h:
-          return oneHourA - oneHourB;
-        case descendBy1h:
-          return oneHourB - oneHourA;
-        case ascendBy24h:
-          return twentyFourHoursA - twentyFourHoursB;
-        case descendBy24h:
-          return twentyFourHoursB - twentyFourHoursA;
-        case ascendBy7d:
-          return sevenDaysA - sevenDaysB;
-        case descendBy7d:
-          return sevenDaysB - sevenDaysA;
+      const isId = selection === "id";
+      const ascendingNumbers = a[selection] - b[selection];
+      const descendingNumbers = b[selection] - a[selection];
+      const alphabetAtoZ = a.id.localeCompare(b.id);
+      const alphabetZtoA = b.id.localeCompare(a.id);
+      switch (sort) {
+        case true:
+          return isId ? alphabetAtoZ : ascendingNumbers;
+        case false:
+          return isId ? alphabetZtoA : descendingNumbers;
         default:
           return sortedAllCoins;
       }
@@ -144,7 +115,7 @@ class Landing extends React.Component {
             <Table className="third">
               <thead>
                 <HeadTableRow>
-                  {tableColumns.map((item) => {
+                  {Object.entries(tableColumns).map((item) => {
                     return (
                       <TableHead
                         item={item}
