@@ -1,6 +1,7 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCoins } from "../../utils/api";
+import { handleError } from "../../utils/handleError";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
 import {
@@ -33,7 +34,6 @@ class Landing extends React.Component {
   };
 
   sortingManager = (selection) => {
-    console.log(selection);
     let newSort;
     switch (this.state.sort) {
       case null:
@@ -53,7 +53,7 @@ class Landing extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins(parseInt(newPage));
+    const newData = await handleError(getCoins(parseInt(newPage)));
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
