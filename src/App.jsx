@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { getMarketData } from "./utils/api";
 import { GlobalStyle, lightTheme, darkTheme } from "./App.styles";
 import { Navbar } from "./components/Navbar";
-import Landing from "./pages/Landing";
+import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
 
 class App extends React.Component {
@@ -55,7 +55,7 @@ class App extends React.Component {
                 exact
                 path="/"
                 component={(props) => (
-                  <Landing
+                  <Home
                     {...props}
                     totalCoins={active_cryptocurrencies} // need this for handleInfiniteScroll function in coins page
                   />

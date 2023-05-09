@@ -29,13 +29,9 @@ export const TableData = (props) => {
       <td>{price_change_percentage_1h_in_currency || <Skeleton />}</td>
       <td>{price_change_percentage_24h_in_currency || <Skeleton />}</td>
       <td>{price_change_percentage_7d_in_currency || <Skeleton />}</td>
+      <td>{total_volume || <Skeleton />}</td>
+      <td>{market_cap || <Skeleton />}</td>
       <td>
-        {total_volume || <Skeleton />}
-        {" / "}
-        {market_cap || <Skeleton />}
-      </td>
-      <td>
-        {" "}
         {circulating_supply || <Skeleton />}
         {" / "}
         {total_supply || <Skeleton />}

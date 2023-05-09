@@ -1,7 +1,7 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+// import queryString from "query-string";
 import { getCoins } from "../../utils/api";
-import { handleError } from "../../utils/handleError";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
 import {
@@ -10,9 +10,9 @@ import {
   TableWrapper,
   Table,
   HeadTableRow,
-} from "./Landing.styles";
+} from "./Home.styles";
 
-class Landing extends React.Component {
+class Home extends React.Component {
   state = {
     allCoins: [],
     hasMore: true,
@@ -25,7 +25,8 @@ class Landing extends React.Component {
       price_change_percentage_1h_in_currency: "1h",
       price_change_percentage_24h_in_currency: "24h",
       price_change_percentage_7d_in_currency: "7d",
-      volume_and_market_cap: "24h Volume / Market Cap",
+      total_volume: "24h Volume",
+      market_cap: "Market Cap",
       circulating_and_supply: "Circulating / Total Supply",
       total_supply: "Last 7d",
     },
@@ -33,7 +34,13 @@ class Landing extends React.Component {
     sort: null,
   };
 
-  sortingManager = (selection) => {
+  sortingManager = async (selection) => {
+    const sortApi = ["id", "total_volume", "market_cap"]
+    if(sortApi.includes(selection)){
+      console.log(selection)
+      await getCoins("market_cap_desc");
+
+    }
     let newSort;
     switch (this.state.sort) {
       case null:
@@ -53,7 +60,7 @@ class Landing extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await handleError(getCoins(parseInt(newPage)));
+    const newData = await getCoins(false, parseInt(newPage));
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
@@ -68,6 +75,9 @@ class Landing extends React.Component {
   };
 
   componentDidMount = () => {
+    // const parsed = queryString.parse(location.search);
+    // console.log(parsed);
+
     // this.handleInfiniteScroll();
     ///////////////////////////////////////////////////
     //used for testing
@@ -149,4 +159,4 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+export default Home;

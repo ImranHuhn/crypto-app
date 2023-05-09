@@ -11,7 +11,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
   const handleClick = () => {
     sortingManager(item[0]);
   };
-  const hasSort = Object.values(tableColumns).slice(0, 6).includes(item[1]);
+  const hasSort = Object.values(tableColumns).slice(0, 8).includes(item[1]);
   return (
     <>
       {hasSort && (
@@ -24,6 +24,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
           </TitleWrapper>
         </TableHeaderSort>
       )}
+      {/* I will have to add condition for volume and marketcap for styling */}
       {!hasSort && (
         <TableHeader>
           <TitleWrapper>{item[1]}</TitleWrapper>
