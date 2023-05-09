@@ -1,6 +1,5 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import queryString from "query-string";
 import { getCoins } from "../../utils/api";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
@@ -35,20 +34,20 @@ class Home extends React.Component {
   };
 
   sortingManager = async (selection) => {
-    let newSort;
+    let sort;
     switch (this.state.sort) {
       case null:
-        newSort = true;
+        sort = true;
         break;
       case true:
-        newSort = false;
+        sort = false;
         break;
       case false:
-        newSort = null;
+        sort = null;
         break;
     }
-    await getCoins({ sort: newSort, selection });
-    this.setState({ sort: newSort, selection });
+    await getCoins({ sort, selection });
+    this.setState({ sort, selection });
   };
 
   handleInfiniteScroll = async () => {
