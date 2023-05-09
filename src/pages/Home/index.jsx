@@ -35,25 +35,26 @@ class Home extends React.Component {
   };
 
   sortingManager = async (selection) => {
-    const sortApi = ["id", "total_volume", "market_cap"]
-    if(sortApi.includes(selection)){
-      console.log(selection)
-      await getCoins("market_cap_desc");
-
+    const sortApi = ["id", "total_volume", "market_cap"];
+    if (sortApi.includes(selection)) {
+      console.log(selection);
+      const orderApi = { sort: this.state.sort, selection: "market_cap_desc" };
+      await getCoins(orderApi);
+    } else {
+      let newSort;
+      switch (this.state.sort) {
+        case null:
+          newSort = true;
+          break;
+        case true:
+          newSort = false;
+          break;
+        case false:
+          newSort = null;
+          break;
+      }
+      this.setState({ sort: newSort, selection });
     }
-    let newSort;
-    switch (this.state.sort) {
-      case null:
-        newSort = true;
-        break;
-      case true:
-        newSort = false;
-        break;
-      case false:
-        newSort = null;
-        break;
-    }
-    this.setState({ sort: newSort, selection });
   };
 
   handleInfiniteScroll = async () => {
