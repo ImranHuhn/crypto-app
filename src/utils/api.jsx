@@ -2,12 +2,23 @@ import axios from "axios";
 
 export const getCoins = async (order, page) => {
   let newOrder;
-  if (order.sort === true) {
-    newOrder = order.selection.concat("_asc");
-  } else if (order.sort === false) {
-    newOrder = order.selection.concat("_desc");
-  } else {
-    newOrder = "market_cap_desc";
+  // if (order.sort === true) {
+  //   newOrder = order.selection.concat("_asc");
+  // } else if (order.sort === false) {
+  //   newOrder = order.selection.concat("_desc");
+  // } else {
+  //   newOrder = "market_cap_desc";
+  // }
+
+  switch (order.sort) {
+    case true:
+      newOrder = order.selection.concat("_asc");
+      break;
+    case false:
+      newOrder = order.selection.concat("_desc");
+      break;
+    case null:
+      newOrder = "market_cap_desc";
   }
 
   console.log(order, page);
