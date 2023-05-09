@@ -35,33 +35,27 @@ class Home extends React.Component {
   };
 
   sortingManager = async (selection) => {
-    const sortApi = ["id", "total_volume", "market_cap"];
-    if (sortApi.includes(selection)) {
-      console.log(selection);
-      const orderApi = { sort: this.state.sort, selection: "market_cap_desc" };
-      await getCoins(orderApi);
-    } else {
-      let newSort;
-      switch (this.state.sort) {
-        case null:
-          newSort = true;
-          break;
-        case true:
-          newSort = false;
-          break;
-        case false:
-          newSort = null;
-          break;
-      }
-      this.setState({ sort: newSort, selection });
+    let newSort;
+    switch (this.state.sort) {
+      case null:
+        newSort = true;
+        break;
+      case true:
+        newSort = false;
+        break;
+      case false:
+        newSort = null;
+        break;
     }
+    await getCoins({ sort: newSort, selection });
+    this.setState({ sort: newSort, selection });
   };
 
   handleInfiniteScroll = async () => {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins(false, parseInt(newPage));
+    const newData = await getCoins(null, parseInt(newPage));
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
@@ -88,6 +82,7 @@ class Home extends React.Component {
   };
 
   render() {
+    console.log("$$$$$$", this.state.selection);
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
 
     let sortedAllCoins = allCoins.map((item) => item);
