@@ -26,11 +26,15 @@ export const getCoins = async (order, page) => {
   console.log("///////newOrder", newOrder);
 
   try {
-    const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${newOrder}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-    );
-    console.log(data);
-    return data;
+    setTimeout =
+      (async () => {
+        const { data } = await axios(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${newOrder}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        );
+        console.log(data);
+        return data;
+      },
+      2000);
   } catch (error) {
     alert(error);
   }
