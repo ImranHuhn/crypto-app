@@ -1,40 +1,32 @@
 import axios from "axios";
 
-export const getCoins = async (order, page) => {
-  let newOrder;
-  // if (order.sort === true) {
-  //   newOrder = order.selection.concat("_asc");
-  // } else if (order.sort === false) {
-  //   newOrder = order.selection.concat("_desc");
-  // } else {
-  //   newOrder = "market_cap_desc";
-  // }
+export const getCoins = async (parameter) => {
+  let order, page;
+  console.log("object", typeof parameter === "object");
 
-  switch (order.sort) {
-    case true:
-      newOrder = order.selection.concat("_asc");
-      break;
-    case false:
-      newOrder = order.selection.concat("_desc");
-      break;
-    case null:
-      newOrder = "market_cap_desc";
+  if (typeof parameter === "object") {
+    parameter;
+    switch (order.sort) {
+      case true:
+        order = parameter.selection.concat("_asc");
+        break;
+      case false:
+        order = parameter.selection.concat("_desc");
+        break;
+      case null:
+        order = "market_cap_desc";
+        break;
+    }
+  } else {
+    page = parameter;
   }
 
-  console.log(order, page);
-  console.log("///////order", order);
-  console.log("///////newOrder", newOrder);
-
   try {
-    setTimeout =
-      (async () => {
-        const { data } = await axios(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${newOrder}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-        );
-        console.log(data);
-        return data;
-      },
-      2000);
+    const { data } = await axios(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${order}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+    );
+    console.log(data);
+    return data;
   } catch (error) {
     alert(error);
   }

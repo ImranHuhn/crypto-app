@@ -54,34 +54,21 @@ class Home extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins(null, parseInt(newPage));
+    const newData = await getCoins(parseInt(newPage));
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
     }
     setTimeout(() => {
       this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
-      //////////////////////////////////////////////////////////
-      // used for testing
-      localStorage.setItem("allCoins", JSON.stringify(newData));
-      //////////////////////////////////////////////////////////
     }, 1500);
   };
 
   componentDidMount = () => {
-    // const parsed = queryString.parse(location.search);
-    // console.log(parsed);
-
-    // this.handleInfiniteScroll();
-    ///////////////////////////////////////////////////
-    //used for testing
-    const storageData = JSON.parse(localStorage.getItem("allCoins")) || [];
-    this.setState({ allCoins: storageData });
-    ///////////////////////////////////////////////////
+    this.handleInfiniteScroll();
   };
 
   render() {
-    console.log("$$$$$$", this.state.selection);
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
 
     let sortedAllCoins = allCoins.map((item) => item);
