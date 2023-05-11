@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledLink = styled(Link)`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  width: 100%;
   height: 100%;
+  border-radius: 8px;
 `;
 
 export const Container = styled.div`
@@ -25,14 +25,14 @@ export const Nav = styled.nav`
 
 export const LinkContainer = styled.div`
   display: flex;
-  height: 100%;
   align-items: center;
+  height: 100%;
 `;
 
 export const LinkWrapper = styled.div`
-  width: 135px;
   display: flex;
   justify-content: center;
+  width: 135px;
   height: 44px;
   margin: 0 10px;
 `;
@@ -51,11 +51,11 @@ export const InputWrapper = styled.div`
 `;
 
 export const Input = styled.input`
-padding-left: 35px;
-height: 44px;
-border-radius: 8px;
-border: none;
-width: 400px;
+  padding-left: 35px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  width: 400px;
 `;
 
 export const CurrencyButton = styled.button`
@@ -84,13 +84,16 @@ export const DollarIconWrapper = styled.div`
 `;
 
 export const MagnifyIconWrapper = styled.div`
-width: 20px;
-position: absolute;
-left: 10px;
+  width: 20px;
+  position: absolute;
+  left: 10px;
 `;
 
 export const ChevronIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: 20px;
+  transform: rotate(180deg);
 `;
 
 export const CurrencyList = styled.ul`
@@ -104,11 +107,10 @@ export const DarkThemeIconWrapper = styled.div`
   width: 24px;
 `;
 
-export const SubNav = styled.div`
+export const SubNavbarWrapper = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #191b1f;
   width: 50%;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
