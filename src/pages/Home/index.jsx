@@ -55,7 +55,7 @@ class Home extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins({page: parseInt(newPage)});
+    const newData = await getCoins({ page: parseInt(newPage) });
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
@@ -77,7 +77,7 @@ class Home extends React.Component {
   };
 
   componentDidMount = () => {
-    // this.handleInfiniteScroll();
+    this.handleInfiniteScroll();
     const parsed = queryString.parse(this.props.location.search, {
       parseBooleans: true,
     });
@@ -85,10 +85,8 @@ class Home extends React.Component {
   };
 
   render() {
-
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
-
-    let sortedAllCoins = allCoins.map((item) => item);
+    const sortedAllCoins = allCoins.map((item) => item);
 
     sortedAllCoins.sort((a, b) => {
       const isId = selection === "id";
