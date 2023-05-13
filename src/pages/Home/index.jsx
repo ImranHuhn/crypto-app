@@ -1,5 +1,6 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import queryString from "query-string";
 import { getCoins } from "../../utils/api";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
@@ -54,7 +55,7 @@ class Home extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins(parseInt(newPage));
+    const newData = await getCoins({page: parseInt(newPage)});
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
@@ -64,11 +65,27 @@ class Home extends React.Component {
     }, 1500);
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      prevState.selection !== this.state.selection ||
+      prevState.sort !== this.state.sort
+    ) {
+      const {selection, sort} = this.state;
+      const query = queryString.stringify({selection, sort})
+      this.props.history.push(`/?${query}`)
+    }
+  };
+
   componentDidMount = () => {
-    this.handleInfiniteScroll();
+    // this.handleInfiniteScroll();
+    const parsed = queryString.parse(this.props.location.search, {
+      parseBooleans: true,
+    });
+    this.setState({ parsed });
   };
 
   render() {
+
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
 
     let sortedAllCoins = allCoins.map((item) => item);

@@ -1,28 +1,22 @@
 import axios from "axios";
 
 export const getCoins = async (parameter) => {
-  let order, page;
-
-  if (typeof parameter === "object") {
-    parameter;
-    switch (order.sort) {
-      case true:
-        order = parameter.selection.concat("_asc");
-        break;
-      case false:
-        order = parameter.selection.concat("_desc");
-        break;
-      case null:
-        order = "market_cap_desc";
-        break;
-    }
-  } else {
-    page = parameter;
+  let order;
+  switch (parameter.sort) {
+    case true:
+      order = parameter.selection.concat("_asc");
+      break;
+    case false:
+      order = parameter.selection.concat("_desc");
+      break;
+    case null:
+      order = "market_cap_desc";
+      break;
   }
 
   try {
     const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${order}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${order}&per_page=50&page=${parameter.page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
     );
     return data;
   } catch (error) {
