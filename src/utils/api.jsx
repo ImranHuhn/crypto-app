@@ -4,7 +4,7 @@ import queryString from "query-string";
 const base = import.meta.env.VITE_END_POINT;
 
 export const getCoins = async (query) => {
-  const testQuery = queryString.stringify(
+  const newQuery = queryString.stringify(
     query,
     { skipNull: true },
     { parseBoolean: true }
@@ -12,7 +12,7 @@ export const getCoins = async (query) => {
 
   try {
     const { data } = await axios(
-      `${base}/coins/markets?${testQuery}&vs_currency=usd&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+      `${base}/coins/markets?${newQuery}&vs_currency=usd&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
     );
     return data;
   } catch (error) {
