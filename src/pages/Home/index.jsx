@@ -73,9 +73,9 @@ class Home extends React.Component {
       prevState.selection !== this.state.selection ||
       prevState.sort !== this.state.sort
     ) {
-      const {selection, sort} = this.state;
-      const query = queryString.stringify({selection, sort})
-      this.props.history.push(`/?${query}`)
+      const { selection, sort } = this.state;
+      const query = queryString.stringify({ selection, sort });
+      this.props.history.push(`/?${query}`);
     }
   };
 
@@ -89,23 +89,23 @@ class Home extends React.Component {
 
   render() {
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
-    const sortedAllCoins = allCoins.map((item) => item);
+    let sortedAllCoins = allCoins.map((item) => item);
 
-    sortedAllCoins.sort((a, b) => {
-      const isId = selection === "id";
-      const ascendingNumbers = a[selection] - b[selection];
-      const descendingNumbers = b[selection] - a[selection];
-      const alphabetAtoZ = a.id.localeCompare(b.id);
-      const alphabetZtoA = b.id.localeCompare(a.id);
-      switch (sort) {
-        case true:
-          return isId ? alphabetAtoZ : ascendingNumbers;
-        case false:
-          return isId ? alphabetZtoA : descendingNumbers;
-        default:
-          return sortedAllCoins;
-      }
-    });
+    if (sort === true || sort === false) {
+      sortedAllCoins = [...sortedAllCoins];
+      sortedAllCoins.sort((a, b) => {
+        const isId = selection === "id";
+        if (isId) {
+          const alphabetAtoZ = a.id.localeCompare(b.id);
+          const alphabetZtoA = b.id.localeCompare(a.id);
+          return sort ? alphabetAtoZ : alphabetZtoA;
+        } else {
+            const ascendingNumbers = a[selection] - b[selection];
+            const descendingNumbers = b[selection] - a[selection];
+            return sort ? ascendingNumbers : descendingNumbers
+        }
+      });
+    }
 
     return (
       <Container>
