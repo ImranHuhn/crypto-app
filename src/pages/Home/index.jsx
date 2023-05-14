@@ -35,19 +35,22 @@ class Home extends React.Component {
   };
 
   sortingManager = async (selection) => {
-    let sort;
+    let sort, newSelection;
     switch (this.state.sort) {
       case null:
         sort = true;
+        newSelection = selection.concat("_asc");
         break;
       case true:
         sort = false;
+        newSelection = selection.concat("_desc");
         break;
       case false:
         sort = null;
+        newSelection = "market_cap_desc";
         break;
     }
-    await getCoins({ sort, selection });
+    await getCoins({ sort, newSelection });
     this.setState({ sort, selection });
   };
 
