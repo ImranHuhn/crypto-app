@@ -1,5 +1,6 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import queryString from "query-string";
 import { getCoins } from "../../utils/api";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
@@ -34,19 +35,22 @@ class Home extends React.Component {
   };
 
   sortingManager = async (selection) => {
-    let sort;
+    let sort, newSelection;
     switch (this.state.sort) {
       case null:
         sort = true;
+        newSelection = selection.concat("_asc");
         break;
       case true:
         sort = false;
+        newSelection = selection.concat("_desc");
         break;
       case false:
         sort = null;
+        newSelection = "market_cap_desc";
         break;
     }
-    await getCoins({ sort, selection });
+    await getCoins({ sort, newSelection });
     this.setState({ sort, selection });
   };
 
@@ -54,7 +58,7 @@ class Home extends React.Component {
     const { page, allCoins, totalCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
-    const newData = await getCoins(parseInt(newPage));
+    const newData = await getCoins({ page: parseInt(newPage) });
     const newAllCoins = [...allCoins, ...newData];
     if (allCoins.length - 1 >= totalCoins) {
       this.setState({ hasMore: false });
@@ -64,30 +68,44 @@ class Home extends React.Component {
     }, 1500);
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      prevState.selection !== this.state.selection ||
+      prevState.sort !== this.state.sort
+    ) {
+      const { selection, sort } = this.state;
+      const query = queryString.stringify({ selection, sort });
+      this.props.history.push(`/?${query}`);
+    }
+  };
+
   componentDidMount = () => {
     this.handleInfiniteScroll();
+    const parsed = queryString.parse(this.props.location.search, {
+      parseBooleans: true,
+    });
+    this.setState({ parsed });
   };
 
   render() {
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
-
     let sortedAllCoins = allCoins.map((item) => item);
 
-    sortedAllCoins.sort((a, b) => {
-      const isId = selection === "id";
-      const ascendingNumbers = a[selection] - b[selection];
-      const descendingNumbers = b[selection] - a[selection];
-      const alphabetAtoZ = a.id.localeCompare(b.id);
-      const alphabetZtoA = b.id.localeCompare(a.id);
-      switch (sort) {
-        case true:
-          return isId ? alphabetAtoZ : ascendingNumbers;
-        case false:
-          return isId ? alphabetZtoA : descendingNumbers;
-        default:
-          return sortedAllCoins;
-      }
-    });
+    if (sort === true || sort === false) {
+      sortedAllCoins = [...sortedAllCoins];
+      sortedAllCoins.sort((a, b) => {
+        const isId = selection === "id";
+        if (isId) {
+          const alphabetAtoZ = a.id.localeCompare(b.id);
+          const alphabetZtoA = b.id.localeCompare(a.id);
+          return sort ? alphabetAtoZ : alphabetZtoA;
+        } else {
+            const ascendingNumbers = a[selection] - b[selection];
+            const descendingNumbers = b[selection] - a[selection];
+            return sort ? ascendingNumbers : descendingNumbers
+        }
+      });
+    }
 
     return (
       <Container>
