@@ -55,16 +55,14 @@ class Home extends React.Component {
   };
 
   handleInfiniteScroll = async () => {
-    const { page, allCoins, totalCoins } = this.state;
+    const { page, allCoins } = this.state;
     this.setState({ isLoading: true });
     const newPage = page + 1;
     const newData = await getCoins({ page: parseInt(newPage) });
+    const hasMoreCoins = !!newData.length
     const newAllCoins = [...allCoins, ...newData];
-    if (allCoins.length - 1 >= totalCoins) {
-      this.setState({ hasMore: false });
-    }
     setTimeout(() => {
-      this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false });
+      this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false, hasMore: hasMoreCoins });
     }, 1500);
   };
 
