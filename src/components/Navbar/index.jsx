@@ -1,5 +1,5 @@
 import React from "react";
-import { SubNavbar } from "../SubNavbar";
+import SubNavbar from "../SubNavbar";
 import {
   StyledLink,
   Container,
@@ -25,14 +25,7 @@ import {
   DollarIcon,
 } from "../IconComponent";
 
-export const Navbar = ({
-  on,
-  handleClick,
-  totalCoins,
-  totalExchanges,
-  marketCap,
-  marketVolume,
-}) => {
+export const Navbar = ({ on, handleClick }) => {
   return (
     <Container className="third" $on={on}>
       <Nav>
@@ -79,12 +72,7 @@ export const Navbar = ({
         </RightNavbarWrapper>
       </Nav>
       <SubNavbarWrapper className="text third">
-        <SubNavbar
-          totalCoins={totalCoins}
-          totalExchanges={totalExchanges}
-          marketCap={marketCap}
-          usdVolume={marketVolume?.usd}
-        />
+        <SubNavbar />
       </SubNavbarWrapper>
     </Container>
   );
