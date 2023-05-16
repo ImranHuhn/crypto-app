@@ -59,10 +59,15 @@ class Home extends React.Component {
     this.setState({ isLoading: true });
     const newPage = page + 1;
     const newData = await getCoins({ page: parseInt(newPage) });
-    const hasMoreCoins = !!newData.length
+    const hasMoreCoins = !!newData.length;
     const newAllCoins = [...allCoins, ...newData];
     setTimeout(() => {
-      this.setState({ allCoins: newAllCoins, page: newPage, isLoading: false, hasMore: hasMoreCoins });
+      this.setState({
+        allCoins: newAllCoins,
+        page: newPage,
+        isLoading: false,
+        hasMore: hasMoreCoins,
+      });
     }, 1500);
   };
 
@@ -98,9 +103,9 @@ class Home extends React.Component {
           const alphabetZtoA = b.id.localeCompare(a.id);
           return sort ? alphabetAtoZ : alphabetZtoA;
         } else {
-            const ascendingNumbers = a[selection] - b[selection];
-            const descendingNumbers = b[selection] - a[selection];
-            return sort ? ascendingNumbers : descendingNumbers
+          const ascendingNumbers = a[selection] - b[selection];
+          const descendingNumbers = b[selection] - a[selection];
+          return sort ? ascendingNumbers : descendingNumbers;
         }
       });
     }
