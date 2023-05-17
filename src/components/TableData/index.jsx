@@ -1,10 +1,4 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { TableRow, Image } from "./TableData.styles";
-
-//////////////////////////////////////////////////////
-// import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,8 +7,9 @@ import {
   LineElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
-//////////////////////////////////////////////////////
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { TableRow, Image } from "./TableData.styles";
 
 export const TableData = (props) => {
   const {
@@ -32,7 +27,6 @@ export const TableData = (props) => {
     total_supply,
   } = props.item || {};
 
-  //////////////////////////////////////////////////////
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
   const options = {
@@ -42,12 +36,18 @@ export const TableData = (props) => {
         radius: 0,
       },
     },
+    scales: {
+      x: {
+        display: false,
+      },
+      y: {
+        display: false,
+      },
+    },
   };
 
-  const labels = props.item.sparkline_in_7d.price.map((el, i) => i);
-
   const data = {
-    labels,
+    labels: props.item.sparkline_in_7d.price.map((el, i) => i),
     datasets: [
       {
         label: "Dataset",
@@ -59,12 +59,6 @@ export const TableData = (props) => {
       },
     ],
   };
-
-  const test = () => {
-    console.log("test", props.item.sparkline_in_7d.price.map((price) => price));
-  };
-  test();
-  //////////////////////////////////////////////////////
 
   return (
     <TableRow>
