@@ -11,12 +11,9 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { faker } from "@faker-js/faker";
 //////////////////////////////////////////////////////
 
 export const TableData = (props) => {
@@ -36,60 +33,37 @@ export const TableData = (props) => {
   } = props.item || {};
 
   //////////////////////////////////////////////////////
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
   const options = {
     responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Chart.js Line Chart",
+    elements: {
+      point: {
+        radius: 0,
       },
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+  const labels = props.item.sparkline_in_7d.price.map((el, i) => i);
 
   const data = {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
-        data: labels.map(() =>
-          faker.datatype.number({ min: -1000, max: 1000 })
-        ),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: labels.map(() =>
-          faker.datatype.number({ min: -1000, max: 1000 })
-        ),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: "Dataset",
+        data: props.item.sparkline_in_7d.price.map((price) => price),
+        borderColor: "rgb(50, 205, 50)",
+        backgroundColor: "rgba(50, 205, 50, 0.5)",
+        cubicInterpolationMode: "monotone",
+        tension: 0.3,
       },
     ],
   };
+
+  const test = () => {
+    console.log("test", props.item.sparkline_in_7d.price.map((price) => price));
+  };
+  test();
   //////////////////////////////////////////////////////
 
   return (
@@ -111,7 +85,7 @@ export const TableData = (props) => {
         {total_supply || <Skeleton />}
       </td>
       <td>
-      <Line options={options} data={data} />
+        <Line options={options} data={data} />
       </td>
     </TableRow>
   );
