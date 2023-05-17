@@ -16,7 +16,7 @@ export const getCoins = async (query) => {
     );
     return data;
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 };
 
@@ -25,6 +25,6 @@ export const getMarketData = async () => {
     const { data } = await axios(`${base}/global`);
     return data.data;
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 };
