@@ -12,18 +12,27 @@ class App extends React.Component {
   };
 
   handleClick = () => {
-    this.setState({ on: !this.state.on });
+    const { on } = this.state;
+    const themeSetting = !on;
+    this.setState({ on: themeSetting });
+    localStorage.setItem("themeSetting", JSON.stringify(themeSetting));
+  };
+
+  componentDidMount = () => {
+    const storedTheme = JSON.parse(localStorage.getItem("themeSetting"));
+    this.setState({ on: storedTheme });
   };
 
   render() {
+    const { on } = this.state;
     return (
       <ThemeProvider theme={this.state.on ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router>
           <div>
-            <Navbar handleClick={this.handleClick} on={this.state.on} />
+            <Navbar handleClick={this.handleClick} on={on} />
             <Switch>
-              <Route exact path="/" component={Coins} />
+              <Route exact path="/" component={Home} />
               <Route exact path="/portfolio" component={Portfolio} />
             </Switch>
           </div>
