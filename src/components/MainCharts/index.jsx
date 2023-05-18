@@ -37,6 +37,10 @@ class MainCharts extends React.Component {
   };
 
   render() {
+    const {prices = [], total_volumes = []} = this.state.bitcoinData || {}
+    const lastPrice = prices[prices?.length-1] || []
+    const lastVolume = total_volumes[total_volumes?.length-1] || []
+
     const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
@@ -54,11 +58,11 @@ class MainCharts extends React.Component {
     };
 
     const priceData = {
-      labels: this.state.bitcoinData?.prices.map((el) => el[0]),
+      labels: prices?.map((el) => el[0]),
       datasets: [
         {
           label: "Dataset",
-          data: this.state.bitcoinData?.prices.map((price) => price[1]),
+          data: prices?.map((price) => price[1]),
           borderColor: "rgb(50, 205, 50)",
           backgroundColor: "rgba(50, 205, 50, 0.5)",
           cubicInterpolationMode: "monotone",
@@ -70,11 +74,11 @@ class MainCharts extends React.Component {
     };
 
     const volumeData = {
-      labels: this.state.bitcoinData?.total_volumes.map((el) => el[0]),
+      labels: total_volumes?.map((el) => el[0]),
       datasets: [
         {
           label: "Dataset",
-          data: this.state.bitcoinData?.total_volumes.map(
+          data: total_volumes?.map(
             (volume) => volume[1]
           ),
           borderColor: "blue",
@@ -90,7 +94,7 @@ class MainCharts extends React.Component {
           <Wrapper className="third">
             <TextBox>
               <h3>BTC Price</h3>
-              <h1>{this.state.bitcoinData?.prices[this.state.bitcoinData?.prices.length-1][1]}</h1>
+              <h1>{lastPrice[1]}</h1>
               <h3>{currentDate}</h3>
             </TextBox>
             <Line options={lineOptions} data={priceData} />
@@ -98,7 +102,7 @@ class MainCharts extends React.Component {
           <Wrapper className="third">
             <TextBox>
               <h3>BTC Volume</h3>
-              <h1>{this.state.bitcoinData?.total_volumes[this.state.bitcoinData?.total_volumes.length-1][1]}</h1>
+              <h1>{lastVolume[1]}</h1>
               <h3>{currentDate}</h3>
             </TextBox>
             <Bar options={lineOptions} data={volumeData} />
