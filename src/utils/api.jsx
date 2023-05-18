@@ -16,7 +16,7 @@ export const getCoins = async (query) => {
     );
     return data;
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 };
 
@@ -25,6 +25,17 @@ export const getMarketData = async () => {
     const { data } = await axios(`${base}/global`);
     return data.data;
   } catch (error) {
-    alert(error);
+    console.log(error);
+  }
+};
+
+export const getBitcoinData = async () => {
+  try {
+    const { data } = await axios(
+      `${base}/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };
