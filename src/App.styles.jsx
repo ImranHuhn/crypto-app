@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .main {
-    background-color: ${(props) => props.theme.main};
+    background: ${(props) => props.theme.main};
   }
 
   .second, .button {
