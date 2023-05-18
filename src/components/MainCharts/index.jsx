@@ -37,6 +37,9 @@ class MainCharts extends React.Component {
   };
 
   render() {
+    console.log(this.state.bitcoinData?.prices[this.state.bitcoinData?.prices.length-1][1])
+    console.log(this.state.bitcoinData?.prices)
+
     const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
@@ -90,7 +93,7 @@ class MainCharts extends React.Component {
           <Wrapper className="third">
             <TextBox>
               <h3>BTC Price</h3>
-              <h1>$13.431 mln</h1>
+              <h1>{this.state.bitcoinData?.prices[this.state.bitcoinData?.prices.length-1][1]}</h1>
               <h3>{currentDate}</h3>
             </TextBox>
             <Line options={lineOptions} data={priceData} />
@@ -98,7 +101,7 @@ class MainCharts extends React.Component {
           <Wrapper className="third">
             <TextBox>
               <h3>BTC Volume</h3>
-              <h1>$807.24 bln</h1>
+              <h1>{this.state.bitcoinData?.total_volumes[this.state.bitcoinData?.total_volumes.length-1][1]}</h1>
               <h3>{currentDate}</h3>
             </TextBox>
             <Bar options={lineOptions} data={volumeData} />
