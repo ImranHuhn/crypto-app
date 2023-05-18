@@ -37,9 +37,6 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    console.log(this.state.bitcoinData?.prices[this.state.bitcoinData?.prices.length-1][1])
-    console.log(this.state.bitcoinData?.prices)
-
     const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
