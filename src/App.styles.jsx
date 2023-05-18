@@ -47,8 +47,8 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const lightTheme = {
-  main: "#ededed",
-  second: "#ededed",
+  main: "#d3d3d3",
+  second: "#d3d3d3",
   third: "#fff",
   text: "#000",
 };
