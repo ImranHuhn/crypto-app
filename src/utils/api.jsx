@@ -28,3 +28,14 @@ export const getMarketData = async () => {
     console.log(error);
   }
 };
+
+export const getBitcoinData = async () => {
+  try {
+    const { data } = await axios(
+      `${base}/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

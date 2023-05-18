@@ -18,7 +18,6 @@ export const Table = styled.table`
   margin: 0 auto;
   width: 100%;
   border-radius: 10px;
-  padding: 0 25px;
   height: 100vh;
 `;
 

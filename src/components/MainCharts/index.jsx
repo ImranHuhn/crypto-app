@@ -9,8 +9,9 @@ import {
   BarElement,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import axios from "axios";
-import moment from 'moment'
+import moment from "moment";
+import { getBitcoinData } from "../../utils/api";
+import { Container, Wrapper, TextBox } from "./MainCharts.styles";
 
 ChartJS.register(
   CategoryScale,
@@ -27,16 +28,8 @@ class MainCharts extends React.Component {
   };
 
   handleMainCharts = async () => {
-    try {
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`
-      );
-      //   console.log("test", data);
-      this.setState({ bitcoinData: data });
-      //   return data;
-    } catch (error) {
-      console.log(error);
-    }
+    const bitcoinData = await getBitcoinData();
+    this.setState({ bitcoinData });
   };
 
   componentDidMount = async () => {
@@ -44,9 +37,7 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    console.log("test", moment().millisecond(1668902400000))
-
-    const currentDate = moment().format('MMMM Do YYYY');
+    const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
       responsive: true,
@@ -94,47 +85,25 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <div>Overview</div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <div
-            className="third"
-            style={{
-              borderRadius: "10px",
-              width: "48%",
-              position: "relative",
-            }}
-          >
-            <div style={{ position: "absolute" }}>
+        <h1 className="text">Bitcoin Overview</h1>
+        <Container>
+          <Wrapper className="third">
+            <TextBox>
               <h3>BTC Price</h3>
               <h1>$13.431 mln</h1>
               <h3>{currentDate}</h3>
-            </div>
-            {/* every 3rd day in a month */}
+            </TextBox>
             <Line options={lineOptions} data={priceData} />
-          </div>
-          <div
-            className="third"
-            style={{
-              borderRadius: "10px",
-              width: "48%",
-              position: "relative",
-            }}
-          >
-            <div style={{ position: "absolute" }}>
+          </Wrapper>
+          <Wrapper className="third">
+            <TextBox>
               <h3>BTC Volume</h3>
               <h1>$807.24 bln</h1>
               <h3>{currentDate}</h3>
-            </div>
-            {/* every hour from 0 -24 */}
+            </TextBox>
             <Bar options={lineOptions} data={volumeData} />
-          </div>
-        </div>
+          </Wrapper>
+        </Container>
       </div>
     );
   }

@@ -126,7 +126,7 @@ class Home extends React.Component {
         >
           <TableWrapper className="text">
             <MainCharts />
-            <h1 className="text">Your Overview</h1>
+            <h1 className="text">Market Overview</h1>
             <Table className="third">
               <thead>
                 <HeadTableRow>
