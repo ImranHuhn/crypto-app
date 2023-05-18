@@ -43,10 +43,7 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    console.log(
-      "test",
-      this.state.bitcoinData?.prices.map((el) => el[0])
-    );
+    console.log("test", this.state.bitcoinData?.prices.map((el) => el[0]))
 
     const lineOptions = {
       responsive: true,
@@ -105,7 +102,6 @@ class MainCharts extends React.Component {
           <div
             className="third"
             style={{
-              //   backgroundColor: "lightblue",
               borderRadius: "10px",
               width: "48%",
               position: "relative",
@@ -116,12 +112,12 @@ class MainCharts extends React.Component {
               <h1>$13.431 mln</h1>
               <h3>Jun 14, 2021 (should be today's date)</h3>
             </div>
+            {/* every 3rd day in a month */}
             <Line options={lineOptions} data={priceData} />
           </div>
           <div
             className="third"
             style={{
-              //   backgroundColor: "pink",
               borderRadius: "10px",
               width: "48%",
               position: "relative",
@@ -132,6 +128,7 @@ class MainCharts extends React.Component {
               <h1>$807.24 bln</h1>
               <h3>Jun 14, 2021 (should be today's date)</h3>
             </div>
+            {/* every hour from 0 -24 */}
             <Bar options={lineOptions} data={volumeData} />
           </div>
         </div>
