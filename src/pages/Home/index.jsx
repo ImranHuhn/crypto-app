@@ -2,6 +2,7 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import queryString from "query-string";
 import { getCoins } from "../../utils/api";
+import MainCharts from "../../components/MainCharts"
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
 import {
@@ -124,6 +125,7 @@ class Home extends React.Component {
           }
         >
           <TableWrapper className="text">
+            <MainCharts />
             <h1 className="text">Your Overview</h1>
             <Table className="third">
               <thead>

@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import axios from "axios";
+import moment from 'moment'
 
 ChartJS.register(
   CategoryScale,
@@ -28,7 +29,7 @@ class MainCharts extends React.Component {
   handleMainCharts = async () => {
     try {
       const { data } = await axios(
-        "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily"
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`
       );
       //   console.log("test", data);
       this.setState({ bitcoinData: data });
@@ -43,7 +44,9 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    console.log("test", this.state.bitcoinData?.prices.map((el) => el[0]))
+    console.log("test", moment().millisecond(1668902400000))
+
+    const currentDate = moment().format('MMMM Do YYYY');
 
     const lineOptions = {
       responsive: true,
@@ -110,7 +113,7 @@ class MainCharts extends React.Component {
             <div style={{ position: "absolute" }}>
               <h3>BTC Price</h3>
               <h1>$13.431 mln</h1>
-              <h3>Jun 14, 2021 (should be today's date)</h3>
+              <h3>{currentDate}</h3>
             </div>
             {/* every 3rd day in a month */}
             <Line options={lineOptions} data={priceData} />
@@ -126,7 +129,7 @@ class MainCharts extends React.Component {
             <div style={{ position: "absolute" }}>
               <h3>BTC Volume</h3>
               <h1>$807.24 bln</h1>
-              <h3>Jun 14, 2021 (should be today's date)</h3>
+              <h3>{currentDate}</h3>
             </div>
             {/* every hour from 0 -24 */}
             <Bar options={lineOptions} data={volumeData} />
