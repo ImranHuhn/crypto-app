@@ -111,7 +111,6 @@ export const SubNavbarWrapper = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #191b1f;
   width: 50%;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;

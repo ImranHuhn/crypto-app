@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .main {
-    background: ${(props) => props.theme.main};
+    background-color: ${(props) => props.theme.main};
   }
 
   .second, .button {
@@ -47,8 +47,8 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const lightTheme = {
-  main: "#d3d3d3",
-  second: "#d3d3d3",
+  main: "#ededed",
+  second: "#ededed",
   third: "#fff",
   text: "#000",
 };
