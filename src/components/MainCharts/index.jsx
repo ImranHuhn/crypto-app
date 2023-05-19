@@ -89,7 +89,7 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <h1 className="text">Bitcoin Overview</h1>
+        <h1 className="text-red-500	">Bitcoin Overview</h1>
         <Container>
           <Wrapper className="third">
             <TextBox>
