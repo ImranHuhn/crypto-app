@@ -16,7 +16,7 @@ import {
   ChevronIconWrapper,
   CurrencyList,
   DarkThemeIconWrapper,
-  SubNav,
+  SubNavbarWrapper,
 } from "./Navbar.styles";
 import {
   DarkThemeIcon,

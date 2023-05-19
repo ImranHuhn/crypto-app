@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, lightTheme, darkTheme } from "./App.styles";
-import Navbar from "./components/Navbar";
-import Coins from "./pages/Coins";
+import { Navbar } from "./components/Navbar";
+import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
 
 class App extends React.Component {
@@ -26,7 +26,7 @@ class App extends React.Component {
   render() {
     const { on } = this.state;
     return (
-      <ThemeProvider theme={this.state.on ? lightTheme : darkTheme}>
+      <ThemeProvider theme={on ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router>
           <div>

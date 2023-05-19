@@ -10,7 +10,7 @@ export const ScrollMessage = styled.h1`
 
 export const TableWrapper = styled.div`
   width: 95%;
-  margin: 0 auto;
+  margin: 100px auto 0;
   padding: 0 10px;
 `;
 
@@ -18,7 +18,6 @@ export const Table = styled.table`
   margin: 0 auto;
   width: 100%;
   border-radius: 10px;
-  padding: 0 25px;
   height: 100vh;
 `;
 
