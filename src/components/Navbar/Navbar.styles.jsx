@@ -107,7 +107,7 @@ export const DarkThemeIconWrapper = styled.div`
   width: 24px;
 `;
 
-export const SubNav = styled.div`
+export const SubNavbarWrapper = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
