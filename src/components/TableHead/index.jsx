@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  TableHeader,
-  TitleWrapper,
-  IconWrapper,
-  TableHeaderSort,
-} from "./TableHead.styles";
 import { SortIcon } from "../IconComponent";
 
 export const TableHead = ({ sortingManager, tableColumns, item }) => {
@@ -15,20 +9,23 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
   return (
     <>
       {hasSort && (
-        <TableHeaderSort onClick={handleClick}>
-          <TitleWrapper>
+        <th
+          className="text-left min-w-[50px] cursor-pointer"
+          onClick={handleClick}
+        >
+          <div className="flex">
             {item[1]}
-            <IconWrapper>
+            <div className="w-5 h-5">
               <SortIcon />
-            </IconWrapper>
-          </TitleWrapper>
-        </TableHeaderSort>
+            </div>
+          </div>
+        </th>
       )}
       {/* I will have to add condition for volume and marketcap for styling */}
       {!hasSort && (
-        <TableHeader>
-          <TitleWrapper>{item[1]}</TitleWrapper>
-        </TableHeader>
+        <th className="text-left min-w-[50px]">
+          <div className="flex">{item[1]}</div>
+        </th>
       )}
     </>
   );
