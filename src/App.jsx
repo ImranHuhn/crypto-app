@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { ThemeProvider } from "styled-components";
-// import { GlobalStyle, lightTheme, darkTheme } from "./App.styles";
-// import { GlobalStyle } from "./App.styles";
 import { Navbar } from "./components/Navbar";
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";

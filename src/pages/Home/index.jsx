@@ -5,13 +5,6 @@ import { getCoins } from "../../utils/api";
 import MainCharts from "../../components/MainCharts";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
-// import {
-//   // Container,
-//   // ScrollMessage,
-//   // TableWrapper,
-//   Table,
-//   // HeadTableRow,
-// } from "./Home.styles";
 
 class Home extends React.Component {
   state = {
