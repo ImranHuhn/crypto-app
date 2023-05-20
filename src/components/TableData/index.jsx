@@ -9,7 +9,6 @@ import {
 import { Line } from "react-chartjs-2";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { TableRow, Image } from "./TableData.styles";
 
 export const TableData = (props) => {
   const {
@@ -61,10 +60,10 @@ export const TableData = (props) => {
   };
 
   return (
-    <TableRow>
+    <tr className="h-24">
       <td>{market_cap_rank || <Skeleton />}</td>
       <td>
-        <Image src={image} />
+        <img className="w-6" src={image} />
         {id || <Skeleton />} ({symbol || <Skeleton />})
       </td>
       <td>{current_price || <Skeleton />}</td>
@@ -81,6 +80,6 @@ export const TableData = (props) => {
       <td>
         <Line options={options} data={data} />
       </td>
-    </TableRow>
+    </tr>
   );
 };

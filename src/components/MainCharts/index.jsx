@@ -11,7 +11,6 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "../../utils/api";
-import { Container, Wrapper, TextBox } from "./MainCharts.styles";
 
 ChartJS.register(
   CategoryScale,
@@ -37,9 +36,9 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    const {prices = [], total_volumes = []} = this.state.bitcoinData || {}
-    const lastPrice = prices[prices?.length-1] || []
-    const lastVolume = total_volumes[total_volumes?.length-1] || []
+    const { prices = [], total_volumes = [] } = this.state.bitcoinData || {};
+    const lastPrice = prices[prices?.length - 1] || [];
+    const lastVolume = total_volumes[total_volumes?.length - 1] || [];
 
     const currentDate = moment().format("MMMM Do YYYY");
 
@@ -78,9 +77,7 @@ class MainCharts extends React.Component {
       datasets: [
         {
           label: "Dataset",
-          data: total_volumes?.map(
-            (volume) => volume[1]
-          ),
+          data: total_volumes?.map((volume) => volume[1]),
           borderColor: "blue",
           backgroundColor: "lightblue",
           below: "blue",
@@ -89,25 +86,25 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <h1 className="text">Bitcoin Overview</h1>
-        <Container>
-          <Wrapper className="third">
-            <TextBox>
+        <h1 className="text-black dark:text-white">Bitcoin Overview</h1>
+        <div className="flex flex-row justify-between w-full">
+          <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
+            <div className="absolute">
               <h3>BTC Price</h3>
-              <h1>{lastPrice[1]}</h1>
+              <h1 className="font-bold text-4xl">{lastPrice[1]}</h1>
               <h3>{currentDate}</h3>
-            </TextBox>
+            </div>
             <Line options={lineOptions} data={priceData} />
-          </Wrapper>
-          <Wrapper className="third">
-            <TextBox>
+          </div>
+          <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
+            <div className="absolute">
               <h3>BTC Volume</h3>
-              <h1>{lastVolume[1]}</h1>
+              <h1 className="font-bold	text-4xl">{lastVolume[1]}</h1>
               <h3>{currentDate}</h3>
-            </TextBox>
+            </div>
             <Bar options={lineOptions} data={volumeData} />
-          </Wrapper>
-        </Container>
+          </div>
+        </div>
       </div>
     );
   }

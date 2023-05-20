@@ -2,16 +2,9 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import queryString from "query-string";
 import { getCoins } from "../../utils/api";
-import MainCharts from "../../components/MainCharts"
+import MainCharts from "../../components/MainCharts";
 import { TableHead } from "../../components/TableHead";
 import { TableData } from "../../components/TableData";
-import {
-  Container,
-  ScrollMessage,
-  TableWrapper,
-  Table,
-  HeadTableRow,
-} from "./Home.styles";
 
 class Home extends React.Component {
   state = {
@@ -112,24 +105,28 @@ class Home extends React.Component {
     }
 
     return (
-      <Container>
+      <div className="overflow-auto">
         <InfiniteScroll
           dataLength={allCoins.length}
           next={this.handleInfiniteScroll}
           hasMore={hasMore}
-          loader={<ScrollMessage className="text">Loading...</ScrollMessage>}
+          loader={
+            <h1 className="text-black dark:text-white text-center">
+              Loading...
+            </h1>
+          }
           endMessage={
-            <ScrollMessage className="text">
+            <h1 className="text-black dark:text-white text-center">
               All coins have been loaded!
-            </ScrollMessage>
+            </h1>
           }
         >
-          <TableWrapper className="text">
+          <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
             <MainCharts />
-            <h1 className="text">Market Overview</h1>
-            <Table className="third">
+            <h1 className="text-black dark:text-white">Market Overview</h1>
+            <table className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen">
               <thead>
-                <HeadTableRow>
+                <tr className="h-24">
                   {Object.entries(tableColumns).map((item) => {
                     return (
                       <TableHead
@@ -140,7 +137,7 @@ class Home extends React.Component {
                       />
                     );
                   })}
-                </HeadTableRow>
+                </tr>
               </thead>
               <tbody>
                 {sortedAllCoins.map((item) => {
@@ -156,10 +153,10 @@ class Home extends React.Component {
                   );
                 })}
               </tbody>
-            </Table>
-          </TableWrapper>
+            </table>
+          </div>
         </InfiniteScroll>
-      </Container>
+      </div>
     );
   }
 }
