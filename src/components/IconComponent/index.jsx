@@ -39,7 +39,7 @@ export const MagnifyIcon = () => {
 export const ChevronIcon = () => {
   return (
     <svg
-      className="fill"
+      className="fill-black dark:fill-white"
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,7 @@ export const PoundIcon = () => {
 export const SortIcon = () => {
   return (
     <svg
-      className="fill"
+      className="fill-black dark:fill-white"
       width="20pt"
       height="20pt"
       version="1.1"

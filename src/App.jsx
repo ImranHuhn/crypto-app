@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { ThemeProvider } from "styled-components";
 // import { GlobalStyle, lightTheme, darkTheme } from "./App.styles";
-import { GlobalStyle } from "./App.styles";
+// import { GlobalStyle } from "./App.styles";
 import { Navbar } from "./components/Navbar";
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
@@ -25,15 +25,11 @@ class App extends React.Component {
   };
 
   render() {
-    // console.log("on", this.state.on)
-
     const { on } = this.state;
     return (
       <div className={on ? "dark" : ""}>
-        {/* <ThemeProvider theme={on ? lightTheme : darkTheme}> */}
-        <GlobalStyle />
         <Router>
-          <div>
+          <div className="bg-[#ededed] dark:bg-[#1f2128]">
             <Navbar handleClick={this.handleClick} />
             <Switch>
               <Route exact path="/" component={Home} />
@@ -41,7 +37,6 @@ class App extends React.Component {
             </Switch>
           </div>
         </Router>
-        {/* </ThemeProvider> */}
       </div>
     );
   }

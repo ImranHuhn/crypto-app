@@ -86,7 +86,7 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <h1 className="text-black">Bitcoin Overview</h1>
+        <h1 className="text-black dark:text-white">Bitcoin Overview</h1>
         <div className="flex flex-row justify-between w-full">
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute">

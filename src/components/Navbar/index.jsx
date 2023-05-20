@@ -10,7 +10,7 @@ import {
 
 export const Navbar = ({ handleClick }) => {
   return (
-    <div className="third relative">
+    <div className="bg-white dark:bg-[#191b1f] relative">
       <nav className="flex item-center justify-between h-20 w-[95%] my-0 mx-auto">
         <div className="flex items-center h-full">
           <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
@@ -36,10 +36,10 @@ export const Navbar = ({ handleClick }) => {
               <MagnifyIcon />
             </div>
             <input
-              className="text-black dark:text-white second pl-9 h-11 rounded-lg border-none w-96	"
+              className="text-black dark:text-white bg-[#ededed] dark:bg-[#2c2f36] pl-9 h-11 rounded-lg border-none w-96	"
               placeholder="Search..."
             />
-            <button className="text-black dark:text-white button flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3">
+            <button className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3">
               <div className="w-6">
                 <DollarIcon />
               </div>
@@ -66,7 +66,7 @@ export const Navbar = ({ handleClick }) => {
           </button>
         </div>
       </nav>
-      <div className="text-black dark:text-white third absolute left-1/2 -translate-x-1/2 w-1/2 rounded-b-xl h-10 flex justify-center items-center">
+      <div className="bg-white dark:bg-[#191b1f] text-black dark:text-white absolute left-1/2 -translate-x-1/2 w-1/2 rounded-b-xl h-10 flex justify-center items-center">
         <SubNavbar />
       </div>
     </div>
