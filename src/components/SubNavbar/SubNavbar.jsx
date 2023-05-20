@@ -1,5 +1,6 @@
 import React from "react";
 import { getMarketData } from "utils/api";
+import { abbreviateNumber } from "utils/calculations";
 import { ChevronIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
@@ -24,6 +25,9 @@ class SubNavbar extends React.Component {
     const { active_cryptocurrencies, markets, total_market_cap } =
       this.state.marketData || {};
     const { usd, btc, eth } = total_market_cap || {};
+
+    console.log(abbreviateNumber(usd));
+
     return (
       <>
         <div className="flex">
@@ -36,7 +40,7 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
-          ${usd}T{/* selected currency from nav for "total_market_cap" */}
+          ${abbreviateNumber(usd)}{/* selected currency from nav for "total_market_cap" */}
         </div>
         <div>
           <ChevronIcon />
@@ -44,7 +48,7 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
-          ${this.state.marketData?.total_volume?.usd}B
+          ${abbreviateNumber(this.state.marketData?.total_volume?.usd)}
           {/* selected currency from nav for "total_volume" */}{" "}
           {/* bar = total volume / total market cap */}
         </div>
