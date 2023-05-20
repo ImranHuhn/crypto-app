@@ -1,5 +1,4 @@
 import React from "react";
-import { Wrapper, Dot, Image } from "./SubNavbar.styles";
 import { getMarketData } from "../../utils/api";
 import { ChevronIcon } from "../IconComponent";
 import bitcoin from "../../assets/bitcoin.webp";
@@ -26,15 +25,15 @@ class SubNavbar extends React.Component {
     const { usd, btc, eth } = total_market_cap || {};
     return (
       <>
-        <Wrapper>
+        <div className="flex">
           <div>Coins</div>
           <div>{active_cryptocurrencies}</div>
-        </Wrapper>
-        <Wrapper>
+        </div>
+        <div className="flex">
           <div>Exchange</div>
           <div>{markets}</div>
-        </Wrapper>
-        <Dot>&#9679;</Dot>
+        </div>
+        <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
           ${usd}T{/* selected currency from nav for "total_market_cap" */}
         </div>
@@ -42,7 +41,7 @@ class SubNavbar extends React.Component {
           <ChevronIcon />
           {/* arrow up down with determine if value is positive or negative for "market_cap_change_percentage_24h_usd" */}
         </div>
-        <Dot>&#9679;</Dot>
+        <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
           ${this.state.marketData?.total_volume?.usd}B
           {/* selected currency from nav for "total_volume" */}{" "}
@@ -50,7 +49,7 @@ class SubNavbar extends React.Component {
         </div>
         <div>
           <div>
-            <Image src={bitcoin} alt="bitcoin" />
+            <img className="w-6" src={bitcoin} alt="bitcoin" />
           </div>
           <div>
             <div>{btc}%</div>
@@ -61,7 +60,7 @@ class SubNavbar extends React.Component {
         </div>
         <div>
           <div>
-            <Image src={ethereum} alt="ethereum" />
+            <img className="w-6" src={ethereum} alt="ethereum" />
           </div>
           <div>
             <div>{eth}%</div>
