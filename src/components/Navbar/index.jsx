@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SubNavbar from "../SubNavbar";
+import SubNavbar from "components/SubNavbar";
 import {
   DarkThemeIcon,
   MagnifyIcon,
   ChevronIcon,
   DollarIcon,
-} from "../IconComponent";
+} from "components/IconComponent";
 
 export const Navbar = ({ handleClick }) => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import { getMarketData } from "../../utils/api";
-import { ChevronIcon } from "../IconComponent";
-import bitcoin from "../../assets/bitcoin.webp";
-import ethereum from "../../assets/ethereum.webp";
+import { getMarketData } from "utils/api";
+import { ChevronIcon } from "components/IconComponent";
+import bitcoin from "assets/bitcoin.webp";
+import ethereum from "assets/ethereum.webp";
 
 class SubNavbar extends React.Component {
   state = {
