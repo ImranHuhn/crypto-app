@@ -1,23 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SubNavbar from "../SubNavbar";
-import {
-  StyledLink,
-  Container,
-  Nav,
-  LinkContainer,
-  LinkWrapper,
-  RightNavbarWrapper,
-  InputWrapper,
-  Input,
-  CurrencyButton,
-  ThemeButton,
-  DollarIconWrapper,
-  MagnifyIconWrapper,
-  ChevronIconWrapper,
-  CurrencyList,
-  DarkThemeIconWrapper,
-  SubNavbarWrapper,
-} from "./Navbar.styles";
 import {
   DarkThemeIcon,
   MagnifyIcon,
@@ -27,53 +10,53 @@ import {
 
 export const Navbar = ({ on, handleClick }) => {
   return (
-    <Container className="third" $on={on}>
-      <Nav>
-        <LinkContainer>
-          <LinkWrapper>
-            <StyledLink className="text button" to="/">
+    <div className="third relative" $on={on}>
+      <nav className="flex item-center justify-between h-20 w-[95%] my-0 mx-auto">
+        <div className="flex items-center h-full">
+          <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
+            <Link className="text button flex justify-center items-center w-full h-full rounded-lg" to="/">
               Coins
-            </StyledLink>
-          </LinkWrapper>
-          <LinkWrapper>
-            <StyledLink className="text button" to="/portfolio">
+            </Link>
+          </div>
+          <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
+            <Link className="text button flex justify-center items-center w-full h-full rounded-lg" to="/portfolio">
               Portfolio
-            </StyledLink>
-          </LinkWrapper>
-        </LinkContainer>
-        <RightNavbarWrapper>
-          <InputWrapper>
-            <MagnifyIconWrapper className="text" $on={on}>
+            </Link>
+          </div>
+        </div>
+        <div className="flex items-center h-full">
+          <div className="flex items-center relative h-full">
+            <div className="text w-5 absolute left-2.5" $on={on}>
               <MagnifyIcon />
-            </MagnifyIconWrapper>
-            <Input className="text second" $on={on} placeholder="Search..." />
-            <CurrencyButton className="text button">
-              <DollarIconWrapper>
+            </div>
+            <input className="text second pl-9 h-11 rounded-lg border-none w-96	" $on={on} placeholder="Search..." />
+            <button className="text button flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3">
+              <div className="w-6">
                 <DollarIcon />
-              </DollarIconWrapper>
+              </div>
               USD
-              <ChevronIconWrapper>
+              <div className="flex items-center w-5 rotate-180">
                 <ChevronIcon />
-              </ChevronIconWrapper>
-            </CurrencyButton>
-            <CurrencyList>
+              </div>
+            </button>
+            <ul className="hidden">
               <li>USD</li>
               <li>GBP</li>
               <li>EUR</li>
               <li>BTC</li>
               <li>ETH</li>
-            </CurrencyList>
-          </InputWrapper>
-          <ThemeButton className="button" onClick={handleClick}>
-            <DarkThemeIconWrapper className="fill" $on={on}>
+            </ul>
+          </div>
+          <button className="button h-11 w-10 rounded-lg border-none absolute right-0 my-0 mx-2" onClick={handleClick}>
+            <div className="fill flex justify-center m-auto w-6" $on={on}>
               <DarkThemeIcon />
-            </DarkThemeIconWrapper>
-          </ThemeButton>
-        </RightNavbarWrapper>
-      </Nav>
-      <SubNavbarWrapper className="text third">
+            </div>
+          </button>
+        </div>
+      </nav>
+      <div className="text third absolute left-1/2 -translate-x-1/2 w-1/2 rounded-b-xl h-10 flex justify-center items-center">
         <SubNavbar />
-      </SubNavbarWrapper>
-    </Container>
+      </div>
+    </div>
   );
 };

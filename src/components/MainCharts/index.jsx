@@ -11,7 +11,6 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "../../utils/api";
-import { Container, Wrapper, TextBox } from "./MainCharts.styles";
 
 ChartJS.register(
   CategoryScale,
@@ -90,24 +89,24 @@ class MainCharts extends React.Component {
     return (
       <div>
         <h1 className="text-red-500	">Bitcoin Overview</h1>
-        <Container>
-          <Wrapper className="third">
-            <TextBox>
+        <div className="flex flex-row justify-between w-full">
+          <div className="third basis-[48%] rounded-lg relative">
+            <div className="absolute">
               <h3>BTC Price</h3>
-              <h1>{lastPrice[1]}</h1>
+              <h1 className="font-bold	text-4xl">{lastPrice[1]}</h1>
               <h3>{currentDate}</h3>
-            </TextBox>
+            </div>
             <Line options={lineOptions} data={priceData} />
-          </Wrapper>
-          <Wrapper className="third">
-            <TextBox>
+          </div>
+          <div className="third basis-[48%] rounded-lg relative">
+            <div className="absolute">
               <h3>BTC Volume</h3>
-              <h1>{lastVolume[1]}</h1>
+              <h1 className="font-bold	text-4xl">{lastVolume[1]}</h1>
               <h3>{currentDate}</h3>
-            </TextBox>
+            </div>
             <Bar options={lineOptions} data={volumeData} />
-          </Wrapper>
-        </Container>
+          </div>
+        </div>
       </div>
     );
   }
