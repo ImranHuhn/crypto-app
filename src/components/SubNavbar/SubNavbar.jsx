@@ -1,6 +1,6 @@
 import React from "react";
 import { getMarketData } from "utils/api";
-import { ChevronIcon } from "components/IconComponent";
+import { ChevronIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
 
