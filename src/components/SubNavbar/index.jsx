@@ -21,7 +21,8 @@ class SubNavbar extends React.Component {
   };
 
   render() {
-    const { active_cryptocurrencies, markets, total_market_cap } = this.state.marketData || {};
+    const { active_cryptocurrencies, markets, total_market_cap } =
+      this.state.marketData || {};
     const { usd, btc, eth } = total_market_cap || {};
     return (
       <>

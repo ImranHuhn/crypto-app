@@ -36,9 +36,9 @@ class MainCharts extends React.Component {
   };
 
   render() {
-    const {prices = [], total_volumes = []} = this.state.bitcoinData || {}
-    const lastPrice = prices[prices?.length-1] || []
-    const lastVolume = total_volumes[total_volumes?.length-1] || []
+    const { prices = [], total_volumes = [] } = this.state.bitcoinData || {};
+    const lastPrice = prices[prices?.length - 1] || [];
+    const lastVolume = total_volumes[total_volumes?.length - 1] || [];
 
     const currentDate = moment().format("MMMM Do YYYY");
 
@@ -77,9 +77,7 @@ class MainCharts extends React.Component {
       datasets: [
         {
           label: "Dataset",
-          data: total_volumes?.map(
-            (volume) => volume[1]
-          ),
+          data: total_volumes?.map((volume) => volume[1]),
           borderColor: "blue",
           backgroundColor: "lightblue",
           below: "blue",
@@ -88,17 +86,17 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <h1 className="text-red-500	">Bitcoin Overview</h1>
+        <h1 className="text-black">Bitcoin Overview</h1>
         <div className="flex flex-row justify-between w-full">
-          <div className="third basis-[48%] rounded-lg relative">
+          <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute">
               <h3>BTC Price</h3>
-              <h1 className="font-bold	text-4xl">{lastPrice[1]}</h1>
+              <h1 className="font-bold text-4xl">{lastPrice[1]}</h1>
               <h3>{currentDate}</h3>
             </div>
             <Line options={lineOptions} data={priceData} />
           </div>
-          <div className="third basis-[48%] rounded-lg relative">
+          <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute">
               <h3>BTC Volume</h3>
               <h1 className="font-bold	text-4xl">{lastVolume[1]}</h1>

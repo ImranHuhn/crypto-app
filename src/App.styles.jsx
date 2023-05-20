@@ -7,55 +7,64 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     font-family: sans-serif;
   }
+  `;
 
-  body {
-    background: ${(props) => props.theme.main};
-    margin: 0;
-  }
+// export const GlobalStyle = createGlobalStyle`
+//   * {
+//     box-sizing: border-box;
+//     list-style-type: none;
+//     text-decoration: none;
+//     font-family: sans-serif;
+//   }
 
-  .text {
-    color: ${(props) => props.theme.text};
-  }
+//   body {
+//     background: ${(props) => props.theme.main};
+//     margin: 0;
+//   }
 
-  .fill {
-    fill: ${(props) => props.theme.text};
-  }
+//   .text {
+//     color: ${(props) => props.theme.text};
+//   }
 
-  .main {
-    background-color: ${(props) => props.theme.main};
-  }
+//   .fill {
+//     fill: ${(props) => props.theme.text};
+//   }
 
-  .second, .button {
-    background-color: ${(props) => props.theme.second}
-  }
+//   .main {
+//     background-color: ${(props) => props.theme.main};
+//   }
 
-  .third {
-    background-color: ${(props) => props.theme.third}
-  }
+//   .second, .button {
+//     background-color: ${(props) => props.theme.second}
+//   }
 
-  ::placeholder {
-    color: ${(props) => props.theme.text};
-  }
+//   .third {
+//     background-color: ${(props) => props.theme.third}
+//   }
 
-  :-ms-input-placeholder {
-    color: ${(props) => props.theme.text};
-  }
+//   ::placeholder {
+//     color: ${(props) => props.theme.text};
+//   }
 
-  ::-ms-input-placeholder {
-    color: ${(props) => props.theme.text};
-  }
-`;
+//   :-ms-input-placeholder {
+//     color: ${(props) => props.theme.text};
+//   }
 
-export const lightTheme = {
-  main: "#ededed",
-  second: "#ededed",
-  third: "#fff",
-  text: "#000",
-};
+//   ::-ms-input-placeholder {
+//     color: ${(props) => props.theme.text};
+//   }
+// `;
 
-export const darkTheme = {
-  main: "#1f2128",
-  second: "#2c2f36",
-  third: "#191b1f",
-  text: "#fff",
-};
+// export const lightTheme = {
+//   main: "#ededed",
+//   second: "#ededed",
+//   third: "#fff",
+//   text: "#000",
+// };
+
+// export const darkTheme = {
+//   main: "#1f2128",
+//   second: "#2c2f36",
+//   third: "#191b1f",
+//   text: "#fff",
+// };
