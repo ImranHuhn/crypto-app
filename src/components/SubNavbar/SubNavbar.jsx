@@ -36,7 +36,7 @@ class SubNavbar extends React.Component {
     );
 
     return (
-      <>
+      <div className="flex justify-around w-4/5">
         <div className="flex">
           <div>Coins</div>
           <div>{active_cryptocurrencies}</div>
@@ -96,7 +96,7 @@ class SubNavbar extends React.Component {
             ></BarFill>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
