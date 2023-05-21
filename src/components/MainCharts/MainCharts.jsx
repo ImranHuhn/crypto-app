@@ -69,7 +69,7 @@ class MainCharts extends React.Component {
     };
 
     const priceData = {
-      labels: marketTime.map((el) => moment(el).format("DD")),
+      labels: marketTime.map((time) => moment(time).format("DD")),
       datasets: [
         {
           label: "Dataset",
@@ -90,11 +90,11 @@ class MainCharts extends React.Component {
     };
 
     const volumeData = {
-      labels: volumeTime.map((el) => moment(el).format("DD")),
+      labels: volumeTime.map((time) => moment(time).format("DD")),
       datasets: [
         {
           label: "Dataset",
-          data: volumePrice.map((volume) => volume),
+          data: volumePrice.map((price) => price),
           borderColor: "rgba(33,114,229,255)",
           backgroundColor: "rgba(33,114,229,255)",
           below: "rgba(33,114,229,255)",
