@@ -1,10 +1,8 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import queryString from "query-string";
-import { getCoins } from "../../utils/api";
-import MainCharts from "../../components/MainCharts";
-import { TableHead } from "../../components/TableHead";
-import { TableData } from "../../components/TableData";
+import { getCoins } from "utils/api";
+import { MainCharts, TableHead, TableData } from "components";
 
 class Home extends React.Component {
   state = {

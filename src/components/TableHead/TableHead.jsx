@@ -1,5 +1,5 @@
 import React from "react";
-import { SortIcon } from "../IconComponent";
+import { SortIcon } from "Icons";
 
 export const TableHead = ({ sortingManager, tableColumns, item }) => {
   const handleClick = () => {

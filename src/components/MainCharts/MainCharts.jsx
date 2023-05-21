@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
-import { getBitcoinData } from "../../utils/api";
+import { getBitcoinData } from "utils/api";
 
 ChartJS.register(
   CategoryScale,

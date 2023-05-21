@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SubNavbar from "../SubNavbar";
-import {
-  DarkThemeIcon,
-  MagnifyIcon,
-  ChevronIcon,
-  DollarIcon,
-} from "../IconComponent";
+import { SubNavbar } from "components";
+import { DarkThemeIcon, MagnifyIcon, ChevronIcon, DollarIcon } from "Icons";
 
 export const Navbar = ({ handleClick }) => {
   return (
