@@ -79,7 +79,6 @@ class MainCharts extends React.Component {
             gradient.addColorStop(1, "rgba(50,205,50,.4)");
             gradient.addColorStop(0.5, "rgba(50, 205, 50, 0.2)");
             gradient.addColorStop(0, "rgba(50, 205, 50, 0)");
-            ctx.fillStyle = gradient;
             return gradient;
           },
         },
