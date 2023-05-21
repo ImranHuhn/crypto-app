@@ -7,6 +7,7 @@ import {
   LineElement,
   Filler,
   BarElement,
+  // ChartArea
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
@@ -69,16 +70,17 @@ class MainCharts extends React.Component {
         {
           label: "Dataset",
           data: prices?.map((price) => price[1]),
-          // borderColor: "rgb(50, 205, 50)",
-          // backgroundColor: "rgba(50, 205, 50, 0.5)",
-          // background: "rgb(50,205,50)",
-          // background: "linear-gradient(180deg, rgba(50,205,50,1) 35%, rgba(50,205,50,0) 100%)",
           cubicInterpolationMode: "monotone",
           tension: 0.3,
-          fill: {
-            target: "origin",
-            above: "rgb(50, 205, 50)",
-            below: "rgb(50, 205, 50)",
+          fill: true,
+          borderColor: "rgba(50,205,50,1)",
+          backgroundColor: ({ chart: { ctx } }) => {
+            const gradient = ctx.createLinearGradient(0, 450, 0, 0);
+            gradient.addColorStop(1, "rgba(50,205,50,.4)");
+            gradient.addColorStop(0.7, "rgba(50, 205, 50, 0.2)");
+            gradient.addColorStop(0, "rgba(50, 205, 50, 0)");
+            ctx.fillStyle = gradient;
+            return gradient;
           },
         },
       ],
@@ -108,7 +110,11 @@ class MainCharts extends React.Component {
               <h1 className="font-bold text-4xl">${bitcoinPrice}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Line className="py-10 px-20" options={lineOptions} data={priceData} />
+            <Line
+              className="py-10 px-20"
+              options={lineOptions}
+              data={priceData}
+            />
           </div>
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute py-5 px-8">
@@ -116,7 +122,11 @@ class MainCharts extends React.Component {
               <h1 className="font-bold	text-4xl">${bitcoinVolume}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Bar className="py-10 px-20" options={lineOptions} data={volumeData} />
+            <Bar
+              className="py-10 px-20"
+              options={lineOptions}
+              data={volumeData}
+            />
           </div>
         </div>
       </div>
