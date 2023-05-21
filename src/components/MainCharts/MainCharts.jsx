@@ -11,6 +11,7 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
+import { threeDecimalAbbreviate } from "utils/calculations";
 
 ChartJS.register(
   CategoryScale,
@@ -39,7 +40,8 @@ class MainCharts extends React.Component {
     const { prices = [], total_volumes = [] } = this.state.bitcoinData || {};
     const lastPrice = prices[prices?.length - 1] || [];
     const lastVolume = total_volumes[total_volumes?.length - 1] || [];
-
+    const bitcoinPrice = threeDecimalAbbreviate(lastPrice[1]);
+    const bitcoinVolume = threeDecimalAbbreviate(lastVolume[1]);
     const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
@@ -57,23 +59,28 @@ class MainCharts extends React.Component {
     };
 
     const priceData = {
-      labels: prices?.map((el) => el[0]),
+      labels: prices?.map((el) => moment(el[0]).format("DD")),
       datasets: [
         {
           label: "Dataset",
           data: prices?.map((price) => price[1]),
-          borderColor: "rgb(50, 205, 50)",
-          backgroundColor: "rgba(50, 205, 50, 0.5)",
+          // borderColor: "rgb(50, 205, 50)",
+          // backgroundColor: "rgba(50, 205, 50, 0.5)",
+          // background: "rgb(50,205,50)",
+          // background: "linear-gradient(180deg, rgba(50,205,50,1) 35%, rgba(50,205,50,0) 100%)",
           cubicInterpolationMode: "monotone",
           tension: 0.3,
-          fill: "origin",
-          below: "green",
+          fill: {
+            target: "origin",
+            above: "blue",
+            below: "green",
+          },
         },
       ],
     };
 
     const volumeData = {
-      labels: total_volumes?.map((el) => el[0]),
+      labels: total_volumes?.map((el) => moment(el[0]).format("DD")),
       datasets: [
         {
           label: "Dataset",
@@ -86,21 +93,23 @@ class MainCharts extends React.Component {
     };
     return (
       <div>
-        <h1 className="text-black dark:text-white">Bitcoin Overview</h1>
+        <h1 className="text-3xl text-black font-bold dark:text-white py-6">
+          Bitcoin Overview
+        </h1>
         <div className="flex flex-row justify-between w-full">
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute">
-              <h3>BTC Price</h3>
-              <h1 className="font-bold text-4xl">{lastPrice[1]}</h1>
-              <h3>{currentDate}</h3>
+              <h3 className="text-xl">BTC Price</h3>
+              <h1 className="font-bold text-4xl">${bitcoinPrice}</h1>
+              <h3 className="text-xl">{currentDate}</h3>
             </div>
             <Line options={lineOptions} data={priceData} />
           </div>
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute">
-              <h3>BTC Volume</h3>
-              <h1 className="font-bold	text-4xl">{lastVolume[1]}</h1>
-              <h3>{currentDate}</h3>
+              <h3 className="text-xl">BTC Volume</h3>
+              <h1 className="font-bold	text-4xl">${bitcoinVolume}</h1>
+              <h3 className="text-xl">{currentDate}</h3>
             </div>
             <Bar options={lineOptions} data={volumeData} />
           </div>
