@@ -7,11 +7,11 @@ import {
   LineElement,
   Filler,
   BarElement,
-  // ChartArea
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
+import { getTimeOrPrice } from "utils/objectEntries";
 import { threeDecimalAbbreviate } from "utils/calculations";
 
 ChartJS.register(
@@ -44,6 +44,10 @@ class MainCharts extends React.Component {
     const bitcoinPrice = threeDecimalAbbreviate(lastPrice[1]);
     const bitcoinVolume = threeDecimalAbbreviate(lastVolume[1]);
     const currentDate = moment().format("MMMM Do YYYY");
+    const { time: marketTime, price: marketPrice } =
+      getTimeOrPrice(prices) || [];
+    const { time: volumeTime, price: volumePrice } =
+      getTimeOrPrice(total_volumes) || [];
 
     const lineOptions = {
       responsive: true,
@@ -65,11 +69,11 @@ class MainCharts extends React.Component {
     };
 
     const priceData = {
-      labels: prices?.map((el) => moment(el[0]).format("DD")),
+      labels: marketTime.map((el) => moment(el).format("DD")),
       datasets: [
         {
           label: "Dataset",
-          data: prices?.map((price) => price[1]),
+          data: marketPrice.map((price) => price),
           cubicInterpolationMode: "monotone",
           tension: 0.3,
           fill: true,
@@ -86,11 +90,11 @@ class MainCharts extends React.Component {
     };
 
     const volumeData = {
-      labels: total_volumes?.map((el) => moment(el[0]).format("DD")),
+      labels: volumeTime.map((el) => moment(el).format("DD")),
       datasets: [
         {
           label: "Dataset",
-          data: total_volumes?.map((volume) => volume[1]),
+          data: volumePrice.map((volume) => volume),
           borderColor: "rgba(33,114,229,255)",
           backgroundColor: "rgba(33,114,229,255)",
           below: "rgba(33,114,229,255)",
