@@ -77,7 +77,7 @@ class MainCharts extends React.Component {
           backgroundColor: ({ chart: { ctx } }) => {
             const gradient = ctx.createLinearGradient(0, 450, 0, 0);
             gradient.addColorStop(1, "rgba(50,205,50,.4)");
-            gradient.addColorStop(0.7, "rgba(50, 205, 50, 0.2)");
+            gradient.addColorStop(0.5, "rgba(50, 205, 50, 0.2)");
             gradient.addColorStop(0, "rgba(50, 205, 50, 0)");
             ctx.fillStyle = gradient;
             return gradient;
