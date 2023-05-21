@@ -64,9 +64,9 @@ class SubNavbar extends React.Component {
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
               barfill={currencyFill || ""}
-              className={`bg-white w-[${currencyFill}%] h-full rounded-xl`}
+              className={`bg-white h-full rounded-xl`}
             ></BarFill>{" "}
-            {/* using styled components here because tailwind is a bit buggy with the fill*/}
+            {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
           </div>
         </div>
         <div className="flex items-center">
