@@ -1,5 +1,7 @@
 import React from "react";
+import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
+import { abbreviateNumber } from "utils/calculations";
 import { ChevronIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
@@ -21,11 +23,21 @@ class SubNavbar extends React.Component {
   };
 
   render() {
-    const { active_cryptocurrencies, markets, total_market_cap } =
-      this.state.marketData || {};
-    const { usd, btc, eth } = total_market_cap || {};
+    const {
+      active_cryptocurrencies,
+      markets,
+      total_market_cap,
+      market_cap_percentage,
+    } = this.state.marketData || {};
+    const { usd } = total_market_cap || {};
+    const { btc, eth } = market_cap_percentage || {};
+    const volume = this.state.marketData?.total_volume;
+    const currencyFill = Math.round((volume?.usd / usd) * 100);
+    const bitcoinPercentage = Math.round(btc);
+    const ethereumPercentage = Math.round(eth);
+
     return (
-      <>
+      <div className="flex justify-around w-4/5">
         <div className="flex">
           <div>Coins</div>
           <div>{active_cryptocurrencies}</div>
@@ -36,41 +48,56 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
-          ${usd}T{/* selected currency from nav for "total_market_cap" */}
+          ${abbreviateNumber(usd)}
+          {/* selected currency from nav for "total_market_cap" */}
         </div>
         <div>
           <ChevronIcon />
           {/* arrow up down with determine if value is positive or negative for "market_cap_change_percentage_24h_usd" */}
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
-        <div>
-          ${this.state.marketData?.total_volume?.usd}B
-          {/* selected currency from nav for "total_volume" */}{" "}
-          {/* bar = total volume / total market cap */}
+        <div className="flex items-center">
+          <div>
+            ${abbreviateNumber(volume?.usd)}
+          </div>
+          {/* selected currency from nav for "total_volume" */}
+          <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
+            <BarFill
+              barfill={currencyFill || ""}
+              className={`bg-white h-full rounded-xl`}
+            ></BarFill>{" "}
+            {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
+          </div>
         </div>
-        <div>
+        <div className="flex items-center">
           <div>
             <img className="w-6" src={bitcoin} alt="bitcoin" />
           </div>
           <div>
-            <div>{btc}%</div>
-            <div>
-              <div>bar</div>
-            </div>
+            <div>{bitcoinPercentage}%</div>
+          </div>
+          <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
+            <BarFill
+              barfill={bitcoinPercentage || ""}
+              className={`bg-white h-full rounded-xl`}
+            ></BarFill>
           </div>
         </div>
-        <div>
+        <div className="flex items-center">
           <div>
             <img className="w-6" src={ethereum} alt="ethereum" />
           </div>
           <div>
-            <div>{eth}%</div>
-            <div>
-              <div>bar</div>
-            </div>
+            <div>{ethereumPercentage}%</div>
+          </div>
+          <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
+            <BarFill
+              barfill={ethereumPercentage || ""}
+              className={`bg-white h-full rounded-xl`}
+            ></BarFill>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
