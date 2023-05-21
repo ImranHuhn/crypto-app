@@ -23,17 +23,18 @@ class SubNavbar extends React.Component {
   };
 
   render() {
-    const { active_cryptocurrencies, markets, total_market_cap } =
-      this.state.marketData || {};
-    const { usd, btc, eth } = total_market_cap || {};
+    const {
+      active_cryptocurrencies,
+      markets,
+      total_market_cap,
+      market_cap_percentage,
+    } = this.state.marketData || {};
+    const { usd } = total_market_cap || {};
+    const { btc, eth } = market_cap_percentage || {};
     const volume = this.state.marketData?.total_volume;
-    const currencyFill = Math.round((volume?.usd / usd) * 100).toString();
-    const bitcoinPercentage = Math.round(
-      this.state.marketData?.market_cap_percentage.btc
-    );
-    const ethereumPercentage = Math.round(
-      this.state.marketData?.market_cap_percentage.eth
-    );
+    const currencyFill = Math.round((volume?.usd / usd) * 100);
+    const bitcoinPercentage = Math.round(btc);
+    const ethereumPercentage = Math.round(eth);
 
     return (
       <div className="flex justify-around w-4/5">
@@ -57,12 +58,12 @@ class SubNavbar extends React.Component {
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
           <div>
-            ${abbreviateNumber(this.state.marketData?.total_volume?.usd)}
+            ${abbreviateNumber(volume?.usd)}
           </div>
           {/* selected currency from nav for "total_volume" */}
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
-              barfill={currencyFill}
+              barfill={currencyFill || ""}
               className={`bg-white w-[${currencyFill}%] h-full rounded-xl`}
             ></BarFill>{" "}
             {/* using styled components here because tailwind is a bit buggy with the fill*/}
@@ -77,7 +78,7 @@ class SubNavbar extends React.Component {
           </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
-              barfill={bitcoinPercentage}
+              barfill={bitcoinPercentage || ""}
               className={`bg-white h-full rounded-xl`}
             ></BarFill>
           </div>
@@ -91,7 +92,7 @@ class SubNavbar extends React.Component {
           </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
-              barfill={ethereumPercentage}
+              barfill={ethereumPercentage || ""}
               className={`bg-white h-full rounded-xl`}
             ></BarFill>
           </div>
