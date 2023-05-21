@@ -7,10 +7,12 @@ import {
   LineElement,
   Filler,
   BarElement,
+  // ChartArea
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
+import { threeDecimalAbbreviate } from "utils/calculations";
 
 ChartJS.register(
   CategoryScale,
@@ -39,7 +41,8 @@ class MainCharts extends React.Component {
     const { prices = [], total_volumes = [] } = this.state.bitcoinData || {};
     const lastPrice = prices[prices?.length - 1] || [];
     const lastVolume = total_volumes[total_volumes?.length - 1] || [];
-
+    const bitcoinPrice = threeDecimalAbbreviate(lastPrice[1]);
+    const bitcoinVolume = threeDecimalAbbreviate(lastVolume[1]);
     const currentDate = moment().format("MMMM Do YYYY");
 
     const lineOptions = {
@@ -53,56 +56,76 @@ class MainCharts extends React.Component {
         y: {
           display: false,
         },
+        x: {
+          grid: {
+            display: false,
+          },
+        },
       },
     };
 
     const priceData = {
-      labels: prices?.map((el) => el[0]),
+      labels: prices?.map((el) => moment(el[0]).format("DD")),
       datasets: [
         {
           label: "Dataset",
           data: prices?.map((price) => price[1]),
-          borderColor: "rgb(50, 205, 50)",
-          backgroundColor: "rgba(50, 205, 50, 0.5)",
           cubicInterpolationMode: "monotone",
           tension: 0.3,
-          fill: "origin",
-          below: "green",
+          fill: true,
+          borderColor: "rgba(50,205,50,1)",
+          backgroundColor: ({ chart: { ctx } }) => {
+            const gradient = ctx.createLinearGradient(0, 450, 0, 0);
+            gradient.addColorStop(1, "rgba(50,205,50,.4)");
+            gradient.addColorStop(0.5, "rgba(50, 205, 50, 0.2)");
+            gradient.addColorStop(0, "rgba(50, 205, 50, 0)");
+            return gradient;
+          },
         },
       ],
     };
 
     const volumeData = {
-      labels: total_volumes?.map((el) => el[0]),
+      labels: total_volumes?.map((el) => moment(el[0]).format("DD")),
       datasets: [
         {
           label: "Dataset",
           data: total_volumes?.map((volume) => volume[1]),
-          borderColor: "blue",
-          backgroundColor: "lightblue",
-          below: "blue",
+          borderColor: "rgba(33,114,229,255)",
+          backgroundColor: "rgba(33,114,229,255)",
+          below: "rgba(33,114,229,255)",
         },
       ],
     };
     return (
       <div>
-        <h1 className="text-black dark:text-white">Bitcoin Overview</h1>
+        <h1 className="text-3xl text-black font-bold dark:text-white py-6">
+          Bitcoin Overview
+        </h1>
         <div className="flex flex-row justify-between w-full">
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
-            <div className="absolute">
-              <h3>BTC Price</h3>
-              <h1 className="font-bold text-4xl">{lastPrice[1]}</h1>
-              <h3>{currentDate}</h3>
+            <div className="absolute py-5 px-8">
+              <h3 className="text-xl">BTC Price</h3>
+              <h1 className="font-bold text-4xl">${bitcoinPrice}</h1>
+              <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Line options={lineOptions} data={priceData} />
+            <Line
+              className="py-10 px-20"
+              options={lineOptions}
+              data={priceData}
+            />
           </div>
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
-            <div className="absolute">
-              <h3>BTC Volume</h3>
-              <h1 className="font-bold	text-4xl">{lastVolume[1]}</h1>
-              <h3>{currentDate}</h3>
+            <div className="absolute py-5 px-8">
+              <h3 className="text-xl">BTC Volume</h3>
+              <h1 className="font-bold	text-4xl">${bitcoinVolume}</h1>
+              <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Bar options={lineOptions} data={volumeData} />
+            <Bar
+              className="py-10 px-20"
+              options={lineOptions}
+              data={volumeData}
+            />
           </div>
         </div>
       </div>
