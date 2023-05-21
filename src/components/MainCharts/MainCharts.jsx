@@ -55,6 +55,11 @@ class MainCharts extends React.Component {
         y: {
           display: false,
         },
+        x: {
+          grid: {
+            display: false,
+          },
+        },
       },
     };
 
@@ -72,8 +77,8 @@ class MainCharts extends React.Component {
           tension: 0.3,
           fill: {
             target: "origin",
-            above: "blue",
-            below: "green",
+            above: "rgb(50, 205, 50)",
+            below: "rgb(50, 205, 50)",
           },
         },
       ],
@@ -85,9 +90,9 @@ class MainCharts extends React.Component {
         {
           label: "Dataset",
           data: total_volumes?.map((volume) => volume[1]),
-          borderColor: "blue",
-          backgroundColor: "lightblue",
-          below: "blue",
+          borderColor: "rgba(33,114,229,255)",
+          backgroundColor: "rgba(33,114,229,255)",
+          below: "rgba(33,114,229,255)",
         },
       ],
     };
@@ -98,20 +103,20 @@ class MainCharts extends React.Component {
         </h1>
         <div className="flex flex-row justify-between w-full">
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
-            <div className="absolute">
+            <div className="absolute py-5 px-8">
               <h3 className="text-xl">BTC Price</h3>
               <h1 className="font-bold text-4xl">${bitcoinPrice}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Line options={lineOptions} data={priceData} />
+            <Line className="py-10 px-20" options={lineOptions} data={priceData} />
           </div>
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
-            <div className="absolute">
+            <div className="absolute py-5 px-8">
               <h3 className="text-xl">BTC Volume</h3>
               <h1 className="font-bold	text-4xl">${bitcoinVolume}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
-            <Bar options={lineOptions} data={volumeData} />
+            <Bar className="py-10 px-20" options={lineOptions} data={volumeData} />
           </div>
         </div>
       </div>
