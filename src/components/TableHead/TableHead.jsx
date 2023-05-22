@@ -13,7 +13,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
           className="text-left cursor-pointer"
           onClick={handleClick}
         >
-          <div className="flex">
+          <div className="flex items-center">
             {item[1]}
             <div className="w-5 h-5">
               <SortIcon />

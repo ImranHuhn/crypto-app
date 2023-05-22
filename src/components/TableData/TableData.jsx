@@ -83,7 +83,7 @@ export const TableData = (props) => {
   };
 
   return (
-    <tr>
+    <tr className="h-20 border-b border-slate-700">
       <td>{market_cap_rank}</td>
       <td>
         <div className="flex">
@@ -108,14 +108,14 @@ export const TableData = (props) => {
             </li>
           </ul>
         </td>
-        <div className="absolute">bar</div>
+        <div className="absolute right-1/2">bar</div>
       </td>
       <td className="relative">
         <ul className="flex justify-between">
           <li className="list-disc">{circulatingSupply}</li>
           <li className="list-disc">{totalSupply}</li>
         </ul>
-        <div className="absolute">bar</div>
+        <div className="absolute right-1/2">bar</div>
       </td>
       <td>
         <div className="h-10 w-32">
