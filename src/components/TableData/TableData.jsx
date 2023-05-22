@@ -9,7 +9,11 @@ import {
 import { Line } from "react-chartjs-2";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { dollarFormat } from "utils/calculations";
+import {
+  longDollarFormat,
+  abbreviateDollar,
+  percentageFormat,
+} from "utils/calculations";
 
 export const TableData = (props) => {
   const {
@@ -26,6 +30,14 @@ export const TableData = (props) => {
     circulating_supply,
     total_supply,
   } = props.item || {};
+  const capitalizedId = id.charAt(0).toUpperCase() + id.slice(1);
+  const capitalSymbol = symbol.toUpperCase();
+  const price = longDollarFormat(current_price);
+  const percentage_1h = percentageFormat(price_change_percentage_1h_in_currency);
+  const percentage_24h = percentageFormat(price_change_percentage_24h_in_currency);
+  const percentage_7d = percentageFormat(price_change_percentage_7d_in_currency);
+  const volume = abbreviateDollar(total_volume, 2)
+  const market = abbreviateDollar(market_cap, 2)
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -57,7 +69,7 @@ export const TableData = (props) => {
         backgroundColor: "rgba(50, 205, 50, 0.5)",
         cubicInterpolationMode: "monotone",
         tension: 0.3,
-        borderWidth: 2
+        borderWidth: 2,
       },
     ],
   };
@@ -68,15 +80,15 @@ export const TableData = (props) => {
       <td>
         <div className="flex">
           <img className="w-6" src={image} />
-          {id} ({symbol})
+          {capitalizedId} ({capitalSymbol})
         </div>
       </td>
-      <td>{dollarFormat(current_price)}</td>
-      <td>{Number(price_change_percentage_1h_in_currency).toFixed(2)}%</td>
-      <td>{Number(price_change_percentage_24h_in_currency).toFixed(2)}</td>
-      <td>{Number(price_change_percentage_7d_in_currency).toFixed(2)}</td>
-      <td>{total_volume}</td>
-      <td>{market_cap}</td>
+      <td>{price}</td>
+      <td>{percentage_1h}%</td>
+      <td>{percentage_24h}%</td>
+      <td>{percentage_7d}%</td>
+      <td>{volume}</td>
+      <td>{market}</td>
       <td>
         {circulating_supply}
         {" / "}

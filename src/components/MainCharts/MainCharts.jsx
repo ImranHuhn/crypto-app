@@ -12,7 +12,7 @@ import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
 import { getTimeOrPrice } from "utils/objectEntries";
-import { threeDecimalAbbreviate } from "utils/calculations";
+import { abbreviateDollar } from "utils/calculations";
 
 ChartJS.register(
   CategoryScale,
@@ -41,8 +41,8 @@ class MainCharts extends React.Component {
     const { prices = [], total_volumes = [] } = this.state.bitcoinData || {};
     const lastPrice = prices[prices?.length - 1] || [];
     const lastVolume = total_volumes[total_volumes?.length - 1] || [];
-    const bitcoinPrice = threeDecimalAbbreviate(lastPrice[1]);
-    const bitcoinVolume = threeDecimalAbbreviate(lastVolume[1]);
+    const bitcoinPrice = abbreviateDollar(lastPrice[1], 3);
+    const bitcoinVolume = abbreviateDollar(lastVolume[1], 3);
     const currentDate = moment().format("MMMM Do YYYY");
     const { time: marketTime, price: marketPrice } =
       getTimeOrPrice(prices) || [];
@@ -110,7 +110,7 @@ class MainCharts extends React.Component {
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute py-5 px-8">
               <h3 className="text-xl">BTC Price</h3>
-              <h1 className="font-bold text-4xl">${bitcoinPrice}</h1>
+              <h1 className="font-bold text-4xl">{bitcoinPrice}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
             <Line
@@ -122,7 +122,7 @@ class MainCharts extends React.Component {
           <div className="bg-white dark:bg-[#191b1f] basis-[48%] rounded-lg relative">
             <div className="absolute py-5 px-8">
               <h3 className="text-xl">BTC Volume</h3>
-              <h1 className="font-bold	text-4xl">${bitcoinVolume}</h1>
+              <h1 className="font-bold	text-4xl">{bitcoinVolume}</h1>
               <h3 className="text-xl">{currentDate}</h3>
             </div>
             <Bar
