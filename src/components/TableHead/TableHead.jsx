@@ -2,29 +2,40 @@ import React from "react";
 import { SortIcon } from "Icons";
 
 export const TableHead = ({ sortingManager, tableColumns, item }) => {
+  const dataKey = item[0];
+  const columnTitle = item[1];
+  const isVolume = dataKey === "total_volume";
+  const isMarket = dataKey === "market_cap";
+  const hasSort = Object.values(tableColumns).slice(0, 8).includes(columnTitle);
   const handleClick = () => {
-    sortingManager(item[0]);
+    sortingManager(dataKey);
   };
-  const hasSort = Object.values(tableColumns).slice(0, 8).includes(item[1]);
   return (
     <>
       {hasSort && (
         <th
-          className="text-left cursor-pointer"
+          className={`text-left cursor-pointer ${isVolume ? "w-[112px]" : ""}`}
           onClick={handleClick}
         >
           <div className="flex items-center">
-            {item[1]}
-            <div className="w-5 h-5">
-              <SortIcon />
-            </div>
+            {isVolume && (
+              <div className="w-5 h-5">
+                <SortIcon />
+              </div>
+            )}
+            {isMarket ? "/" : ""}
+            {columnTitle}
+            {!isVolume && (
+              <div className="w-5 h-5">
+                <SortIcon />
+              </div>
+            )}
           </div>
         </th>
       )}
-      {/* I will have to add condition for volume and marketcap for styling */}
       {!hasSort && (
         <th className="text-left">
-          <div className="flex">{item[1]}</div>
+          <div className="flex">{columnTitle}</div>
         </th>
       )}
     </>

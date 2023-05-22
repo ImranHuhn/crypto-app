@@ -95,29 +95,29 @@ export const TableData = (props) => {
       <td>{percentage_1h}%</td>
       <td>{percentage_24h}%</td>
       <td>{percentage_7d}%</td>
-      <td colspan="2" className="relative">
+      <td colspan="2" className="relative pr-5">
         <td>
           <ul>
-            <li className="list-disc">{volume}</li>
+            <li className="list-disc ml-5">{volume}</li>
           </ul>
         </td>
         <td className="absolute -translate-y-full right-0">
           <ul>
-            <li className="list-disc">
+            <li className="list-disc mr-5">
               {market}
             </li>
           </ul>
         </td>
-        <div className="bg-white w-full h-2 mb-3">
+        <div className="bg-white w-64 h-2 mb-2">
           <div className="bg-black w-1/2 h-full"></div>
         </div>
       </td>
-      <td className="relative">
+      <td className="relative pr-5">
         <ul className="flex justify-between">
-          <li className="list-disc">{circulatingSupply}</li>
+          <li className="list-disc ml-5">{circulatingSupply}</li>
           <li className="list-disc">{totalSupply}</li>
         </ul>
-        <div className="bg-white w-full h-2 mb-3">
+        <div className="bg-white w-64 h-2 mb-2">
           <div className="bg-black w-1/2 h-full"></div>
         </div>
       </td>
