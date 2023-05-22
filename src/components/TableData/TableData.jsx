@@ -108,14 +108,18 @@ export const TableData = (props) => {
             </li>
           </ul>
         </td>
-        <div className="absolute right-1/2">bar</div>
+        <div className="bg-white w-full h-2 mb-3">
+          <div className="bg-black w-1/2 h-full"></div>
+        </div>
       </td>
       <td className="relative">
         <ul className="flex justify-between">
           <li className="list-disc">{circulatingSupply}</li>
           <li className="list-disc">{totalSupply}</li>
         </ul>
-        <div className="absolute right-1/2">bar</div>
+        <div className="bg-white w-full h-2 mb-3">
+          <div className="bg-black w-1/2 h-full"></div>
+        </div>
       </td>
       <td>
         <div className="h-10 w-32">
