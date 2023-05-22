@@ -33,11 +33,19 @@ export const TableData = (props) => {
   const capitalizedId = id.charAt(0).toUpperCase() + id.slice(1);
   const capitalSymbol = symbol.toUpperCase();
   const price = longDollarFormat(current_price);
-  const percentage_1h = percentageFormat(price_change_percentage_1h_in_currency);
-  const percentage_24h = percentageFormat(price_change_percentage_24h_in_currency);
-  const percentage_7d = percentageFormat(price_change_percentage_7d_in_currency);
-  const volume = abbreviateDollar(total_volume, 2)
-  const market = abbreviateDollar(market_cap, 2)
+  const percentage_1h = percentageFormat(
+    price_change_percentage_1h_in_currency
+  );
+  const percentage_24h = percentageFormat(
+    price_change_percentage_24h_in_currency
+  );
+  const percentage_7d = percentageFormat(
+    price_change_percentage_7d_in_currency
+  );
+  const volume = abbreviateDollar(total_volume, 2);
+  const market = abbreviateDollar(market_cap, 2);
+  const circulatingSupply = abbreviateDollar(circulating_supply, 2);
+  const totalSupply = abbreviateDollar(total_supply, 2);
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -87,12 +95,27 @@ export const TableData = (props) => {
       <td>{percentage_1h}%</td>
       <td>{percentage_24h}%</td>
       <td>{percentage_7d}%</td>
-      <td>{volume}</td>
-      <td>{market}</td>
-      <td>
-        {circulating_supply}
-        {" / "}
-        {total_supply}
+      <td colspan="2" className="relative">
+        <td>
+          <ul>
+            <li className="list-disc">{volume}</li>
+          </ul>
+        </td>
+        <td className="absolute -translate-y-full right-0">
+          <ul>
+            <li className="list-disc">
+              {market}
+            </li>
+          </ul>
+        </td>
+        <div className="absolute">bar</div>
+      </td>
+      <td className="relative">
+        <ul className="flex justify-between">
+          <li className="list-disc">{circulatingSupply}</li>
+          <li className="list-disc">{totalSupply}</li>
+        </ul>
+        <div className="absolute">bar</div>
       </td>
       <td>
         <div className="h-10 w-32">
