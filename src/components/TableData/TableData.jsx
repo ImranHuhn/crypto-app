@@ -7,8 +7,9 @@ import {
   LineElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import Skeleton from "react-loading-skeleton";
+// import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { dollarFormat } from "utils/calculations";
 
 export const TableData = (props) => {
   const {
@@ -30,6 +31,7 @@ export const TableData = (props) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: {
       point: {
         radius: 0,
@@ -55,30 +57,35 @@ export const TableData = (props) => {
         backgroundColor: "rgba(50, 205, 50, 0.5)",
         cubicInterpolationMode: "monotone",
         tension: 0.3,
+        borderWidth: 2
       },
     ],
   };
 
   return (
-    <tr className="h-24">
-      <td>{market_cap_rank || <Skeleton />}</td>
+    <tr>
+      <td>{market_cap_rank}</td>
       <td>
-        <img className="w-6" src={image} />
-        {id || <Skeleton />} ({symbol || <Skeleton />})
+        <div className="flex">
+          <img className="w-6" src={image} />
+          {id} ({symbol})
+        </div>
       </td>
-      <td>{current_price || <Skeleton />}</td>
-      <td>{price_change_percentage_1h_in_currency || <Skeleton />}</td>
-      <td>{price_change_percentage_24h_in_currency || <Skeleton />}</td>
-      <td>{price_change_percentage_7d_in_currency || <Skeleton />}</td>
-      <td>{total_volume || <Skeleton />}</td>
-      <td>{market_cap || <Skeleton />}</td>
+      <td>{dollarFormat(current_price)}</td>
+      <td>{Number(price_change_percentage_1h_in_currency).toFixed(2)}%</td>
+      <td>{Number(price_change_percentage_24h_in_currency).toFixed(2)}</td>
+      <td>{Number(price_change_percentage_7d_in_currency).toFixed(2)}</td>
+      <td>{total_volume}</td>
+      <td>{market_cap}</td>
       <td>
-        {circulating_supply || <Skeleton />}
+        {circulating_supply}
         {" / "}
-        {total_supply || <Skeleton />}
+        {total_supply}
       </td>
       <td>
-        <Line options={options} data={data} />
+        <div className="h-10 w-32">
+          <Line options={options} data={data} />
+        </div>
       </td>
     </tr>
   );

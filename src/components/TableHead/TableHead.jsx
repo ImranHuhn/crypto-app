@@ -10,7 +10,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
     <>
       {hasSort && (
         <th
-          className="text-left min-w-[50px] cursor-pointer"
+          className="text-left cursor-pointer"
           onClick={handleClick}
         >
           <div className="flex">
@@ -23,7 +23,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
       )}
       {/* I will have to add condition for volume and marketcap for styling */}
       {!hasSort && (
-        <th className="text-left min-w-[50px]">
+        <th className="text-left">
           <div className="flex">{item[1]}</div>
         </th>
       )}

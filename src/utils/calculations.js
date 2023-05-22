@@ -13,3 +13,10 @@ export const threeDecimalAbbreviate = (number) => {
     minimumFractionDigits: 0,
   }).format(number);
 };
+
+export const dollarFormat = (number) => {
+  return Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(number);
+};
