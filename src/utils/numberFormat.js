@@ -1,6 +1,14 @@
-export const percentageFormat = (number) => {
-  return Number(number).toFixed(2)
-}
+export const percentageFormat = (number, decimalPlaces) => {
+  return Intl.NumberFormat("en-US", {
+    style: "percent",
+    maximumFractionDigits: decimalPlaces,
+    minimumFractionDigits: 0,
+    // signDisplay: "never",
+  }).format(number);
+};
+// export const percentageFormat = (number) => {
+//   return Number(number).toFixed(2)
+// }
 
 export const abbreviateDollar = (number, decimalPlaces) => {
   return Intl.NumberFormat("en-US", {

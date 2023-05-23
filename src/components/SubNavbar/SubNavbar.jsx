@@ -1,7 +1,7 @@
 import React from "react";
 import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
-import { abbreviateDollar } from "utils/calculations";
+import { abbreviateDollar } from "utils/numberFormat";
 import { ChevronIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";

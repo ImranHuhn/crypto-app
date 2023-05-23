@@ -13,8 +13,8 @@ import {
   longDollarFormat,
   abbreviateDollar,
   percentageFormat,
-} from "utils/calculations";
-import {FillBar} from "./TableData.styles"
+} from "utils/numberFormat";
+import { FillBar } from "./TableData.styles";
 
 export const TableData = (props) => {
   const {
@@ -35,13 +35,16 @@ export const TableData = (props) => {
   const capitalSymbol = symbol.toUpperCase();
   const price = longDollarFormat(current_price);
   const percentage_1h = percentageFormat(
-    price_change_percentage_1h_in_currency
+    price_change_percentage_1h_in_currency,
+    2
   );
   const percentage_24h = percentageFormat(
-    price_change_percentage_24h_in_currency
+    price_change_percentage_24h_in_currency,
+    2
   );
   const percentage_7d = percentageFormat(
-    price_change_percentage_7d_in_currency
+    price_change_percentage_7d_in_currency,
+    2
   );
   const volume = abbreviateDollar(total_volume, 2);
   const market = abbreviateDollar(market_cap, 2);
@@ -93,9 +96,9 @@ export const TableData = (props) => {
         </div>
       </td>
       <td>{price}</td>
-      <td>{percentage_1h}%</td>
-      <td>{percentage_24h}%</td>
-      <td>{percentage_7d}%</td>
+      <td>{percentage_1h}</td>
+      <td>{percentage_24h}</td>
+      <td>{percentage_7d}</td>
       <td colspan="2" className="relative pr-5">
         <div className="flex justify-between w-64">
           <td>
@@ -110,7 +113,10 @@ export const TableData = (props) => {
           </td>
         </div>
         <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar fill={total_volume/market_cap * 100} className="bg-black h-full rounded-xl overflow-hidden"></FillBar>
+          <FillBar
+            fill={(total_volume / market_cap) * 100}
+            className="bg-black h-full rounded-xl overflow-hidden"
+          ></FillBar>
         </div>
       </td>
       <td className="relative pr-5">
@@ -119,7 +125,10 @@ export const TableData = (props) => {
           <li className="list-disc">{totalSupply}</li>
         </ul>
         <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar fill={circulating_supply/total_supply * 100} className="bg-black h-full rounded-xl overflow-hidden"></FillBar>
+          <FillBar
+            fill={(circulating_supply / total_supply) * 100}
+            className="bg-black h-full rounded-xl overflow-hidden"
+          ></FillBar>
         </div>
       </td>
       <td>

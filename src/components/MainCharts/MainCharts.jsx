@@ -12,7 +12,7 @@ import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
 import { getTimeOrPrice } from "utils/objectEntries";
-import { abbreviateDollar } from "utils/calculations";
+import { abbreviateDollar } from "utils/numberFormat";
 
 ChartJS.register(
   CategoryScale,
