@@ -15,7 +15,7 @@ import {
   percentageFormat,
 } from "utils/numberFormat";
 import { FillBar } from "./TableData.styles";
-import { ChevronIcon } from "Icons";
+import { ChevronTrendIcon } from "Icons";
 
 export const TableData = (props) => {
   const {
@@ -87,7 +87,7 @@ export const TableData = (props) => {
     ],
   };
   return (
-    <tr className="h-20 border-b border-slate-700">
+    <tr className="h-20 border-b border-slate-600">
       <td>{market_cap_rank}</td>
       <td>
         <div className="flex">
@@ -105,7 +105,13 @@ export const TableData = (props) => {
       >
         <div className="flex items-center">
           <div className="w-5 h-5 ">
-            <ChevronIcon />
+            <ChevronTrendIcon
+              filler={
+                price_change_percentage_1h_in_currency < 0
+                  ? "#e5113c"
+                  : "#00f629"
+              }
+            />
           </div>
 
           {percentage_1h}
@@ -120,7 +126,13 @@ export const TableData = (props) => {
       >
         <div className="flex items-center">
           <div className="w-5 h-5">
-            <ChevronIcon />
+            <ChevronTrendIcon
+              filler={
+                price_change_percentage_24h_in_currency < 0
+                  ? "#e5113c"
+                  : "#00f629"
+              }
+            />
           </div>
           {percentage_24h}
         </div>
@@ -134,7 +146,13 @@ export const TableData = (props) => {
       >
         <div className="flex items-center">
           <div className="w-5 h-5">
-            <ChevronIcon />
+            <ChevronTrendIcon
+              filler={
+                price_change_percentage_7d_in_currency < 0
+                  ? "#e5113c"
+                  : "#00f629"
+              }
+            />
           </div>
           {percentage_7d}
         </div>

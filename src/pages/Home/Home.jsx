@@ -127,37 +127,41 @@ class Home extends React.Component {
         >
           <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
             <MainCharts />
-            <h1 className="text-3xl text-black font-bold dark:text-white py-6">Market Overview</h1>
-            <table className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen border-separate px-8">
-              <thead>
-                <tr className="h-24">
-                  {Object.entries(tableColumns).map((item) => {
+            <h1 className="text-3xl text-black font-bold dark:text-white py-6">
+              Market Overview
+            </h1>
+            <div className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen">
+              <table className="w-[95%] mx-auto my-0">
+                <thead>
+                  <tr className="h-24">
+                    {Object.entries(tableColumns).map((item) => {
+                      return (
+                        <TableHead
+                          item={item}
+                          tableColumns={tableColumns}
+                          sortingManager={this.sortingManager}
+                          key={crypto.randomUUID()}
+                        />
+                      );
+                    })}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedAllCoins.map((item) => {
                     return (
-                      <TableHead
+                      <TableData
+                        isLoading={this.state.isLoading}
                         item={item}
-                        tableColumns={tableColumns}
-                        sortingManager={this.sortingManager}
+                        allCoins={allCoins}
+                        sort={sort}
+                        selection={selection}
                         key={crypto.randomUUID()}
                       />
                     );
                   })}
-                </tr>
-              </thead>
-              <tbody>
-                {sortedAllCoins.map((item) => {
-                  return (
-                    <TableData
-                      isLoading={this.state.isLoading}
-                      item={item}
-                      allCoins={allCoins}
-                      sort={sort}
-                      selection={selection}
-                      key={crypto.randomUUID()}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
         </InfiniteScroll>
       </div>
