@@ -5,6 +5,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  DatasetController,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 // import Skeleton from "react-loading-skeleton";
@@ -14,7 +15,7 @@ import {
   abbreviateDollar,
   percentageFormat,
 } from "utils/numberFormat";
-import { FillBar } from "./TableData.styles";
+import { FillBar, List } from "./TableData.styles";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
 
@@ -174,31 +175,37 @@ export const TableData = (props) => {
         <div className="flex justify-between w-64">
           <div>
             <ul>
-              <li className="list-disc ml-5">{volume}</li>
+              <List textColor={color} className="list-disc ml-5">
+                {volume}
+              </List>
             </ul>
           </div>
           <div>
             <ul>
-              <li className="list-disc">{market}</li>
+              <List textColor={color} className="list-disc">{market}</List>
             </ul>
           </div>
         </div>
-        <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
+        <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
-            fill={(total_volume / market_cap) * 100}
+            fillWidth={(total_volume / market_cap) * 100}
+            fillColor={color}
             className="bg-black h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
       </td>
       <td className="relative pr-5">
         <ul className="flex justify-between w-64">
-          <li className="list-disc ml-5">{circulatingSupply}</li>
-          <li className="list-disc">{totalSupply}</li>
+          <List textColor={color} className="list-disc ml-5">
+            {circulatingSupply}
+          </List>
+          <List textColor={color} className="list-disc">{totalSupply}</List>
         </ul>
-        <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
+        <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
-            fill={(circulating_supply / total_supply) * 100}
-            className="bg-black h-full rounded-xl overflow-hidden"
+            fillWidth={(circulating_supply / total_supply) * 100}
+            fillColor={color}
+            className="h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
       </td>

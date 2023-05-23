@@ -54,7 +54,7 @@ class Home extends React.Component {
     const hasMoreCoins = !!newData.length;
     const newAllCoins = [...allCoins, ...newData];
     ////////////////////////////
-    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
+    localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
     setTimeout(() => {
       this.setState({
@@ -79,14 +79,14 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     ////////////////////////////
-    // const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
+    const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
     ////////////////////////////
     this.handleInfiniteScroll();
     const parsed = queryString.parse(this.props.location.search, {
       parseBooleans: true,
     });
     this.setState({ parsed, 
-      // allCoins: storedData
+      allCoins: storedData
      });
   };
 
