@@ -1,11 +1,6 @@
-export const randomColor = () => {
-    // random color code
-}
+export const randomColor = (opacity) => {
+  const random = Math.random() * 256;
+  return rgba(random, random, random, opacity);
+};
 
-export const trendColor = (number) => {
-    if(number < 0) {
-        console.log("negative")
-    } else {
-        console.log("positive")
-    }
-}
+console.log(randomColor(1))

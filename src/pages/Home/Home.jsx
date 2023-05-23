@@ -128,7 +128,7 @@ class Home extends React.Component {
           <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
             <MainCharts />
             <h1 className="text-3xl text-black font-bold dark:text-white py-6">Market Overview</h1>
-            <table className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen">
+            <table className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen border-separate px-8">
               <thead>
                 <tr className="h-24">
                   {Object.entries(tableColumns).map((item) => {

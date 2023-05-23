@@ -86,11 +86,6 @@ export const TableData = (props) => {
       },
     ],
   };
-  console.log(
-    "price_change_percentage_1h_in_currency",
-    price_change_percentage_1h_in_currency
-  );
-  console.log("percentage_1h", percentage_1h);
   return (
     <tr className="h-20 border-b border-slate-700">
       <td>{market_cap_rank}</td>
@@ -144,18 +139,18 @@ export const TableData = (props) => {
           {percentage_7d}
         </div>
       </td>
-      <td colspan="2" className="relative pr-5">
+      <td colSpan="2" className="relative pr-5">
         <div className="flex justify-between w-64">
-          <td>
+          <div>
             <ul>
               <li className="list-disc ml-5">{volume}</li>
             </ul>
-          </td>
-          <td>
+          </div>
+          <div>
             <ul>
               <li className="list-disc">{market}</li>
             </ul>
-          </td>
+          </div>
         </div>
         <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
