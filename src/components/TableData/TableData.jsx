@@ -86,7 +86,11 @@ export const TableData = (props) => {
       },
     ],
   };
-
+  console.log(
+    "price_change_percentage_1h_in_currency",
+    price_change_percentage_1h_in_currency
+  );
+  console.log("percentage_1h", percentage_1h);
   return (
     <tr className="h-20 border-b border-slate-700">
       <td>{market_cap_rank}</td>
