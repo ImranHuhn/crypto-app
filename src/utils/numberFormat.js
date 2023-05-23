@@ -3,12 +3,9 @@ export const percentageFormat = (number, decimalPlaces) => {
     style: "percent",
     maximumFractionDigits: decimalPlaces,
     minimumFractionDigits: 0,
-    // signDisplay: "never",
+    signDisplay: "never",
   }).format(number);
 };
-// export const percentageFormat = (number) => {
-//   return Number(number).toFixed(2)
-// }
 
 export const abbreviateDollar = (number, decimalPlaces) => {
   return Intl.NumberFormat("en-US", {
