@@ -14,6 +14,7 @@ import {
   abbreviateDollar,
   percentageFormat,
 } from "utils/calculations";
+import {FillBar} from "./TableData.styles"
 
 export const TableData = (props) => {
   const {
@@ -102,14 +103,14 @@ export const TableData = (props) => {
               <li className="list-disc ml-5">{volume}</li>
             </ul>
           </td>
-          <td className="">
+          <td>
             <ul>
               <li className="list-disc">{market}</li>
             </ul>
           </td>
         </div>
-        <div className="bg-white w-64 h-2 mb-2">
-          <div className="bg-black w-1/2 h-full"></div>
+        <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
+          <FillBar fill={total_volume/market_cap * 100} className="bg-black h-full rounded-xl overflow-hidden"></FillBar>
         </div>
       </td>
       <td className="relative pr-5">
@@ -117,8 +118,8 @@ export const TableData = (props) => {
           <li className="list-disc ml-5">{circulatingSupply}</li>
           <li className="list-disc">{totalSupply}</li>
         </ul>
-        <div className="bg-white w-64 h-2 mb-2">
-          <div className="bg-black w-1/2 h-full"></div>
+        <div className="bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
+          <FillBar fill={circulating_supply/total_supply * 100} className="bg-black h-full rounded-xl overflow-hidden"></FillBar>
         </div>
       </td>
       <td>

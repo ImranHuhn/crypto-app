@@ -6,6 +6,7 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
   const columnTitle = item[1];
   const isVolume = dataKey === "total_volume";
   const isMarket = dataKey === "market_cap";
+  const isLast = dataKey === "total_supply";
   const hasSort = Object.values(tableColumns).slice(0, 8).includes(columnTitle);
   const handleClick = () => {
     sortingManager(dataKey);
@@ -35,7 +36,15 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
       )}
       {!hasSort && (
         <th className="text-left">
-          <div className="flex">{columnTitle}</div>
+          <div className="flex">
+            {columnTitle}
+            {isLast && (
+              <div className="flex items-center">
+                <div className="bg-white rounded-full w-2 h-2"></div>
+                <div>#%</div>
+              </div>
+            )}
+          </div>
         </th>
       )}
     </>
