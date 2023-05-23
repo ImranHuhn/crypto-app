@@ -1,6 +1,10 @@
-export const randomColor = (opacity) => {
-  const random = Math.random() * 256;
-  return rgba(random, random, random, opacity);
+export const randomColor = () => {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+      color += letters[Math.round(Math.random() * 15)];
+  }
+  return color;
 };
 
-console.log(randomColor(1))
+// console.log(randomColor())

@@ -54,7 +54,7 @@ class Home extends React.Component {
     const hasMoreCoins = !!newData.length;
     const newAllCoins = [...allCoins, ...newData];
     ////////////////////////////
-    localStorage.setItem("storedData", JSON.stringify(newAllCoins));
+    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
     setTimeout(() => {
       this.setState({
@@ -79,13 +79,15 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     ////////////////////////////
-    const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
+    // const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
     ////////////////////////////
     this.handleInfiniteScroll();
     const parsed = queryString.parse(this.props.location.search, {
       parseBooleans: true,
     });
-    this.setState({ parsed, allCoins: storedData });
+    this.setState({ parsed, 
+      // allCoins: storedData
+     });
   };
 
   render() {
@@ -130,8 +132,8 @@ class Home extends React.Component {
             <h1 className="text-3xl text-black font-bold dark:text-white py-6">
               Market Overview
             </h1>
-            <div className="bg-white dark:bg-[#191b1f] w-full mx-auto my-0 rounded-lg	h-screen">
-              <table className="w-[95%] mx-auto my-0">
+            <div className="bg-white dark:bg-[#191b1f] w-full mx-auto rounded-lg">
+              <table className="w-[95%] mx-auto">
                 <thead>
                   <tr className="h-24">
                     {Object.entries(tableColumns).map((item) => {

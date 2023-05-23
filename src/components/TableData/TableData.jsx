@@ -16,6 +16,7 @@ import {
 } from "utils/numberFormat";
 import { FillBar } from "./TableData.styles";
 import { ChevronTrendIcon } from "Icons";
+import { randomColor } from "utils/colorGenerator";
 
 export const TableData = (props) => {
   const {
@@ -51,6 +52,7 @@ export const TableData = (props) => {
   const market = abbreviateDollar(market_cap, 2);
   const circulatingSupply = abbreviateDollar(circulating_supply, 2);
   const totalSupply = abbreviateDollar(total_supply, 2);
+  const color = randomColor();
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -104,7 +106,11 @@ export const TableData = (props) => {
         }`}
       >
         <div className="flex items-center">
-          <div className="w-5 h-5 ">
+          <div
+            className={`w-5 h-5 ${
+              price_change_percentage_1h_in_currency < 0 ? `rotate-180` : ""
+            }`}
+          >
             <ChevronTrendIcon
               filler={
                 price_change_percentage_1h_in_currency < 0
@@ -113,7 +119,6 @@ export const TableData = (props) => {
               }
             />
           </div>
-
           {percentage_1h}
         </div>
       </td>
@@ -125,7 +130,11 @@ export const TableData = (props) => {
         }`}
       >
         <div className="flex items-center">
-          <div className="w-5 h-5">
+          <div
+            className={`w-5 h-5 ${
+              price_change_percentage_24h_in_currency < 0 ? `rotate-180` : ""
+            }`}
+          >
             <ChevronTrendIcon
               filler={
                 price_change_percentage_24h_in_currency < 0
@@ -145,7 +154,11 @@ export const TableData = (props) => {
         }`}
       >
         <div className="flex items-center">
-          <div className="w-5 h-5">
+          <div
+            className={`w-5 h-5 ${
+              price_change_percentage_7d_in_currency < 0 ? `rotate-180` : ""
+            }`}
+          >
             <ChevronTrendIcon
               filler={
                 price_change_percentage_7d_in_currency < 0
