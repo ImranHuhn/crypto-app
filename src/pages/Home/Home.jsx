@@ -146,15 +146,20 @@ class Home extends React.Component {
             </h1>
           }
         >
-          <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
+          {/* <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5"> */}
+          <div className="text-black dark:text-white">
             <MainCharts />
+            {/* <h1 className="text-3xl text-black font-bold dark:text-white py-6"> */}
             <h1 className="text-3xl text-black font-bold dark:text-white py-6">
               Market Overview
             </h1>
-            <div className="bg-white dark:bg-[#191b1f] w-full mx-auto rounded-lg">
-              <table className="w-[95%] mx-auto">
+            {/* <div className="bg-white dark:bg-[#191b1f] w-full mx-auto rounded-lg"> */}
+            <div className="bg-white dark:bg-[#191b1f] rounded-lg">
+              {/* <table className="w-[95%] mx-auto"> */}
+              <table className="">
                 <thead>
-                  <tr className="h-24">
+                  {/* <tr className="h-24"> */}
+                  <tr className="">
                     {Object.entries(tableColumns).map((item) => {
                       return (
                         <TableHead
