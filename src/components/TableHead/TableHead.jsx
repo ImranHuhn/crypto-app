@@ -38,12 +38,6 @@ export const TableHead = ({ sortingManager, tableColumns, item }) => {
         <th className="text-left">
           <div className="flex">
             {columnTitle}
-            {isLast && (
-              <div className="flex items-center">
-                <div className="bg-white rounded-full w-2 h-2"></div>
-                <div>#%</div>
-              </div>
-            )}
           </div>
         </th>
       )}

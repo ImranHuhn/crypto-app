@@ -33,6 +33,7 @@ export const TableData = (props) => {
     market_cap,
     circulating_supply,
     total_supply,
+    price_change_percentage_24h,
   } = props.item || {};
   const capitalizedId = id.charAt(0).toUpperCase() + id.slice(1);
   const capitalSymbol = symbol.toUpperCase();
@@ -81,8 +82,9 @@ export const TableData = (props) => {
       {
         label: "Dataset",
         data: props.item.sparkline_in_7d.price.map((price) => price),
-        borderColor: "rgb(50, 205, 50)",
-        backgroundColor: "rgba(50, 205, 50, 0.5)",
+        borderColor: `${
+          price_change_percentage_24h < 0 ? `#e5113c` : `#00f629`
+        }`,
         cubicInterpolationMode: "monotone",
         tension: 0.3,
         borderWidth: 2,
@@ -182,7 +184,9 @@ export const TableData = (props) => {
           </div>
           <div>
             <ul>
-              <List textColor={color} className="list-disc">{market}</List>
+              <List textColor={color} className="list-disc">
+                {market}
+              </List>
             </ul>
           </div>
         </div>
@@ -199,7 +203,9 @@ export const TableData = (props) => {
           <List textColor={color} className="list-disc ml-5">
             {circulatingSupply}
           </List>
-          <List textColor={color} className="list-disc">{totalSupply}</List>
+          <List textColor={color} className="list-disc">
+            {totalSupply}
+          </List>
         </ul>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
