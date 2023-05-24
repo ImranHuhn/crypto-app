@@ -7,4 +7,3 @@ export const randomColor = () => {
   return color;
 };
 
-// console.log(randomColor())
