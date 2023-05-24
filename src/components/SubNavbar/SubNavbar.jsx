@@ -1,7 +1,7 @@
 import React from "react";
 import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
-import { abbreviateNumber } from "utils/calculations";
+import { abbreviateDollar } from "utils/numberFormat";
 import { ChevronIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
@@ -48,7 +48,7 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div>
-          ${abbreviateNumber(usd)}
+          {abbreviateDollar(usd, 2)}
           {/* selected currency from nav for "total_market_cap" */}
         </div>
         <div>
@@ -57,9 +57,7 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
-          <div>
-            ${abbreviateNumber(volume?.usd)}
-          </div>
+          <div>{abbreviateDollar(volume?.usd, 2)}</div>
           {/* selected currency from nav for "total_volume" */}
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill

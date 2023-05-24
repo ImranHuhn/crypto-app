@@ -17,6 +17,7 @@ export const getCoins = async (query) => {
     return data;
   } catch (error) {
     console.log(error);
+    return { name: "error", errorMessage: error };
   }
 };
 
