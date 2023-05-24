@@ -56,8 +56,6 @@ class Home extends React.Component {
     const { page, allCoins } = this.state;
     const newPage = page + 1;
     const newData = await getCoins({ page: parseInt(newPage) });
-    // const hasMoreCoins = !!newData.length;
-    // const newAllCoins = [...allCoins, ...newData];
     // for testing purposes //////////////////////////
     // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
@@ -73,7 +71,7 @@ class Home extends React.Component {
           page: newPage,
           hasMore: hasMoreCoins,
         });
-      }, 1000);
+      }, 1500);
     }
   };
 
