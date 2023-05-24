@@ -60,13 +60,18 @@ class Home extends React.Component {
     // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
     if (newData.name === "error") {
-      this.setState({ isLoading: false, hasError: true, errorMessage: newData.errorMessage });
+      this.setState({
+        isLoading: false,
+        hasError: true,
+        errorMessage: newData.errorMessage,
+      });
     } else {
       const hasMoreCoins = !!newData.length;
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {
         this.setState({
           isLoading: false,
+          hasError: false,
           allCoins: newAllCoins,
           page: newPage,
           hasMore: hasMoreCoins,
@@ -97,7 +102,7 @@ class Home extends React.Component {
     this.setState({
       parsed,
       // for testing purposes //////////////////////////
-      // allCoins: storedData 
+      // allCoins: storedData
       ////////////////////////////
     });
   };
@@ -129,9 +134,11 @@ class Home extends React.Component {
           next={this.handleInfiniteScroll}
           hasMore={hasMore}
           loader={
-            <h1 className="text-black dark:text-white text-center">
-              Loading...
-            </h1>
+            this.state.isLoading && (
+              <h1 className="text-black dark:text-white text-center">
+                Loading...
+              </h1>
+            )
           }
           endMessage={
             <h1 className="text-black dark:text-white text-center">
