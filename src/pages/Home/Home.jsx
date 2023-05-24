@@ -134,7 +134,7 @@ class Home extends React.Component {
           next={this.handleInfiniteScroll}
           hasMore={hasMore}
           loader={
-            this.state.isLoading && (
+            !this.state.hasError && (
               <h1 className="text-black dark:text-white text-center">
                 Loading...
               </h1>
