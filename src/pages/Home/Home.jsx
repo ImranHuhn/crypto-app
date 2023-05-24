@@ -159,7 +159,7 @@ class Home extends React.Component {
             )
           }
           endMessage={
-            <h1 className="text-black dark:text-white text-center">
+            !this.state.hasMore && <h1 className="text-black dark:text-white text-center">
               All coins have been loaded!
             </h1>
           }
