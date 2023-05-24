@@ -193,11 +193,6 @@ class Home extends React.Component {
                       </td>
                     </tr>
                   )}
-                  {this.state.hasError && (
-                    <tr>
-                      <td colSpan="10">{this.state.errorMessage.message}</td>
-                    </tr>
-                  )}
                   {sortedAllCoins.map((item) => {
                     return (
                       <>
@@ -212,6 +207,11 @@ class Home extends React.Component {
                       </>
                     );
                   })}
+                  {this.state.hasError && (
+                    <tr>
+                      <td colSpan="10">{this.state.errorMessage.message}</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
