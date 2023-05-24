@@ -13,6 +13,8 @@ class Home extends React.Component {
     hasMore: true,
     page: 0,
     isLoading: false,
+    hasError: false,
+    errorMessage: "",
     tableColumns: {
       market_cap_rank: "#",
       id: "Name",
@@ -50,23 +52,29 @@ class Home extends React.Component {
   };
 
   handleInfiniteScroll = async () => {
-    const { page, allCoins } = this.state;
     this.setState({ isLoading: true });
+    const { page, allCoins } = this.state;
     const newPage = page + 1;
     const newData = await getCoins({ page: parseInt(newPage) });
-    const hasMoreCoins = !!newData.length;
-    const newAllCoins = [...allCoins, ...newData];
-    ////////////////////////////
+    // const hasMoreCoins = !!newData.length;
+    // const newAllCoins = [...allCoins, ...newData];
+    // for testing purposes //////////////////////////
     // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
-    setTimeout(() => {
-      this.setState({
-        allCoins: newAllCoins,
-        page: newPage,
-        isLoading: false,
-        hasMore: hasMoreCoins,
-      });
-    }, 1500);
+    if (newData.name === "error") {
+      this.setState({ isLoading: false, hasError: true, errorMessage: newData.errorMessage });
+    } else {
+      const hasMoreCoins = !!newData.length;
+      const newAllCoins = [...allCoins, ...newData];
+      setTimeout(() => {
+        this.setState({
+          isLoading: false,
+          allCoins: newAllCoins,
+          page: newPage,
+          hasMore: hasMoreCoins,
+        });
+      }, 1000);
+    }
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -81,7 +89,7 @@ class Home extends React.Component {
   };
 
   componentDidMount = () => {
-    ////////////////////////////
+    // for testing purposes //////////////////////////
     // const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
     ////////////////////////////
     this.handleInfiniteScroll();
@@ -90,7 +98,9 @@ class Home extends React.Component {
     });
     this.setState({
       parsed,
-      // allCoins: storedData
+      // for testing purposes //////////////////////////
+      // allCoins: storedData 
+      ////////////////////////////
     });
   };
 
@@ -158,6 +168,11 @@ class Home extends React.Component {
                       <td colSpan="10">
                         <Skeleton count={10} />
                       </td>
+                    </tr>
+                  )}
+                  {this.state.hasError && (
+                    <tr>
+                      <td colSpan="10">{this.state.errorMessage.message}</td>
                     </tr>
                   )}
                   {sortedAllCoins.map((item) => {
