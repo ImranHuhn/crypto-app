@@ -56,17 +56,11 @@ class Home extends React.Component {
     const { page, allCoins } = this.state;
     const newPage = page + 1;
     const newData = await getCoins({ page: parseInt(newPage) });
+    const hasMoreCoins = !!newData.length;
     // for testing purposes //////////////////////////
     // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
-    if (newData.name === "error") {
-      this.setState({
-        isLoading: false,
-        hasError: true,
-        errorMessage: newData.errorMessage,
-      });
-    } else {
-      const hasMoreCoins = !!newData.length;
+    if (hasMoreCoins) {
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {
         this.setState({
@@ -77,7 +71,31 @@ class Home extends React.Component {
           hasMore: hasMoreCoins,
         });
       }, 1500);
+    } else {
+      this.setState({
+        isLoading: false,
+        hasError: true,
+        errorMessage: newData.errorMessage,
+      });
     }
+    // if (newData.name === "error") {
+    //   this.setState({
+    //     isLoading: false,
+    //     hasError: true,
+    //     errorMessage: newData.errorMessage,
+    //   });
+    // } else {
+    //   const newAllCoins = [...allCoins, ...newData];
+    //   setTimeout(() => {
+    //     this.setState({
+    //       isLoading: false,
+    //       hasError: false,
+    //       allCoins: newAllCoins,
+    //       page: newPage,
+    //       hasMore: hasMoreCoins,
+    //     });
+    //   }, 1500);
+    // }
   };
 
   componentDidUpdate = (prevProps, prevState) => {
