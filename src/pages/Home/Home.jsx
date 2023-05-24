@@ -78,24 +78,6 @@ class Home extends React.Component {
         errorMessage: newData.errorMessage,
       });
     }
-    // if (newData.name === "error") {
-    //   this.setState({
-    //     isLoading: false,
-    //     hasError: true,
-    //     errorMessage: newData.errorMessage,
-    //   });
-    // } else {
-    //   const newAllCoins = [...allCoins, ...newData];
-    //   setTimeout(() => {
-    //     this.setState({
-    //       isLoading: false,
-    //       hasError: false,
-    //       allCoins: newAllCoins,
-    //       page: newPage,
-    //       hasMore: hasMoreCoins,
-    //     });
-    //   }, 1500);
-    // }
   };
 
   componentDidUpdate = (prevProps, prevState) => {
