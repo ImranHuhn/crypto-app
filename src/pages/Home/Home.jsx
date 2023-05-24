@@ -4,6 +4,9 @@ import queryString from "query-string";
 import { getCoins } from "utils/api";
 import { MainCharts, TableHead, TableData } from "components";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 class Home extends React.Component {
   state = {
     allCoins: [],
@@ -54,7 +57,7 @@ class Home extends React.Component {
     const hasMoreCoins = !!newData.length;
     const newAllCoins = [...allCoins, ...newData];
     ////////////////////////////
-    localStorage.setItem("storedData", JSON.stringify(newAllCoins));
+    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
     ////////////////////////////
     setTimeout(() => {
       this.setState({
@@ -79,15 +82,16 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     ////////////////////////////
-    const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
+    // const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
     ////////////////////////////
     this.handleInfiniteScroll();
     const parsed = queryString.parse(this.props.location.search, {
       parseBooleans: true,
     });
-    this.setState({ parsed, 
-      allCoins: storedData
-     });
+    this.setState({
+      parsed,
+      // allCoins: storedData
+    });
   };
 
   render() {
@@ -149,16 +153,25 @@ class Home extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
+                  {this.state.isLoading && (
+                    <tr>
+                      <td colSpan="10">
+                        <Skeleton count={10} />
+                      </td>
+                    </tr>
+                  )}
                   {sortedAllCoins.map((item) => {
                     return (
-                      <TableData
-                        isLoading={this.state.isLoading}
-                        item={item}
-                        allCoins={allCoins}
-                        sort={sort}
-                        selection={selection}
-                        key={crypto.randomUUID()}
-                      />
+                      <>
+                        <TableData
+                          isLoading={this.state.isLoading}
+                          item={item}
+                          allCoins={allCoins}
+                          sort={sort}
+                          selection={selection}
+                          key={crypto.randomUUID()}
+                        />
+                      </>
                     );
                   })}
                 </tbody>

@@ -5,11 +5,10 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  DatasetController,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 // import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+// import "react-loading-skeleton/dist/skeleton.css";
 import {
   longDollarFormat,
   abbreviateDollar,
