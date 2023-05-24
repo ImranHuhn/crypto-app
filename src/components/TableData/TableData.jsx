@@ -89,8 +89,7 @@ export const TableData = (props) => {
     ],
   };
   return (
-    // <tr className="h-20 border-b border-slate-600">
-    <tr className="border-b border-slate-600">
+    <tr className="h-20 border-b border-slate-600">
       <td>{market_cap_rank}</td>
       <td>
         <div className="flex">
@@ -171,14 +170,11 @@ export const TableData = (props) => {
           {percentage_7d}
         </div>
       </td>
-      {/* <td colSpan="2" className="relative pr-5"> */}
-      <td colSpan="2" className="relative">
-        {/* <div className="flex justify-between w-64"> */}
-        <div className="flex justify-between">
+      <td colSpan="2" className="relative pr-5">
+        <div className="flex justify-between w-64">
           <div>
             <ul>
-              {/* <List textColor={color} className="list-disc ml-5"> */}
-              <List textColor={color} className="list-disc">
+              <List textColor={color} className="list-disc ml-5">
                 {volume}
               </List>
             </ul>
@@ -191,41 +187,34 @@ export const TableData = (props) => {
             </ul>
           </div>
         </div>
-        {/* <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden"> */}
-        <div className="bg-slate-200 dark:bg-white rounded-xl overflow-hidden">
+        <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
             fillWidth={(total_volume / market_cap) * 100}
             fillColor={color}
-            // className="bg-black h-full rounded-xl overflow-hidden"
-            className="bg-black rounded-xl overflow-hidden"
+            className="bg-black h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
       </td>
-      {/* <td className="relative pr-5"> */}
-      <td className="relative">
-        {/* <ul className="flex justify-between w-64"> */}
-        <ul className="flex justify-between">
-          {/* <List textColor={color} className="list-disc ml-5"> */}
-          <List textColor={color} className="list-disc">
+      <td className="relative pr-5">
+        <ul className="flex justify-between w-64">
+          <List textColor={color} className="list-disc ml-5">
             {circulatingSupply}
           </List>
           <List textColor={color} className="list-disc">
             {totalSupply}
           </List>
         </ul>
-        {/* <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden"> */}
-        <div className="bg-slate-200 dark:bg-white rounded-xl overflow-hidden">
+        <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
             fillWidth={(circulating_supply / total_supply) * 100}
             fillColor={color}
-            // className="h-full rounded-xl overflow-hidden"
-            className="rounded-xl overflow-hidden"
+            className="h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
       </td>
       <td>
-        {/* <div className="h-10 w-32"> */}
-        <div className="">
+        {/* <div className="h-10 w-32"> // h-10 caused double vertical scroll */}
+        <div className=" w-32">
           <Line options={options} data={data} />
         </div>
       </td>
