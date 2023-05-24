@@ -213,8 +213,7 @@ export const TableData = (props) => {
         </div>
       </td>
       <td>
-        {/* <div className="h-10 w-32"> // h-10 caused double vertical scroll */}
-        <div className=" w-32">
+        <div className="h-10 w-32 overflow-hidden">
           <Line options={options} data={data} />
         </div>
       </td>
