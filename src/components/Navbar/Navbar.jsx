@@ -1,17 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { SubNavbar } from "components";
 import { DarkThemeIcon, MagnifyIcon, ChevronIcon, DollarIcon } from "Icons";
+import { NavbarLink } from "components";
 
 export const Navbar = ({ handleThemeClick }) => {
-  const handleClick = () => {
-    // code for active button in either coins or portfolio
-  }
   return (
     <div className="bg-white dark:bg-[#191b1f] relative">
       <nav className="flex item-center justify-between h-20 w-[95%] my-0 mx-auto">
         <div className="flex items-center h-full">
-          <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
+          <NavbarLink path="/" text="Coins" />
+          <NavbarLink path="/portfolio" text="Portfolio" />
+          {/* <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
             <Link
               className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
               to="/"
@@ -19,8 +19,8 @@ export const Navbar = ({ handleThemeClick }) => {
             >
               Coins
             </Link>
-          </div>
-          <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
+          </div> */}
+          {/* <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
             <Link
               className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
               to="/portfolio"
@@ -28,7 +28,7 @@ export const Navbar = ({ handleThemeClick }) => {
             >
               Portfolio
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center h-full">
           <div className="flex items-center relative h-full">
