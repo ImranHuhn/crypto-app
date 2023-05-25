@@ -2,7 +2,7 @@ import React from "react";
 import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
 import { abbreviateDollar } from "utils/numberFormat";
-import { ChevronIcon } from "Icons";
+import { ChevronIcon, ChevronTrendIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
 
@@ -28,6 +28,7 @@ class SubNavbar extends React.Component {
       markets,
       total_market_cap,
       market_cap_percentage,
+      market_cap_change_percentage_24h_usd,
     } = this.state.marketData || {};
     const { usd } = total_market_cap || {};
     const { btc, eth } = market_cap_percentage || {};
@@ -40,21 +41,29 @@ class SubNavbar extends React.Component {
       <div className="flex justify-around w-4/5">
         <div className="flex">
           <div>Coins</div>
-          <div>{active_cryptocurrencies}</div>
+          <div className="mx-2 font-bold">{active_cryptocurrencies}</div>
         </div>
         <div className="flex">
           <div>Exchange</div>
-          <div>{markets}</div>
+          <div className="mx-2 font-bold">{markets}</div>
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
-        <div>
-          {abbreviateDollar(usd, 2)}
-          {/* selected currency from nav for "total_market_cap" */}
+        <div className="flex items-center">
+          <div className="px-1">{abbreviateDollar(usd, 2)}</div>
+          <div
+            className={`w-5 h-5 ${
+              market_cap_change_percentage_24h_usd < 0 ? `rotate-180` : ""
+            }`}
+          >
+            <ChevronTrendIcon
+              filler={
+                market_cap_change_percentage_24h_usd < 0 ? "#e5113c" : "#00f629"
+              }
+            />
+          </div>
         </div>
-        <div>
-          <ChevronIcon />
-          {/* arrow up down with determine if value is positive or negative for "market_cap_change_percentage_24h_usd" */}
-        </div>
+        {/* <div className="flex items-center">
+        </div> */}
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
           <div>{abbreviateDollar(volume?.usd, 2)}</div>

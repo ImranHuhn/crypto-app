@@ -7,7 +7,7 @@ import { MainCharts, TableHead, TableData } from "components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-class Home extends React.Component {
+class Coins extends React.Component {
   state = {
     allCoins: [],
     hasMore: true,
@@ -204,4 +204,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Coins;
