@@ -152,7 +152,7 @@ class Home extends React.Component {
               Market Overview
             </h1>
             <div className="bg-white dark:bg-[#191b1f] w-full mx-auto rounded-lg">
-              <table className="w-[95%] mx-auto">
+              <table className="mx-auto w-[95%] overflow-hidden">
                 <thead>
                   <tr className="h-24">
                     {Object.entries(tableColumns).map((item) => {
