@@ -108,8 +108,6 @@ class Coins extends React.Component {
   };
 
   render() {
-    console.log("test", this.props);
-
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
     let sortedAllCoins = allCoins.map((item) => item);
 

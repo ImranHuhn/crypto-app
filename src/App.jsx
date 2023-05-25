@@ -26,7 +26,7 @@ class App extends React.Component {
       <div className={on ? "dark" : ""}>
         <Router>
           <div className="bg-[#ededed] dark:bg-[#1f2128]">
-            <Navbar handleClick={this.handleClick} />
+            <Navbar handleThemeClick={this.handleClick}/>
             <Switch>
               <Route exact path="/" component={Coins} />
               <Route exact path="/portfolio" component={Portfolio} />

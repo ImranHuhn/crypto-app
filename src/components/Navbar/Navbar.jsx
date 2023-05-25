@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { SubNavbar } from "components";
 import { DarkThemeIcon, MagnifyIcon, ChevronIcon, DollarIcon } from "Icons";
 
-export const Navbar = ({ handleClick }) => {
+export const Navbar = ({ handleThemeClick }) => {
+  const handleClick = () => {
+    // code for active button in either coins or portfolio
+  }
   return (
     <div className="bg-white dark:bg-[#191b1f] relative">
       <nav className="flex item-center justify-between h-20 w-[95%] my-0 mx-auto">
@@ -12,6 +15,7 @@ export const Navbar = ({ handleClick }) => {
             <Link
               className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
               to="/"
+              onClick={handleClick}
             >
               Coins
             </Link>
@@ -20,6 +24,7 @@ export const Navbar = ({ handleClick }) => {
             <Link
               className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
               to="/portfolio"
+              onClick={handleClick}
             >
               Portfolio
             </Link>
@@ -53,7 +58,7 @@ export const Navbar = ({ handleClick }) => {
           </div>
           <button
             className="bg-[#ededed] dark:bg-[#2c2f36] h-11 w-10 rounded-lg border-none absolute right-0 my-0 mx-2"
-            onClick={handleClick}
+            onClick={handleThemeClick}
           >
             <div className="fill-black dark:fill-white flex justify-center m-auto w-6">
               <DarkThemeIcon />
