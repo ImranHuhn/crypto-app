@@ -174,14 +174,14 @@ export const TableData = (props) => {
         <div className="flex justify-between w-64">
           <div>
             <ul>
-              <List textColor={color} className="list-disc ml-5">
+              <List textcolor={color} className="list-disc ml-5" key={crypto.randomUUID()}>
                 {volume}
               </List>
             </ul>
           </div>
           <div>
             <ul>
-              <List textColor={color} className="list-disc">
+              <List textcolor={color} className="list-disc" key={crypto.randomUUID()}>
                 {market}
               </List>
             </ul>
@@ -189,25 +189,25 @@ export const TableData = (props) => {
         </div>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
-            fillWidth={(total_volume / market_cap) * 100}
-            fillColor={color}
+            fillwidth={(total_volume / market_cap) * 100}
+            fillcolor={color}
             className="bg-black h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
       </td>
       <td className="relative pr-5">
         <ul className="flex justify-between w-64">
-          <List textColor={color} className="list-disc ml-5">
+          <List textcolor={color} className="list-disc ml-5">
             {circulatingSupply}
           </List>
-          <List textColor={color} className="list-disc">
+          <List textcolor={color} className="list-disc">
             {totalSupply}
           </List>
         </ul>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
           <FillBar
-            fillWidth={(circulating_supply / total_supply) * 100}
-            fillColor={color}
+            fillwidth={(circulating_supply / total_supply) * 100}
+            fillcolor={color}
             className="h-full rounded-xl overflow-hidden"
           ></FillBar>
         </div>
