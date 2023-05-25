@@ -62,8 +62,6 @@ class SubNavbar extends React.Component {
             />
           </div>
         </div>
-        {/* <div className="flex items-center">
-        </div> */}
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
           <div>{abbreviateDollar(volume?.usd, 2)}</div>
@@ -71,7 +69,7 @@ class SubNavbar extends React.Component {
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
               barfill={currencyFill || ""}
-              className={`bg-white h-full rounded-xl`}
+              className="bg-black dark:bg-white h-full rounded-xl"
             ></BarFill>{" "}
             {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
           </div>
@@ -86,7 +84,7 @@ class SubNavbar extends React.Component {
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
               barfill={bitcoinPercentage || ""}
-              className={`bg-white h-full rounded-xl`}
+              className="bg-black dark:bg-white h-full rounded-xl"
             ></BarFill>
           </div>
         </div>
@@ -100,7 +98,7 @@ class SubNavbar extends React.Component {
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
             <BarFill
               barfill={ethereumPercentage || ""}
-              className={`bg-white h-full rounded-xl`}
+              className="bg-black dark:bg-white h-full rounded-xl"
             ></BarFill>
           </div>
         </div>

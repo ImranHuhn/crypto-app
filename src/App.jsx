@@ -16,7 +16,7 @@ class App extends React.Component {
   };
 
   componentDidMount = () => {
-    const storedTheme = JSON.parse(localStorage.getItem("themeSetting")) || {};
+    const storedTheme = JSON.parse(localStorage.getItem("themeSetting"));
     this.setState({ on: storedTheme });
   };
 

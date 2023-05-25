@@ -108,7 +108,7 @@ class Coins extends React.Component {
   };
 
   render() {
-    console.log("test", location.search)
+    console.log("test", this.props);
 
     const { allCoins, sort, selection, tableColumns, hasMore } = this.state;
     let sortedAllCoins = allCoins.map((item) => item);
@@ -143,9 +143,11 @@ class Coins extends React.Component {
             )
           }
           endMessage={
-            !this.state.hasMore && <h1 className="text-black dark:text-white text-center">
-              All coins have been loaded!
-            </h1>
+            !this.state.hasMore && (
+              <h1 className="text-black dark:text-white text-center">
+                All coins have been loaded!
+              </h1>
+            )
           }
         >
           <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
@@ -179,16 +181,14 @@ class Coins extends React.Component {
                   )}
                   {sortedAllCoins.map((item) => {
                     return (
-                      <>
-                        <TableData
-                          isLoading={this.state.isLoading}
-                          item={item}
-                          allCoins={allCoins}
-                          sort={sort}
-                          selection={selection}
-                          key={crypto.randomUUID()}
-                        />
-                      </>
+                      <TableData
+                        isLoading={this.state.isLoading}
+                        item={item}
+                        allCoins={allCoins}
+                        sort={sort}
+                        selection={selection}
+                        key={crypto.randomUUID()}
+                      />
                     );
                   })}
                   {this.state.hasError && (

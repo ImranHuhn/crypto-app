@@ -174,14 +174,14 @@ export const TableData = (props) => {
         <div className="flex justify-between w-64">
           <div>
             <ul>
-              <List textcolor={color} className="list-disc ml-5" key={crypto.randomUUID()}>
+              <List textcolor={color} className="list-disc ml-5">
                 {volume}
               </List>
             </ul>
           </div>
           <div>
             <ul>
-              <List textcolor={color} className="list-disc" key={crypto.randomUUID()}>
+              <List textcolor={color} className="list-disc">
                 {market}
               </List>
             </ul>
