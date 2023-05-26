@@ -7,7 +7,7 @@ import { MainCharts, TableHead, TableData } from "components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-class Home extends React.Component {
+class Coins extends React.Component {
   state = {
     allCoins: [],
     hasMore: true,
@@ -141,9 +141,11 @@ class Home extends React.Component {
             )
           }
           endMessage={
-            !this.state.hasMore && <h1 className="text-black dark:text-white text-center">
-              All coins have been loaded!
-            </h1>
+            !this.state.hasMore && (
+              <h1 className="text-black dark:text-white text-center">
+                All coins have been loaded!
+              </h1>
+            )
           }
         >
           <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
@@ -177,16 +179,14 @@ class Home extends React.Component {
                   )}
                   {sortedAllCoins.map((item) => {
                     return (
-                      <>
-                        <TableData
-                          isLoading={this.state.isLoading}
-                          item={item}
-                          allCoins={allCoins}
-                          sort={sort}
-                          selection={selection}
-                          key={crypto.randomUUID()}
-                        />
-                      </>
+                      <TableData
+                        isLoading={this.state.isLoading}
+                        item={item}
+                        allCoins={allCoins}
+                        sort={sort}
+                        selection={selection}
+                        key={crypto.randomUUID()}
+                      />
                     );
                   })}
                   {this.state.hasError && (
@@ -204,4 +204,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Coins;

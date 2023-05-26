@@ -1,28 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { SubNavbar } from "components";
 import { DarkThemeIcon, MagnifyIcon, ChevronIcon, DollarIcon } from "Icons";
 
-export const Navbar = ({ handleClick }) => {
+export const Navbar = ({ handleThemeClick }) => {
   return (
     <div className="bg-white dark:bg-[#191b1f] relative">
       <nav className="flex item-center justify-between h-20 w-[95%] my-0 mx-auto">
         <div className="flex items-center h-full">
           <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
-            <Link
-              className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
-              to="/"
+            <NavLink
+              className="text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
+              activeClassName="bg-[#ededed] dark:bg-[#2c2f36]"
+              exact to="/"
             >
               Coins
-            </Link>
+            </NavLink>
           </div>
           <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
-            <Link
-              className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
+            <NavLink
+              className="text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
+              activeClassName="bg-[#ededed] dark:bg-[#2c2f36]"
               to="/portfolio"
             >
               Portfolio
-            </Link>
+            </NavLink>
           </div>
         </div>
         <div className="flex items-center h-full">
@@ -53,7 +55,7 @@ export const Navbar = ({ handleClick }) => {
           </div>
           <button
             className="bg-[#ededed] dark:bg-[#2c2f36] h-11 w-10 rounded-lg border-none absolute right-0 my-0 mx-2"
-            onClick={handleClick}
+            onClick={handleThemeClick}
           >
             <div className="fill-black dark:fill-white flex justify-center m-auto w-6">
               <DarkThemeIcon />

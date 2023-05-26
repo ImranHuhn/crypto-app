@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "components";
-import { Home, Portfolio } from "pages";
+import { Coins, Portfolio } from "pages";
 
 class App extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class App extends React.Component {
   };
 
   componentDidMount = () => {
-    const storedTheme = JSON.parse(localStorage.getItem("themeSetting")) || {};
+    const storedTheme = JSON.parse(localStorage.getItem("themeSetting"));
     this.setState({ on: storedTheme });
   };
 
@@ -26,9 +26,9 @@ class App extends React.Component {
       <div className={on ? "dark" : ""}>
         <Router>
           <div className="bg-[#ededed] dark:bg-[#1f2128]">
-            <Navbar handleClick={this.handleClick} />
+            <Navbar handleThemeClick={this.handleClick}/>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Coins} />
               <Route exact path="/portfolio" component={Portfolio} />
             </Switch>
           </div>
