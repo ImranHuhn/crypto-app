@@ -8,8 +8,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import {
-  longDollarFormat,
-  abbreviateDollar,
+  longCurrencyFormat,
+  abbreviateCurrency,
   percentageFormat,
 } from "utils/numberFormat";
 import { FillBar, List } from "./TableData.styles";
@@ -34,7 +34,10 @@ export const TableData = (props) => {
   } = props.item || {};
   const capitalizedId = id.charAt(0).toUpperCase() + id.slice(1);
   const capitalSymbol = symbol.toUpperCase();
-  const price = longDollarFormat(current_price);
+  const price = longCurrencyFormat({
+    number: current_price,
+    currency: props.currency,
+  });
   const percentage_1h = percentageFormat(
     price_change_percentage_1h_in_currency,
     2
@@ -47,10 +50,26 @@ export const TableData = (props) => {
     price_change_percentage_7d_in_currency,
     2
   );
-  const volume = abbreviateDollar(total_volume, 2);
-  const market = abbreviateDollar(market_cap, 2);
-  const circulatingSupply = abbreviateDollar(circulating_supply, 2);
-  const totalSupply = abbreviateDollar(total_supply, 2);
+  const volume = abbreviateCurrency({
+    number: total_volume,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const market = abbreviateCurrency({
+    number: market_cap,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const circulatingSupply = abbreviateCurrency({
+    number: circulating_supply,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const totalSupply = abbreviateCurrency({
+    number: total_supply,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
   const color = randomColor();
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);

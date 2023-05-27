@@ -6,6 +6,12 @@ import { Coins, Portfolio } from "pages";
 class App extends React.Component {
   state = {
     on: false,
+    currency: "USD",
+  };
+
+  getCurrency = (currency) => {
+    this.setState({ currency });
+    localStorage.setItem("currency", JSON.stringify(currency));
   };
 
   handleClick = () => {
@@ -17,7 +23,8 @@ class App extends React.Component {
 
   componentDidMount = () => {
     const storedTheme = JSON.parse(localStorage.getItem("themeSetting"));
-    this.setState({ on: storedTheme });
+    const currency = JSON.parse(localStorage.getItem("currency")) || "USD";
+    this.setState({ on: storedTheme, currency });
   };
 
   render() {
@@ -26,10 +33,26 @@ class App extends React.Component {
       <div className={on ? "dark" : ""}>
         <Router>
           <div className="bg-[#ededed] dark:bg-[#1f2128]">
-            <Navbar handleThemeClick={this.handleClick}/>
+            <Navbar
+              handleThemeClick={this.handleClick}
+              currency={this.state.currency}
+              getCurrency={this.getCurrency}
+            />
             <Switch>
-              <Route exact path="/" component={Coins} />
-              <Route exact path="/portfolio" component={Portfolio} />
+              <Route
+                exact
+                path="/"
+                component={(props) => (
+                  <Coins {...props} currency={this.state.currency} />
+                )}
+              />
+              <Route
+                exact
+                path="/portfolio"
+                component={(props) => (
+                  <Portfolio {...props} currency={this.state.currency} />
+                )}
+              />
             </Switch>
           </div>
         </Router>

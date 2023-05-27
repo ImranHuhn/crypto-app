@@ -1,7 +1,7 @@
 import React from "react";
 import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
-import { abbreviateDollar } from "utils/numberFormat";
+import { abbreviateCurrency } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
@@ -49,7 +49,13 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
-          <div className="px-1">{abbreviateDollar(usd, 2)}</div>
+          <div className="px-1">
+            {abbreviateCurrency({
+              number: usd,
+              decimalPlaces: 2,
+              currency: this.props.currency,
+            })}
+          </div>
           <div
             className={`w-5 h-5 ${
               market_cap_change_percentage_24h_usd < 0 ? `rotate-180` : ""
@@ -64,14 +70,19 @@ class SubNavbar extends React.Component {
         </div>
         <h4 className="my-auto mx-1">&#9679;</h4>
         <div className="flex items-center">
-          <div>{abbreviateDollar(volume?.usd, 2)}</div>
-          {/* selected currency from nav for "total_volume" */}
+          <div>
+            {abbreviateCurrency({
+              number: volume?.usd,
+              decimalPlaces: 2,
+              currency: this.props.currency,
+            })}
+          </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
+            {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
             <BarFill
               barfill={currencyFill || ""}
               className="bg-black dark:bg-white h-full rounded-xl"
             ></BarFill>{" "}
-            {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
           </div>
         </div>
         <div className="flex items-center">

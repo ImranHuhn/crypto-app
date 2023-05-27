@@ -5,7 +5,6 @@ class CurrencyList extends React.Component {
   state = {
     isClicked: false,
     currencies: ["USD", "GBP", "EUR", "BTC", "ETH"],
-    selection: "USD",
   };
 
   handleClick = () => {
@@ -13,7 +12,8 @@ class CurrencyList extends React.Component {
   };
 
   handleItemClick = (e) => {
-    this.setState({ selection: e.target.value, isClicked: false });
+    this.props.getCurrency(e.target.value);
+    this.setState({ isClicked: false });
   };
 
   render() {
@@ -26,7 +26,7 @@ class CurrencyList extends React.Component {
           <div className="w-6">
             <DollarIcon />
           </div>
-          {this.state.selection}
+          {this.props.currency}
           <div className="flex items-center w-5 h-5 rotate-180">
             <ChevronIcon />
           </div>

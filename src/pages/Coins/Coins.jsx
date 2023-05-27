@@ -47,7 +47,7 @@ class Coins extends React.Component {
         newSelection = "market_cap_desc";
         break;
     }
-    await getCoins({ sort, newSelection });
+    await getCoins({ sort, newSelection, vs_currency: this.props.currency });
     this.setState({ sort, selection });
   };
 
@@ -55,7 +55,7 @@ class Coins extends React.Component {
     this.setState({ isLoading: true });
     const { page, allCoins } = this.state;
     const newPage = page + 1;
-    const newData = await getCoins({ page: parseInt(newPage) });
+    const newData = await getCoins({ page: parseInt(newPage), vs_currency: this.props.currency });
     const hasMoreCoins = !!newData.length;
     // for testing purposes //////////////////////////
     // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
@@ -86,7 +86,7 @@ class Coins extends React.Component {
       prevState.sort !== this.state.sort
     ) {
       const { selection, sort } = this.state;
-      const query = queryString.stringify({ selection, sort });
+      const query = queryString.stringify({ selection, sort, vs_currency: this.props.currency });
       this.props.history.push(`/?${query}`);
     }
   };
@@ -149,7 +149,7 @@ class Coins extends React.Component {
           }
         >
           <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
-            <MainCharts />
+            <MainCharts currency={this.props.currency}/>
             <h1 className="text-3xl text-black font-bold dark:text-white py-6">
               Market Overview
             </h1>
@@ -178,6 +178,7 @@ class Coins extends React.Component {
                         allCoins={allCoins}
                         sort={sort}
                         selection={selection}
+                        currency={this.props.currency}
                         key={crypto.randomUUID()}
                       />
                     );
@@ -191,7 +192,7 @@ class Coins extends React.Component {
                   )}
                   {this.state.hasError && (
                     <tr>
-                      <td colSpan="10">{this.state.errorMessage.message}</td>
+                      <td colSpan="10" className="text-center">{this.state.errorMessage.message}</td>
                     </tr>
                   )}
                 </tbody>
