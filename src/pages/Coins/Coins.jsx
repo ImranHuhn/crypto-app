@@ -170,13 +170,6 @@ class Coins extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.isLoading && (
-                    <tr>
-                      <td colSpan="10">
-                        <Skeleton count={10} />
-                      </td>
-                    </tr>
-                  )}
                   {sortedAllCoins.map((item) => {
                     return (
                       <TableData
@@ -189,6 +182,13 @@ class Coins extends React.Component {
                       />
                     );
                   })}
+                  {this.state.isLoading && (
+                    <tr>
+                      <td colSpan="10">
+                        <Skeleton count={10} />
+                      </td>
+                    </tr>
+                  )}
                   {this.state.hasError && (
                     <tr>
                       <td colSpan="10">{this.state.errorMessage.message}</td>

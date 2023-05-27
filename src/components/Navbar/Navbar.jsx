@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { SubNavbar } from "components";
-import { DarkThemeIcon, MagnifyIcon, ChevronIcon, DollarIcon } from "Icons";
+import { SubNavbar, CurrencyList } from "components";
+import { DarkThemeIcon, MagnifyIcon } from "Icons";
 
 export const Navbar = ({ handleThemeClick }) => {
   return (
@@ -12,7 +12,8 @@ export const Navbar = ({ handleThemeClick }) => {
             <NavLink
               className="text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
               activeClassName="bg-[#ededed] dark:bg-[#2c2f36]"
-              exact to="/"
+              exact
+              to="/"
             >
               Coins
             </NavLink>
@@ -36,22 +37,7 @@ export const Navbar = ({ handleThemeClick }) => {
               className="text-black dark:text-white bg-[#ededed] dark:bg-[#2c2f36] pl-9 h-11 rounded-lg border-none w-96	"
               placeholder="Search..."
             />
-            <button className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3">
-              <div className="w-6">
-                <DollarIcon />
-              </div>
-              USD
-              <div className="flex items-center w-5 rotate-180">
-                <ChevronIcon />
-              </div>
-            </button>
-            <ul className="hidden">
-              <li>USD</li>
-              <li>GBP</li>
-              <li>EUR</li>
-              <li>BTC</li>
-              <li>ETH</li>
-            </ul>
+            <CurrencyList />
           </div>
           <button
             className="bg-[#ededed] dark:bg-[#2c2f36] h-11 w-10 rounded-lg border-none absolute right-0 my-0 mx-2"
