@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronIcon, DollarIcon, CheckMark } from "Icons";
+import { ChevronIcon, CheckMark } from "Icons";
 
 class CurrencyList extends React.Component {
   state = {
@@ -23,9 +23,6 @@ class CurrencyList extends React.Component {
           onClick={this.handleClick}
           className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3"
         >
-          <div className="w-6">
-            <DollarIcon />
-          </div>
           {this.props.currency}
           <div className="flex items-center w-5 h-5 rotate-180">
             <ChevronIcon />
