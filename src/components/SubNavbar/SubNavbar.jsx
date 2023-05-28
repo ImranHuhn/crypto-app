@@ -1,5 +1,4 @@
 import React from "react";
-import { BarFill } from "./SubNavbar.styles";
 import { getMarketData } from "utils/api";
 import { abbreviateCurrency } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
@@ -78,11 +77,10 @@ class SubNavbar extends React.Component {
             })}
           </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
-            {/* using styled components here because tailwind is a bit buggy with the fill width "w-[${currencyFill}%]" */}
-            <BarFill
-              barfill={currencyFill || ""}
+            <div
+              style={{ width: `${currencyFill || ""}%` }}
               className="bg-black dark:bg-white h-full rounded-xl"
-            ></BarFill>{" "}
+            ></div>{" "}
           </div>
         </div>
         <div className="flex items-center">
@@ -93,10 +91,10 @@ class SubNavbar extends React.Component {
             <div>{bitcoinPercentage}%</div>
           </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
-            <BarFill
-              barfill={bitcoinPercentage || ""}
+            <div
+              style={{ width: `${bitcoinPercentage || ""}%` }}
               className="bg-black dark:bg-white h-full rounded-xl"
-            ></BarFill>
+            ></div>
           </div>
         </div>
         <div className="flex items-center">
@@ -107,10 +105,10 @@ class SubNavbar extends React.Component {
             <div>{ethereumPercentage}%</div>
           </div>
           <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
-            <BarFill
-              barfill={ethereumPercentage || ""}
+            <div
+              style={{ width: `${ethereumPercentage || ""}%` }}
               className="bg-black dark:bg-white h-full rounded-xl"
-            ></BarFill>
+            ></div>
           </div>
         </div>
       </div>

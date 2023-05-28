@@ -12,7 +12,6 @@ import {
   abbreviateCurrency,
   percentageFormat,
 } from "utils/numberFormat";
-import { FillBar, List } from "./TableData.styles";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
 
@@ -193,42 +192,46 @@ export const TableData = (props) => {
         <div className="flex justify-between w-64">
           <div>
             <ul>
-              <List textcolor={color} className="list-disc ml-5">
+              <li style={{ color: color }} className="list-disc ml-5">
                 {volume}
-              </List>
+              </li>
             </ul>
           </div>
           <div>
             <ul>
-              <List textcolor={color} className="list-disc">
+              <li style={{ color: color }} className="list-disc">
                 {market}
-              </List>
+              </li>
             </ul>
           </div>
         </div>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar
-            fillwidth={(total_volume / market_cap) * 100}
-            fillcolor={color}
+          <div
+            style={{
+              width: `${(total_volume / market_cap) * 100}%`,
+              backgroundColor: color,
+            }}
             className="bg-black h-full rounded-xl overflow-hidden"
-          ></FillBar>
+          ></div>
         </div>
       </td>
       <td className="relative pr-5">
         <ul className="flex justify-between w-64">
-          <List textcolor={color} className="list-disc ml-5">
+          <li style={{ color: color }} className="list-disc ml-5">
             {circulatingSupply}
-          </List>
-          <List textcolor={color} className="list-disc">
+          </li>
+          <li style={{ color: color }} className="list-disc">
             {totalSupply}
-          </List>
+          </li>
         </ul>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar
-            fillwidth={(circulating_supply / total_supply) * 100}
-            fillcolor={color}
+          <div
+            style={{
+              width: `${(total_volume / market_cap) * 100}%`,
+              backgroundColor: color,
+            }}
             className="h-full rounded-xl overflow-hidden"
-          ></FillBar>
+          ></div>
         </div>
       </td>
       <td>
