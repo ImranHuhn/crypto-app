@@ -8,11 +8,10 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import {
-  longDollarFormat,
-  abbreviateDollar,
+  longCurrencyFormat,
+  abbreviateCurrency,
   percentageFormat,
 } from "utils/numberFormat";
-import { FillBar, List } from "./TableData.styles";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
 
@@ -34,7 +33,10 @@ export const TableData = (props) => {
   } = props.item || {};
   const capitalizedId = id.charAt(0).toUpperCase() + id.slice(1);
   const capitalSymbol = symbol.toUpperCase();
-  const price = longDollarFormat(current_price);
+  const price = longCurrencyFormat({
+    number: current_price,
+    currency: props.currency,
+  });
   const percentage_1h = percentageFormat(
     price_change_percentage_1h_in_currency,
     2
@@ -47,10 +49,26 @@ export const TableData = (props) => {
     price_change_percentage_7d_in_currency,
     2
   );
-  const volume = abbreviateDollar(total_volume, 2);
-  const market = abbreviateDollar(market_cap, 2);
-  const circulatingSupply = abbreviateDollar(circulating_supply, 2);
-  const totalSupply = abbreviateDollar(total_supply, 2);
+  const volume = abbreviateCurrency({
+    number: total_volume,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const market = abbreviateCurrency({
+    number: market_cap,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const circulatingSupply = abbreviateCurrency({
+    number: circulating_supply,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
+  const totalSupply = abbreviateCurrency({
+    number: total_supply,
+    decimalPlaces: 2,
+    currency: props.currency,
+  });
   const color = randomColor();
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
@@ -174,42 +192,46 @@ export const TableData = (props) => {
         <div className="flex justify-between w-64">
           <div>
             <ul>
-              <List textcolor={color} className="list-disc ml-5">
+              <li style={{ color: color }} className="list-disc ml-5">
                 {volume}
-              </List>
+              </li>
             </ul>
           </div>
           <div>
             <ul>
-              <List textcolor={color} className="list-disc">
+              <li style={{ color: color }} className="list-disc">
                 {market}
-              </List>
+              </li>
             </ul>
           </div>
         </div>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar
-            fillwidth={(total_volume / market_cap) * 100}
-            fillcolor={color}
+          <div
+            style={{
+              width: `${(total_volume / market_cap) * 100}%`,
+              backgroundColor: color,
+            }}
             className="bg-black h-full rounded-xl overflow-hidden"
-          ></FillBar>
+          ></div>
         </div>
       </td>
       <td className="relative pr-5">
         <ul className="flex justify-between w-64">
-          <List textcolor={color} className="list-disc ml-5">
+          <li style={{ color: color }} className="list-disc ml-5">
             {circulatingSupply}
-          </List>
-          <List textcolor={color} className="list-disc">
+          </li>
+          <li style={{ color: color }} className="list-disc">
             {totalSupply}
-          </List>
+          </li>
         </ul>
         <div className="bg-slate-200 dark:bg-white w-64 h-2 mb-2 rounded-xl overflow-hidden">
-          <FillBar
-            fillwidth={(circulating_supply / total_supply) * 100}
-            fillcolor={color}
+          <div
+            style={{
+              width: `${(total_volume / market_cap) * 100}%`,
+              backgroundColor: color,
+            }}
             className="h-full rounded-xl overflow-hidden"
-          ></FillBar>
+          ></div>
         </div>
       </td>
       <td>

@@ -1,4 +1,4 @@
-export const getTimeOrPrice = (data) => {
+export const getDateValuePairs = (data = []) => {
   const newData = data?.reduce(
     (acc, el) => {
       acc.time.push(el[0]);
