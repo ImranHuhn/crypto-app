@@ -36,7 +36,7 @@ class CurrencyList extends React.Component {
           {this.state.currencies.map((el) => {
             return (
               <li
-                key={crypto.randomUUID()}
+                key={el}
                 className="text-black dark:text-white h-8 flex items-center justify-center"
               >
                 <button
@@ -44,7 +44,7 @@ class CurrencyList extends React.Component {
                   value={el}
                   className="hover:bg-[#1a61c8] hover:text-white w-[90%] rounded-md flex justify-around"
                 >
-                  {el === this.state.selection && (
+                  {el === this.props.currency && (
                     <div className="w-2 h-2">
                       <CheckMark />
                     </div>

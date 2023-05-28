@@ -9,11 +9,9 @@ export const getCoins = async (query) => {
     { skipNull: true },
     { parseBoolean: true }
   );
-    console.log(newQuery)
   try {
     const { data } = await axios(
       `${base}/coins/markets?${newQuery}&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-      // `${base}/coins/markets?${newQuery}&vs_currency=usd&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
     );
     return data;
   } catch (error) {

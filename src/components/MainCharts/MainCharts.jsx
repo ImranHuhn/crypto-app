@@ -11,7 +11,7 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import moment from "moment";
 import { getBitcoinData } from "utils/api";
-import { getTimeOrPrice } from "utils/objectEntries";
+import { getDateValuePairs } from "utils/objectEntries";
 import { abbreviateCurrency } from "utils/numberFormat";
 
 ChartJS.register(
@@ -52,10 +52,9 @@ class MainCharts extends React.Component {
       currency: this.props.currency,
     });
     const currentDate = moment().format("MMMM Do YYYY");
-    const { time: marketTime, price: marketPrice } =
-      getTimeOrPrice(prices) || [];
+    const { time: marketTime, price: marketPrice } = getDateValuePairs(prices);
     const { time: volumeTime, price: volumePrice } =
-      getTimeOrPrice(total_volumes) || [];
+      getDateValuePairs(total_volumes);
 
     const lineOptions = {
       responsive: true,
