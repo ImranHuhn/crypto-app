@@ -113,10 +113,10 @@ export const Coins = (props) => {
 
   useEffect(() => {
     handleInfiniteScroll();
-    const parsed = queryString.parse(props.location.search, {
+    const newParsed = queryString.parse(props.location.search, {
       parseBooleans: true,
     });
-    setParsed(parsed);
+    setParsed(newParsed);
   }, []);
 
   return (
