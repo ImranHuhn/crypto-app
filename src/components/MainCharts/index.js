@@ -1,1 +1,1 @@
-export { default } from "./MainCharts";
+export { MainCharts } from "./MainCharts";
