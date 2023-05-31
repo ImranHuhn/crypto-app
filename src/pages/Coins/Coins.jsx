@@ -170,7 +170,7 @@ export const Coins = (props) => {
                       allCoins={allCoins}
                       sort={sort}
                       selection={selection}
-                      currency={this.props.currency}
+                      currency={props.currency}
                       key={item.id}
                     />
                   );
