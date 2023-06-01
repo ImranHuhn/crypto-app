@@ -100,22 +100,22 @@ export const Coins = (props) => {
     }
   };
 
-  useEffect(() => {
-    const query = queryString.stringify({
-      selection,
-      sort,
-      vs_currency: props.currency,
-    });
-    props.history.push(`/?${query}`);
-  }, [selection, sort]);
+  // useEffect(() => {
+  //   const query = queryString.stringify({
+  //     selection,
+  //     sort,
+  //     vs_currency: props.currency,
+  //   });
+  //   props.history.push(`/?${query}`);
+  // }, [selection, sort]);
 
-  useEffect(() => {
-    handleInfiniteScroll();
-    const newParsed = queryString.parse(props.location.search, {
-      parseBooleans: true,
-    });
-    setParsed(newParsed);
-  }, []);
+  // useEffect(() => {
+  //   handleInfiniteScroll();
+  //   const newParsed = queryString.parse(props.location.search, {
+  //     parseBooleans: true,
+  //   });
+  //   setParsed(newParsed);
+  // }, []);
 
   return (
     <div className="overflow-auto">

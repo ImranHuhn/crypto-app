@@ -1,8 +1,17 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  // BrowserRouter,
+  // Route,
+  // Routes,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import { Navbar } from "components";
 import { Coins, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
+
+import { Test } from "../src/pages/Test";
 
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
@@ -22,31 +31,71 @@ export const App = () => {
     setCurrency(currency);
   }, []);
 
+  const router = createBrowserRouter([
+    // {
+    //   path: "/",
+    //   element: (
+    //     <Navbar
+    //       handleThemeClick={handleClick}
+    //       currency={currency}
+    //       getCurrency={getCurrency}
+    //     />
+    //   ),
+    //   children: [{ index: true, element: <Test /> }],
+    // },
+    {
+      path: "/",
+      element: (
+        <Navbar
+          handleThemeClick={handleClick}
+          currency={currency}
+          getCurrency={getCurrency}
+        />
+      ),
+      children: [
+        {
+          index: true,
+          element: <Coins currency={currency} />,
+        },
+        {
+          path: "portfolio",
+          element: <Portfolio currency={currency} />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <div className={on ? "dark" : ""}>
-      <Router>
+      <RouterProvider
+        router={router}
+        handleThemeClick={handleClick}
+        currency={currency}
+        getCurrency={getCurrency}
+      />
+      {/* <BrowserRouter>
         <div className="bg-[#ededed] dark:bg-[#1f2128]">
           <Navbar
             handleThemeClick={handleClick}
             currency={currency}
             getCurrency={getCurrency}
           />
-          <Switch>
+          <Routes>
             <Route
               exact
               path="/"
-              component={(props) => <Coins {...props} currency={currency} />}
+              element={(props) => <Coins {...props} currency={currency} />}
             />
             <Route
               exact
               path="/portfolio"
-              component={(props) => (
+              element={(props) => (
                 <Portfolio {...props} currency={currency} />
               )}
             />
-          </Switch>
+          </Routes>
         </div>
-      </Router>
+      </BrowserRouter> */}
     </div>
   );
 };
