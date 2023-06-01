@@ -1,17 +1,8 @@
 import { useEffect } from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  // BrowserRouter,
-  // Route,
-  // Routes,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Navbar } from "components";
 import { Coins, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
-
-import { Test } from "../src/pages/Test";
 
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
@@ -32,17 +23,6 @@ export const App = () => {
   }, []);
 
   const router = createBrowserRouter([
-    // {
-    //   path: "/",
-    //   element: (
-    //     <Navbar
-    //       handleThemeClick={handleClick}
-    //       currency={currency}
-    //       getCurrency={getCurrency}
-    //     />
-    //   ),
-    //   children: [{ index: true, element: <Test /> }],
-    // },
     {
       path: "/",
       element: (
@@ -68,36 +48,8 @@ export const App = () => {
   return (
     <div className={on ? "dark" : ""}>
       <div className="bg-[#ededed] dark:bg-[#1f2128]">
-        <RouterProvider
-          router={router}
-          handleThemeClick={handleClick}
-          currency={currency}
-          getCurrency={getCurrency}
-        />
+        <RouterProvider router={router} />
       </div>
-      {/* <BrowserRouter>
-        <div className="bg-[#ededed] dark:bg-[#1f2128]">
-          <Navbar
-            handleThemeClick={handleClick}
-            currency={currency}
-            getCurrency={getCurrency}
-          />
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={(props) => <Coins {...props} currency={currency} />}
-            />
-            <Route
-              exact
-              path="/portfolio"
-              element={(props) => (
-                <Portfolio {...props} currency={currency} />
-              )}
-            />
-          </Routes>
-        </div>
-      </BrowserRouter> */}
     </div>
   );
 };
