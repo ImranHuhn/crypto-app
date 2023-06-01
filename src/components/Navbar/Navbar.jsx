@@ -13,16 +13,16 @@ export const Navbar = ({ handleThemeClick, currency, getCurrency }) => {
           <div className="flex items-center h-full">
             <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
               <NavLink
-                to="/"
                 className="text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
+                to="/"
               >
                 Coins
               </NavLink>
             </div>
             <div className="flex justify-center w-36 h-11 my-0 mx-2.5">
               <NavLink
-                to="/portfolio"
                 className="text-black dark:text-white flex justify-center items-center w-full h-full rounded-lg"
+                to="/portfolio"
               >
                 Portfolio
               </NavLink>
