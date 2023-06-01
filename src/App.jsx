@@ -67,12 +67,14 @@ export const App = () => {
 
   return (
     <div className={on ? "dark" : ""}>
-      <RouterProvider
-        router={router}
-        handleThemeClick={handleClick}
-        currency={currency}
-        getCurrency={getCurrency}
-      />
+      <div className="bg-[#ededed] dark:bg-[#1f2128]">
+        <RouterProvider
+          router={router}
+          handleThemeClick={handleClick}
+          currency={currency}
+          getCurrency={getCurrency}
+        />
+      </div>
       {/* <BrowserRouter>
         <div className="bg-[#ededed] dark:bg-[#1f2128]">
           <Navbar
