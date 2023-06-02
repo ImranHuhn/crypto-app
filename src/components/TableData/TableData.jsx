@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,8 +14,11 @@ import {
 } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
+import { Context } from "../../context";
 
 export const TableData = (props) => {
+  const currency = useContext(Context);
+
   const {
     market_cap_rank,
     image,
@@ -35,7 +38,7 @@ export const TableData = (props) => {
   const capitalSymbol = symbol.toUpperCase();
   const price = longCurrencyFormat({
     number: current_price,
-    currency: props.currency,
+    currency: currency,
   });
   const percentage_1h = percentageFormat(
     price_change_percentage_1h_in_currency,
@@ -52,22 +55,22 @@ export const TableData = (props) => {
   const volume = abbreviateCurrency({
     number: total_volume,
     decimalPlaces: 2,
-    currency: props.currency,
+    currency: currency,
   });
   const market = abbreviateCurrency({
     number: market_cap,
     decimalPlaces: 2,
-    currency: props.currency,
+    currency: currency,
   });
   const circulatingSupply = abbreviateCurrency({
     number: circulating_supply,
     decimalPlaces: 2,
-    currency: props.currency,
+    currency: currency,
   });
   const totalSupply = abbreviateCurrency({
     number: total_supply,
     decimalPlaces: 2,
-    currency: props.currency,
+    currency: currency,
   });
   const color = randomColor();
 

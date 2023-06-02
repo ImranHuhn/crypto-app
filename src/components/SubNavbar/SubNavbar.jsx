@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getMarketData } from "utils/api";
 import { abbreviateCurrency } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
+import { Context } from "../../context";
 
-export const SubNavbar = (props) => {
+export const SubNavbar = () => {
   const [marketData, setMarketData] = useState(null);
+
+  const currency = useContext(Context);
 
   const {
     active_cryptocurrencies,
@@ -47,7 +50,7 @@ export const SubNavbar = (props) => {
           {abbreviateCurrency({
             number: usd,
             decimalPlaces: 2,
-            currency: props.currency,
+            currency: currency,
           })}
         </div>
         <div
@@ -68,7 +71,7 @@ export const SubNavbar = (props) => {
           {abbreviateCurrency({
             number: volume?.usd,
             decimalPlaces: 2,
-            currency: props.currency,
+            currency: currency,
           })}
         </div>
         <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">

@@ -4,9 +4,13 @@ import { Navbar } from "components";
 import { Coins, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
 
+import { Context } from "./context";
+
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
   const [currency, setCurrency] = useLocalState("currency", "USD");
+
+  //const value = 'My Context Value'; //$$$$$
 
   const getCurrency = (currency) => {
     setCurrency(currency);
@@ -48,7 +52,9 @@ export const App = () => {
   return (
     <div className={on ? "dark" : ""}>
       <div className="bg-[#ededed] dark:bg-[#1f2128]">
-        <RouterProvider router={router} />
+        <Context.Provider value={currency}>
+          <RouterProvider router={router} />
+        </Context.Provider>
       </div>
     </div>
   );

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ChevronIcon, CheckMark } from "Icons";
+import { Context } from "../../context";
 
 export const CurrencyList = (props) => {
   const currencies = ["USD", "GBP", "EUR", "BTC", "ETH"];
 
   const [clicked, setClicked] = useState(false);
+
+  const currency = useContext(Context);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -21,7 +24,7 @@ export const CurrencyList = (props) => {
         onClick={handleClick}
         className="bg-[#ededed] dark:bg-[#2c2f36] text-black dark:text-white flex items-center justify-center h-11 rounded-lg border-none w-24 my-0 mx-3"
       >
-        {props.currency}
+        {currency}
         <div className="flex items-center w-5 h-5 rotate-180">
           <ChevronIcon />
         </div>
@@ -42,7 +45,7 @@ export const CurrencyList = (props) => {
                 value={el}
                 className="hover:bg-[#1a61c8] hover:text-white w-[90%] rounded-md flex justify-around"
               >
-                {el === props.currency && (
+                {el === currency && (
                   <div className="w-2 h-2">
                     <CheckMark />
                   </div>
