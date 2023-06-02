@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +13,7 @@ import moment from "moment";
 import { getBitcoinData } from "utils/api";
 import { getDateValuePairs } from "utils/objectEntries";
 import { abbreviateCurrency } from "utils/numberFormat";
+import { Context } from "../../context";
 
 ChartJS.register(
   CategoryScale,
@@ -23,8 +24,10 @@ ChartJS.register(
   BarElement
 );
 
-export const MainCharts = (props) => {
+export const MainCharts = () => {
   const [bitcoinData, setBitcoinData] = useState(null);
+
+  const currency = useContext(Context);
 
   const { prices = [], total_volumes = [] } = bitcoinData || {};
   const lastPrice = prices[prices?.length - 1] || [];
@@ -32,12 +35,12 @@ export const MainCharts = (props) => {
   const bitcoinPrice = abbreviateCurrency({
     number: lastPrice[1],
     decimalPlaces: 3,
-    currency: props.currency,
+    currency,
   });
   const bitcoinVolume = abbreviateCurrency({
     number: lastVolume[1],
     decimalPlaces: 3,
-    currency: props.currency,
+    currency,
   });
   const currentDate = moment().format("MMMM Do YYYY");
   const { time: marketTime, price: marketPrice } = getDateValuePairs(prices);

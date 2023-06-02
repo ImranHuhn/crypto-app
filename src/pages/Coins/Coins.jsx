@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import queryString from "query-string";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getCoins } from "utils/api";
 import { MainCharts, TableHead, TableData } from "components";
+import { Context } from "../../context";
 
-export const Coins = (props) => {
+export const Coins = () => {
   const [allCoins, setAllCoins] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
@@ -16,6 +18,9 @@ export const Coins = (props) => {
   const [selection, setSelection] = useState("");
   const [sort, setSort] = useState(null);
   const [parsed, setParsed] = useState(null);
+
+  const currency = useContext(Context);
+  const navigate = useNavigate();
 
   const tableColumns = {
     market_cap_rank: "#",
@@ -67,7 +72,7 @@ export const Coins = (props) => {
     await getCoins({
       sort: newSort,
       newSelection,
-      vs_currency: props.currency,
+      vs_currency: currency,
     });
     setSort(newSort);
     setSelection(selection);
@@ -78,7 +83,7 @@ export const Coins = (props) => {
     const newPage = page + 1;
     const newData = await getCoins({
       page: parseInt(newPage),
-      vs_currency: props.currency,
+      vs_currency: currency,
     });
     const hasMoreCoins = !!newData.length;
     // for testing purposes //////////////////////////
@@ -104,14 +109,14 @@ export const Coins = (props) => {
     const query = queryString.stringify({
       selection,
       sort,
-      vs_currency: props.currency,
+      vs_currency: currency,
     });
-    props.history.push(`/?${query}`);
+    navigate(`/?${query}`);
   }, [selection, sort]);
 
   useEffect(() => {
     handleInfiniteScroll();
-    const newParsed = queryString.parse(props.location.search, {
+    const newParsed = queryString.parse(location.search, {
       parseBooleans: true,
     });
     setParsed(newParsed);
@@ -139,7 +144,7 @@ export const Coins = (props) => {
         }
       >
         <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
-          <MainCharts currency={props.currency} />
+          <MainCharts />
           <h1 className="text-3xl text-black font-bold dark:text-white py-6">
             Market Overview
           </h1>
@@ -168,7 +173,6 @@ export const Coins = (props) => {
                       allCoins={allCoins}
                       sort={sort}
                       selection={selection}
-                      currency={props.currency}
                       key={item.id}
                     />
                   );

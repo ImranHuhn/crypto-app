@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Navbar } from "components";
 import { Coins, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
+
+import { Context } from "./context";
 
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
@@ -22,31 +24,35 @@ export const App = () => {
     setCurrency(currency);
   }, []);
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <Navbar
+          handleThemeClick={handleClick}
+          getCurrency={getCurrency}
+        />
+      ),
+      children: [
+        {
+          index: true,
+          element: <Coins />,
+        },
+        {
+          path: "portfolio",
+          element: <Portfolio />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <div className={on ? "dark" : ""}>
-      <Router>
-        <div className="bg-[#ededed] dark:bg-[#1f2128]">
-          <Navbar
-            handleThemeClick={handleClick}
-            currency={currency}
-            getCurrency={getCurrency}
-          />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              component={(props) => <Coins {...props} currency={currency} />}
-            />
-            <Route
-              exact
-              path="/portfolio"
-              component={(props) => (
-                <Portfolio {...props} currency={currency} />
-              )}
-            />
-          </Switch>
-        </div>
-      </Router>
+      <div className="bg-[#ededed] dark:bg-[#1f2128]">
+        <Context.Provider value={currency}>
+          <RouterProvider router={router} />
+        </Context.Provider>
+      </div>
     </div>
   );
 };
