@@ -38,7 +38,7 @@ export const TableData = (props) => {
   const capitalSymbol = symbol.toUpperCase();
   const price = longCurrencyFormat({
     number: current_price,
-    currency: currency,
+    currency,
   });
   const percentage_1h = percentageFormat(
     price_change_percentage_1h_in_currency,
@@ -55,22 +55,22 @@ export const TableData = (props) => {
   const volume = abbreviateCurrency({
     number: total_volume,
     decimalPlaces: 2,
-    currency: currency,
+    currency,
   });
   const market = abbreviateCurrency({
     number: market_cap,
     decimalPlaces: 2,
-    currency: currency,
+    currency,
   });
   const circulatingSupply = abbreviateCurrency({
     number: circulating_supply,
     decimalPlaces: 2,
-    currency: currency,
+    currency,
   });
   const totalSupply = abbreviateCurrency({
     number: total_supply,
     decimalPlaces: 2,
-    currency: currency,
+    currency,
   });
   const color = randomColor();
 

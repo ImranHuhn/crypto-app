@@ -5,7 +5,7 @@ import { DarkThemeIcon, MagnifyIcon } from "Icons";
 
 import { Outlet } from "react-router-dom";
 
-export const Navbar = ({ handleThemeClick, currency, getCurrency }) => {
+export const Navbar = ({ handleThemeClick, getCurrency }) => {
   return (
     <>
       <div className="bg-white dark:bg-[#191b1f] relative">
@@ -37,7 +37,7 @@ export const Navbar = ({ handleThemeClick, currency, getCurrency }) => {
                 className="text-black dark:text-white bg-[#ededed] dark:bg-[#2c2f36] pl-9 h-11 rounded-lg border-none w-96	"
                 placeholder="Search..."
               />
-              <CurrencyList currency={currency} getCurrency={getCurrency} />
+              <CurrencyList getCurrency={getCurrency} />
             </div>
             <button
               className="bg-[#ededed] dark:bg-[#2c2f36] h-11 w-10 rounded-lg border-none absolute right-0 my-0 mx-2"
@@ -50,7 +50,7 @@ export const Navbar = ({ handleThemeClick, currency, getCurrency }) => {
           </div>
         </nav>
         <div className="bg-white dark:bg-[#191b1f] text-black dark:text-white absolute left-1/2 -translate-x-1/2 w-1/2 rounded-b-xl h-10 flex justify-center items-center">
-          <SubNavbar currency={currency} />
+          <SubNavbar />
         </div>
       </div>
       <Outlet />

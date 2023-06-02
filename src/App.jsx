@@ -30,18 +30,17 @@ export const App = () => {
       element: (
         <Navbar
           handleThemeClick={handleClick}
-          currency={currency}
           getCurrency={getCurrency}
         />
       ),
       children: [
         {
           index: true,
-          element: <Coins currency={currency} />,
+          element: <Coins />,
         },
         {
           path: "portfolio",
-          element: <Portfolio currency={currency} />,
+          element: <Portfolio />,
         },
       ],
     },

@@ -142,8 +142,7 @@ export const Coins = () => {
         }
       >
         <div className="text-black dark:text-white w-[95%] mx-auto mt-24 mb-0 px-0 py-2.5">
-          <span>{currency}</span>;{/**/}
-          <MainCharts currency={currency} />
+          <MainCharts />
           <h1 className="text-3xl text-black font-bold dark:text-white py-6">
             Market Overview
           </h1>
@@ -172,7 +171,6 @@ export const Coins = () => {
                       allCoins={allCoins}
                       sort={sort}
                       selection={selection}
-                      currency={currency}
                       key={item.id}
                     />
                   );

@@ -35,12 +35,12 @@ export const MainCharts = () => {
   const bitcoinPrice = abbreviateCurrency({
     number: lastPrice[1],
     decimalPlaces: 3,
-    currency: currency,
+    currency,
   });
   const bitcoinVolume = abbreviateCurrency({
     number: lastVolume[1],
     decimalPlaces: 3,
-    currency: currency,
+    currency,
   });
   const currentDate = moment().format("MMMM Do YYYY");
   const { time: marketTime, price: marketPrice } = getDateValuePairs(prices);
