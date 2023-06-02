@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import queryString from "query-string";
 import Skeleton from "react-loading-skeleton";
@@ -7,7 +8,7 @@ import { getCoins } from "utils/api";
 import { MainCharts, TableHead, TableData } from "components";
 import { Context } from "../../context";
 
-export const Coins = () => {
+export const Coins = (props) => {
   const [allCoins, setAllCoins] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
@@ -19,6 +20,7 @@ export const Coins = () => {
   const [parsed, setParsed] = useState(null);
 
   const currency = useContext(Context);
+  const navigate = useNavigate();
 
   const tableColumns = {
     market_cap_rank: "#",
@@ -103,22 +105,22 @@ export const Coins = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const query = queryString.stringify({
-  //     selection,
-  //     sort,
-  //     vs_currency: props.currency,
-  //   });
-  //   props.history.push(`/?${query}`);
-  // }, [selection, sort]);
+  useEffect(() => {
+    const query = queryString.stringify({
+      selection,
+      sort,
+      vs_currency: currency,
+    });
+    navigate(`/?${query}`);
+  }, [selection, sort]);
 
-  // useEffect(() => {
-  //   handleInfiniteScroll();
-  //   const newParsed = queryString.parse(props.location.search, {
-  //     parseBooleans: true,
-  //   });
-  //   setParsed(newParsed);
-  // }, []);
+  useEffect(() => {
+    handleInfiniteScroll();
+    const newParsed = queryString.parse(location.search, {
+      parseBooleans: true,
+    });
+    setParsed(newParsed);
+  }, []);
 
   return (
     <div className="overflow-auto">
