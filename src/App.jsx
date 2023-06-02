@@ -10,8 +10,6 @@ export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
   const [currency, setCurrency] = useLocalState("currency", "USD");
 
-  //const value = 'My Context Value'; //$$$$$
-
   const getCurrency = (currency) => {
     setCurrency(currency);
   };
