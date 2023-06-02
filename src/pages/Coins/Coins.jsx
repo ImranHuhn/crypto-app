@@ -8,7 +8,7 @@ import { getCoins } from "utils/api";
 import { MainCharts, TableHead, TableData } from "components";
 import { Context } from "../../context";
 
-export const Coins = (props) => {
+export const Coins = () => {
   const [allCoins, setAllCoins] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
