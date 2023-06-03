@@ -4,12 +4,12 @@ import { abbreviateCurrency } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 export const SubNavbar = () => {
   const [marketData, setMarketData] = useState(null);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const {
     active_cryptocurrencies,

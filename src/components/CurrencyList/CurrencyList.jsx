@@ -1,13 +1,13 @@
 import { useState, useContext } from "react";
 import { ChevronIcon, CheckMark } from "Icons";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 export const CurrencyList = (props) => {
   const currencies = ["USD", "GBP", "EUR", "BTC", "ETH"];
 
   const [clicked, setClicked] = useState(false);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const handleClick = () => {
     setClicked(!clicked);

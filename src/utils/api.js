@@ -39,3 +39,15 @@ export const getBitcoinData = async () => {
     console.log(error);
   }
 };
+
+export const getACoin = async (coinId) => {
+  try {
+    const { data } = await axios(
+      `${base}/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { name: "error", errorMessage: error };
+  }
+};

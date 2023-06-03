@@ -14,10 +14,12 @@ import {
 } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
+
+import { Link } from "react-router-dom";
 
 export const TableData = (props) => {
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const {
     market_cap_rank,
@@ -115,7 +117,9 @@ export const TableData = (props) => {
       <td>
         <div className="flex">
           <img className="w-6" src={image} />
-          {capitalizedId} ({capitalSymbol})
+          <Link to={`/coin/${id}`}>
+            {capitalizedId} ({capitalSymbol})
+          </Link>
         </div>
       </td>
       <td>{price}</td>

@@ -13,7 +13,7 @@ import moment from "moment";
 import { getBitcoinData } from "utils/api";
 import { getDateValuePairs } from "utils/objectEntries";
 import { abbreviateCurrency } from "utils/numberFormat";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 ChartJS.register(
   CategoryScale,
@@ -27,7 +27,7 @@ ChartJS.register(
 export const MainCharts = () => {
   const [bitcoinData, setBitcoinData] = useState(null);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const { prices = [], total_volumes = [] } = bitcoinData || {};
   const lastPrice = prices[prices?.length - 1] || [];
