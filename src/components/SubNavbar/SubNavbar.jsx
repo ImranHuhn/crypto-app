@@ -50,7 +50,7 @@ export const SubNavbar = () => {
           {abbreviateCurrency({
             number: usd,
             decimalPlaces: 2,
-            currency,
+            currency: currency,
           })}
         </div>
         <div
@@ -71,7 +71,7 @@ export const SubNavbar = () => {
           {abbreviateCurrency({
             number: volume?.usd,
             decimalPlaces: 2,
-            currency,
+            currency: currency,
           })}
         </div>
         <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
