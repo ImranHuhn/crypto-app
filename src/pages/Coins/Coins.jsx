@@ -111,7 +111,9 @@ export const Coins = () => {
       sort,
       vs_currency: currency,
     });
-    navigate(`/?${query}`);
+    if (selection || sort === "") {
+      navigate(`/?${query}`);
+    }
   }, [selection, sort]);
 
   useEffect(() => {
@@ -120,6 +122,7 @@ export const Coins = () => {
       parseBooleans: true,
     });
     setParsed(newParsed);
+    console.log("component mount");
   }, []);
 
   return (
