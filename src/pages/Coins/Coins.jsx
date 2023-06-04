@@ -86,9 +86,7 @@ export const Coins = () => {
       vs_currency: currency,
     });
     const hasMoreCoins = !!newData.length;
-    // for testing purposes //////////////////////////
-    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
-    ////////////////////////////
+
     if (hasMoreCoins) {
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {
@@ -106,6 +104,15 @@ export const Coins = () => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const newData = await getCoins({
+        page: parseInt(1),
+        vs_currency: currency,
+      });
+      const newAllCoins = [...newData];
+      setAllCoins(newAllCoins);
+    };
+    fetchData();
     const query = queryString.stringify({
       selection,
       sort,
@@ -114,7 +121,7 @@ export const Coins = () => {
     if (selection || sort === "") {
       navigate(`/?${query}`);
     }
-  }, [selection, sort]);
+  }, [selection, sort, currency]);
 
   useEffect(() => {
     handleInfiniteScroll();
@@ -122,7 +129,6 @@ export const Coins = () => {
       parseBooleans: true,
     });
     setParsed(newParsed);
-    console.log("component mount");
   }, []);
 
   return (

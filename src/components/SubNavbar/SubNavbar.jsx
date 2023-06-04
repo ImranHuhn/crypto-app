@@ -14,17 +14,25 @@ export const SubNavbar = () => {
   const {
     active_cryptocurrencies,
     markets,
-    total_market_cap,
+    total_market_cap: market,
     market_cap_percentage,
     market_cap_change_percentage_24h_usd,
+    total_volume: volume,
   } = marketData || {};
-  const { usd } = total_market_cap || {};
-  const { btc, eth } = market_cap_percentage || {};
-  const volume = marketData?.total_volume;
-  const currencyFill = Math.round((volume?.usd / usd) * 100);
-  const bitcoinPercentage = Math.round(btc);
-  const ethereumPercentage = Math.round(eth);
+  const { btc: btcPercent, eth: ethPercent } = market_cap_percentage || {};
+  const currencyFill = Math.round((volume?.usd / market?.usd) * 100);
+  const bitcoinPercentage = Math.round(btcPercent);
+  const ethereumPercentage = Math.round(ethPercent);
 
+  const currencyConversion = (data) => {
+    const conversion = Object.entries(data || {}).find(([key, value]) => {
+      if (key === currency.toLowerCase()) return value;
+    });
+    return conversion || []
+  }
+  const [marketCurrency, marketValue] = currencyConversion(market) || []
+  const [volumeCurrency, volumeValue] = currencyConversion(volume) || []
+  
   const handleMarketData = async () => {
     const newData = await getMarketData();
     setMarketData(newData);
@@ -48,7 +56,7 @@ export const SubNavbar = () => {
       <div className="flex items-center">
         <div className="px-1">
           {abbreviateCurrency({
-            number: usd,
+            number: marketValue,
             decimalPlaces: 2,
             currency: currency,
           })}
@@ -69,7 +77,7 @@ export const SubNavbar = () => {
       <div className="flex items-center">
         <div>
           {abbreviateCurrency({
-            number: volume?.usd,
+            number: volumeValue,
             decimalPlaces: 2,
             currency: currency,
           })}
