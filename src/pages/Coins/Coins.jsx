@@ -122,7 +122,6 @@ export const Coins = () => {
       parseBooleans: true,
     });
     setParsed(newParsed);
-    console.log("component mount");
   }, []);
 
   return (
