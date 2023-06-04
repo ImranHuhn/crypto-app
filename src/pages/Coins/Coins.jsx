@@ -86,9 +86,7 @@ export const Coins = () => {
       vs_currency: currency,
     });
     const hasMoreCoins = !!newData.length;
-    // for testing purposes //////////////////////////
-    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
-    ////////////////////////////
+    
     if (hasMoreCoins) {
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {

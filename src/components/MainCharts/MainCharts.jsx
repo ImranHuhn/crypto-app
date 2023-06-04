@@ -32,6 +32,9 @@ export const MainCharts = () => {
   const { prices = [], total_volumes = [] } = bitcoinData || {};
   const lastPrice = prices[prices?.length - 1] || [];
   const lastVolume = total_volumes[total_volumes?.length - 1] || [];
+
+  console.log("$$$", lastPrice[1]); ///////
+
   const bitcoinPrice = abbreviateCurrency({
     number: lastPrice[1],
     decimalPlaces: 3,
@@ -101,13 +104,13 @@ export const MainCharts = () => {
   };
 
   const handleMainCharts = async () => {
-    const bitcoinData = await getBitcoinData();
+    const bitcoinData = await getBitcoinData({ vs_currency: currency });
     setBitcoinData(bitcoinData);
   };
 
   useEffect(() => {
     handleMainCharts();
-  }, []);
+  }, [currency]);
 
   return (
     <div>
