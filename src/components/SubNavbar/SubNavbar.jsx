@@ -23,16 +23,16 @@ export const SubNavbar = () => {
   const currencyFill = Math.round((volume?.usd / market?.usd) * 100);
   const bitcoinPercentage = Math.round(btcPercent);
   const ethereumPercentage = Math.round(ethPercent);
-  const marketCurrency = currencyConversion(market)
-  const volumeCurrency = currencyConversion(volume)
 
   const currencyConversion = (data) => {
     const conversion = Object.entries(data || {}).find(([key, value]) => {
       if (key === currency.toLowerCase()) return value;
     });
-    return conversion[1]
+    return conversion || []
   }
-
+  const [marketCurrency, marketValue] = currencyConversion(market) || []
+  const [volumeCurrency, volumeValue] = currencyConversion(volume) || []
+  
   const handleMarketData = async () => {
     const newData = await getMarketData();
     setMarketData(newData);
@@ -56,7 +56,7 @@ export const SubNavbar = () => {
       <div className="flex items-center">
         <div className="px-1">
           {abbreviateCurrency({
-            number: marketCurrency,
+            number: marketValue,
             decimalPlaces: 2,
             currency: currency,
           })}
@@ -77,7 +77,7 @@ export const SubNavbar = () => {
       <div className="flex items-center">
         <div>
           {abbreviateCurrency({
-            number: volumeCurrency,
+            number: volumeValue,
             decimalPlaces: 2,
             currency: currency,
           })}
