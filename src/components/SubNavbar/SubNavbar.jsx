@@ -19,26 +19,19 @@ export const SubNavbar = () => {
     market_cap_change_percentage_24h_usd,
     total_volume: volume,
   } = marketData || {};
-  const { usd } = market || {};
   const { btc: btcPercent, eth: ethPercent } = market_cap_percentage || {};
-  const currencyFill = Math.round((volume?.usd / usd) * 100);
+  const currencyFill = Math.round((volume?.usd / market?.usd) * 100);
   const bitcoinPercentage = Math.round(btcPercent);
   const ethereumPercentage = Math.round(ethPercent);
+  const marketCurrency = currencyConversion(market)
+  const volumeCurrency = currencyConversion(volume)
 
-  const marketVolumeCurrency = {
-    USD: [market?.usd, volume?.usd],
-    GBP: [market?.gbp, volume?.gbp],
-    EUR: [market?.eur, volume?.eur],
-    BTC: [market?.btc, volume?.btc],
-    ETH: [market?.btc, volume?.btc],
-  };
-
-  const marketVolumePair = Object.entries(marketVolumeCurrency).filter((el) => {
-    if (el[0] === currency) return el;
-  });
-  
-  const volumeCurrency = marketVolumePair[0][1][1];
-  const marketCurrency = marketVolumePair[0][1][0];
+  const currencyConversion = (data) => {
+    const conversion = Object.entries(data || {}).find(([key, value]) => {
+      if (key === currency.toLowerCase()) return value;
+    });
+    return conversion[1]
+  }
 
   const handleMarketData = async () => {
     const newData = await getMarketData();
