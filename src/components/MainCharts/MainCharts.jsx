@@ -33,8 +33,6 @@ export const MainCharts = () => {
   const lastPrice = prices[prices?.length - 1] || [];
   const lastVolume = total_volumes[total_volumes?.length - 1] || [];
 
-  console.log("$$$", lastPrice[1]); ///////
-
   const bitcoinPrice = abbreviateCurrency({
     number: lastPrice[1],
     decimalPlaces: 3,

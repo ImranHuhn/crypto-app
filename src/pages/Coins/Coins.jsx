@@ -86,7 +86,7 @@ export const Coins = () => {
       vs_currency: currency,
     });
     const hasMoreCoins = !!newData.length;
-    
+
     if (hasMoreCoins) {
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {
@@ -104,6 +104,22 @@ export const Coins = () => {
   };
 
   useEffect(() => {
+    // handleInfiniteScroll();
+    ////////////
+    const fetchData = async () => {
+      console.log("$$$$")
+      const newData = await getCoins({
+        page: parseInt(page),
+        vs_currency: currency,
+      });
+      const newAllCoins = [...newData];
+      setAllCoins(newAllCoins);
+      // const newAllCoins = [...allCoins, ...newData];
+      // setAllCoins(newAllCoins);
+      console.log(newData)
+    };
+    fetchData();
+    /////////////////
     const query = queryString.stringify({
       selection,
       sort,
@@ -112,7 +128,7 @@ export const Coins = () => {
     if (selection || sort === "") {
       navigate(`/?${query}`);
     }
-  }, [selection, sort]);
+  }, [selection, sort, currency]);
 
   useEffect(() => {
     handleInfiniteScroll();
