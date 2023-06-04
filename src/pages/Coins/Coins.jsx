@@ -106,7 +106,7 @@ export const Coins = () => {
   useEffect(() => {
     const fetchData = async () => {
       const newData = await getCoins({
-        page: parseInt(page),
+        page: parseInt(1),
         vs_currency: currency,
       });
       const newAllCoins = [...newData];
