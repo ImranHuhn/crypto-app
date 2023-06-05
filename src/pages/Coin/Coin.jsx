@@ -1,15 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { getACoin } from "utils/api";
 
 export const Coin = () => {
-  const location = useLocation();
+  const [coin, setCoin] = useState(null);
 
-  let params = useParams();
-  console.log(params);
+  const location = useLocation();
+  const params = useParams();
 
   useEffect(() => {
-    console.log("change");
+    const fetchCoin = async () => {
+      const newCoin = await getACoin(params.coinId);
+      setCoin(newCoin);
+    };
+    fetchCoin();
   }, [location]);
+
+  console.log("state", coin);
 
   return (
     <div className="h-screen w-screen bg-[#FFC0CB] text-black dark:text-white">

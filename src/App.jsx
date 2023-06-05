@@ -5,8 +5,6 @@ import { Coins, Coin, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
 import { CurrencyContext } from "./context/CurrencyContext";
 
-import { getACoin } from "utils/api";
-
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
   const [currency, setCurrency] = useLocalState("currency", "USD");
@@ -39,9 +37,7 @@ export const App = () => {
         {
           path: "coin/:coinId",
           element: <Coin />,
-          loader: ({ params }) => {
-            return params.coinId;
-          },
+          loader: ({ params }) => params.coinId,
         },
         {
           path: "portfolio",
