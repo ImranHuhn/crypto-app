@@ -19,7 +19,7 @@ export const Coin = () => {
   console.log("state", coin);
 
   return (
-    <div className="h-screen w-screen bg-[#FFC0CB] text-black dark:text-white">
+    <div className="h-full w-full bg-[#FFC0CB] text-black dark:text-white">
       Coin page
     </div>
   );
