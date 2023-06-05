@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Navbar } from "components";
 import { Coins, Coin, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
-
 import { CurrencyContext } from "./context/CurrencyContext";
+
+import { getACoin } from "utils/api";
 
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
@@ -36,8 +37,11 @@ export const App = () => {
           element: <Coins />,
         },
         {
-          path: "coin/*",
+          path: "coin/:coinId",
           element: <Coin />,
+          loader: ({ params }) => {
+            return params.coinId;
+          },
         },
         {
           path: "portfolio",

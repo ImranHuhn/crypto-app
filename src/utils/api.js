@@ -41,15 +41,14 @@ export const getBitcoinData = async (query) => {
   }
 };
 
-// will work on this when working on coin page
-// export const getACoin = async (coinId) => {
-//   try {
-//     const { data } = await axios(
-//       `${base}/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
-//     );
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//     return { name: "error", errorMessage: error };
-//   }
-// };
+export const getACoin = async (coinId) => {
+  try {
+    const { data } = await axios(
+      `${base}/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { name: "error", errorMessage: error };
+  }
+};
