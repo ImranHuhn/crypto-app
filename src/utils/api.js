@@ -29,13 +29,26 @@ export const getMarketData = async () => {
   }
 };
 
-export const getBitcoinData = async () => {
+export const getBitcoinData = async (query) => {
+  const newQuery = queryString.stringify(query);
   try {
     const { data } = await axios(
-      `${base}/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`
+      `${base}/coins/bitcoin/market_chart?${newQuery}&days=180&interval=daily`
     );
     return data;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getACoin = async (coinId) => {
+  try {
+    const { data } = await axios(
+      `${base}/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { name: "error", errorMessage: error };
   }
 };

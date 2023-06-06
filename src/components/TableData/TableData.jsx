@@ -14,10 +14,12 @@ import {
 } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import { randomColor } from "utils/colorGenerator";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
+
+import { Link } from "react-router-dom";
 
 export const TableData = (props) => {
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const {
     market_cap_rank,
@@ -38,7 +40,7 @@ export const TableData = (props) => {
   const capitalSymbol = symbol.toUpperCase();
   const price = longCurrencyFormat({
     number: current_price,
-    currency,
+    currency: currency,
   });
   const percentage_1h = percentageFormat(
     price_change_percentage_1h_in_currency,
@@ -52,26 +54,33 @@ export const TableData = (props) => {
     price_change_percentage_7d_in_currency,
     2
   );
-  const volume = abbreviateCurrency({
-    number: total_volume,
-    decimalPlaces: 2,
-    currency,
-  });
-  const market = abbreviateCurrency({
-    number: market_cap,
-    decimalPlaces: 2,
-    currency,
-  });
-  const circulatingSupply = abbreviateCurrency({
-    number: circulating_supply,
-    decimalPlaces: 2,
-    currency,
-  });
-  const totalSupply = abbreviateCurrency({
-    number: total_supply,
-    decimalPlaces: 2,
-    currency,
-  });
+
+  const abbreviate = abbreviateCurrency(currency);
+  const volume = abbreviate({ number: total_volume });
+  const market = abbreviate({ number: market_cap });
+  const circulatingSupply = abbreviate({ number: circulating_supply });
+  const totalSupply = abbreviate({ number: total_supply });
+
+  // const volume = abbreviateCurrency({
+  //   number: total_volume,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const market = abbreviateCurrency({
+  //   number: market_cap,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const circulatingSupply = abbreviateCurrency({
+  //   number: circulating_supply,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const totalSupply = abbreviateCurrency({
+  //   number: total_supply,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
   const color = randomColor();
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
@@ -115,7 +124,9 @@ export const TableData = (props) => {
       <td>
         <div className="flex">
           <img className="w-6" src={image} />
-          {capitalizedId} ({capitalSymbol})
+          <Link to={`/coin/${id}`}>
+            {capitalizedId} ({capitalSymbol})
+          </Link>
         </div>
       </td>
       <td>{price}</td>

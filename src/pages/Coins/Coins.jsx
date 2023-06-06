@@ -6,7 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getCoins } from "utils/api";
 import { MainCharts, TableHead, TableData } from "components";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 export const Coins = () => {
   const [allCoins, setAllCoins] = useState([]);
@@ -19,7 +19,7 @@ export const Coins = () => {
   const [sort, setSort] = useState(null);
   const [parsed, setParsed] = useState(null);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
   const navigate = useNavigate();
 
   const tableColumns = {
@@ -86,9 +86,7 @@ export const Coins = () => {
       vs_currency: currency,
     });
     const hasMoreCoins = !!newData.length;
-    // for testing purposes //////////////////////////
-    // localStorage.setItem("storedData", JSON.stringify(newAllCoins));
-    ////////////////////////////
+
     if (hasMoreCoins) {
       const newAllCoins = [...allCoins, ...newData];
       setTimeout(() => {
@@ -106,13 +104,24 @@ export const Coins = () => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const newData = await getCoins({
+        page: parseInt(1),
+        vs_currency: currency,
+      });
+      const newAllCoins = [...newData];
+      setAllCoins(newAllCoins);
+    };
+    fetchData();
     const query = queryString.stringify({
       selection,
       sort,
       vs_currency: currency,
     });
-    navigate(`/?${query}`);
-  }, [selection, sort]);
+    if (selection || sort === "") {
+      navigate(`/?${query}`);
+    }
+  }, [selection, sort, currency]);
 
   useEffect(() => {
     handleInfiniteScroll();

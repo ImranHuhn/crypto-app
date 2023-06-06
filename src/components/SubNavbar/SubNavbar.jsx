@@ -4,27 +4,35 @@ import { abbreviateCurrency } from "utils/numberFormat";
 import { ChevronTrendIcon } from "Icons";
 import bitcoin from "assets/bitcoin.webp";
 import ethereum from "assets/ethereum.webp";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 export const SubNavbar = () => {
   const [marketData, setMarketData] = useState(null);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const {
     active_cryptocurrencies,
     markets,
-    total_market_cap,
+    total_market_cap: market,
     market_cap_percentage,
     market_cap_change_percentage_24h_usd,
+    total_volume: volume,
   } = marketData || {};
-  const { usd } = total_market_cap || {};
-  const { btc, eth } = market_cap_percentage || {};
-  const volume = marketData?.total_volume;
-  const currencyFill = Math.round((volume?.usd / usd) * 100);
-  const bitcoinPercentage = Math.round(btc);
-  const ethereumPercentage = Math.round(eth);
+  const { btc: btcPercent, eth: ethPercent } = market_cap_percentage || {};
+  const currencyFill = Math.round((volume?.usd / market?.usd) * 100);
+  const bitcoinPercentage = Math.round(btcPercent);
+  const ethereumPercentage = Math.round(ethPercent);
 
+  const currencyConversion = (data) => {
+    const conversion = Object.entries(data || {}).find(([key, value]) => {
+      if (key === currency.toLowerCase()) return value;
+    });
+    return conversion || []
+  }
+  const [marketCurrency, marketValue] = currencyConversion(market) || []
+  const [volumeCurrency, volumeValue] = currencyConversion(volume) || []
+  
   const handleMarketData = async () => {
     const newData = await getMarketData();
     setMarketData(newData);
@@ -33,6 +41,10 @@ export const SubNavbar = () => {
   useEffect(() => {
     handleMarketData();
   }, []);
+
+  const abbreviate = abbreviateCurrency(currency);
+  const abbreviateMarket = abbreviate({number: marketValue})
+  const abbreviateVolume = abbreviate({number: volumeValue})
 
   return (
     <div className="flex justify-around w-4/5">
@@ -47,11 +59,12 @@ export const SubNavbar = () => {
       <h4 className="my-auto mx-1">&#9679;</h4>
       <div className="flex items-center">
         <div className="px-1">
-          {abbreviateCurrency({
-            number: usd,
+          {abbreviateMarket}
+          {/* {abbreviateCurrency({
+            number: marketValue,
             decimalPlaces: 2,
-            currency,
-          })}
+            currency: currency,
+          })} */}
         </div>
         <div
           className={`w-5 h-5 ${
@@ -68,11 +81,12 @@ export const SubNavbar = () => {
       <h4 className="my-auto mx-1">&#9679;</h4>
       <div className="flex items-center">
         <div>
-          {abbreviateCurrency({
-            number: volume?.usd,
+          {abbreviateVolume}
+          {/* {abbreviateCurrency({
+            number: volumeValue,
             decimalPlaces: 2,
-            currency,
-          })}
+            currency: currency,
+          })} */}
         </div>
         <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
           <div

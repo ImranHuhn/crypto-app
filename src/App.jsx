@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Navbar } from "components";
-import { Coins, Portfolio } from "pages";
+import { Coins, Coin, Portfolio } from "pages";
 import { useLocalState } from "./hooks/useLocalState";
-
-import { Context } from "./context";
+import { CurrencyContext } from "./context/CurrencyContext";
 
 export const App = () => {
   const [on, setOn] = useLocalState("themeSetting", false);
@@ -28,15 +27,17 @@ export const App = () => {
     {
       path: "/",
       element: (
-        <Navbar
-          handleThemeClick={handleClick}
-          getCurrency={getCurrency}
-        />
+        <Navbar handleThemeClick={handleClick} getCurrency={getCurrency} />
       ),
       children: [
         {
           index: true,
           element: <Coins />,
+        },
+        {
+          path: "coin/:coinId",
+          element: <Coin />,
+          loader: ({ params }) => params.coinId,
         },
         {
           path: "portfolio",
@@ -49,9 +50,9 @@ export const App = () => {
   return (
     <div className={on ? "dark" : ""}>
       <div className="bg-[#ededed] dark:bg-[#1f2128]">
-        <Context.Provider value={currency}>
+        <CurrencyContext.Provider value={currency}>
           <RouterProvider router={router} />
-        </Context.Provider>
+        </CurrencyContext.Provider>
       </div>
     </div>
   );

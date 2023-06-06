@@ -13,7 +13,7 @@ import moment from "moment";
 import { getBitcoinData } from "utils/api";
 import { getDateValuePairs } from "utils/objectEntries";
 import { abbreviateCurrency } from "utils/numberFormat";
-import { Context } from "../../context";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 ChartJS.register(
   CategoryScale,
@@ -27,20 +27,21 @@ ChartJS.register(
 export const MainCharts = () => {
   const [bitcoinData, setBitcoinData] = useState(null);
 
-  const currency = useContext(Context);
+  const currency = useContext(CurrencyContext);
 
   const { prices = [], total_volumes = [] } = bitcoinData || {};
   const lastPrice = prices[prices?.length - 1] || [];
   const lastVolume = total_volumes[total_volumes?.length - 1] || [];
+
   const bitcoinPrice = abbreviateCurrency({
     number: lastPrice[1],
     decimalPlaces: 3,
-    currency,
+    currency: currency,
   });
   const bitcoinVolume = abbreviateCurrency({
     number: lastVolume[1],
     decimalPlaces: 3,
-    currency,
+    currency: currency,
   });
   const currentDate = moment().format("MMMM Do YYYY");
   const { time: marketTime, price: marketPrice } = getDateValuePairs(prices);
@@ -101,13 +102,13 @@ export const MainCharts = () => {
   };
 
   const handleMainCharts = async () => {
-    const bitcoinData = await getBitcoinData();
+    const bitcoinData = await getBitcoinData({ vs_currency: currency });
     setBitcoinData(bitcoinData);
   };
 
   useEffect(() => {
     handleMainCharts();
-  }, []);
+  }, [currency]);
 
   return (
     <div>
