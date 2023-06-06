@@ -2,16 +2,20 @@ export const percentageFormat = (number) => {
   return Math.abs(number).toFixed(1).concat("%")
 }
 
-export const abbreviateCurrency = (value) => {
+//currying technique to prevent repetition
+export const abbreviateCurrency = (currency) => (
+  value = { decimalPlaces: 2 }
+) => {
   return Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
     maximumFractionDigits: value.decimalPlaces,
     minimumFractionDigits: 0,
     style: "currency",
-    currency: value.currency,
+    currency
   }).format(value.number);
 };
+
 
 export const longCurrencyFormat = (value) => {
   return Intl.NumberFormat("en-US", {

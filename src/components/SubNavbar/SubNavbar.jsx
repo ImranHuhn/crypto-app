@@ -42,6 +42,10 @@ export const SubNavbar = () => {
     handleMarketData();
   }, []);
 
+  const abbreviate = abbreviateCurrency(currency);
+  const abbreviateMarket = abbreviate({number: marketValue})
+  const abbreviateVolume = abbreviate({number: volumeValue})
+
   return (
     <div className="flex justify-around w-4/5">
       <div className="flex">
@@ -55,11 +59,12 @@ export const SubNavbar = () => {
       <h4 className="my-auto mx-1">&#9679;</h4>
       <div className="flex items-center">
         <div className="px-1">
-          {abbreviateCurrency({
+          {abbreviateMarket}
+          {/* {abbreviateCurrency({
             number: marketValue,
             decimalPlaces: 2,
             currency: currency,
-          })}
+          })} */}
         </div>
         <div
           className={`w-5 h-5 ${
@@ -76,11 +81,12 @@ export const SubNavbar = () => {
       <h4 className="my-auto mx-1">&#9679;</h4>
       <div className="flex items-center">
         <div>
-          {abbreviateCurrency({
+          {abbreviateVolume}
+          {/* {abbreviateCurrency({
             number: volumeValue,
             decimalPlaces: 2,
             currency: currency,
-          })}
+          })} */}
         </div>
         <div className="bg-[#2067cd] w-10 h-3 rounded-xl overflow-hidden">
           <div

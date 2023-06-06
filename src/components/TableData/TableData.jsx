@@ -54,26 +54,33 @@ export const TableData = (props) => {
     price_change_percentage_7d_in_currency,
     2
   );
-  const volume = abbreviateCurrency({
-    number: total_volume,
-    decimalPlaces: 2,
-    currency: currency,
-  });
-  const market = abbreviateCurrency({
-    number: market_cap,
-    decimalPlaces: 2,
-    currency: currency,
-  });
-  const circulatingSupply = abbreviateCurrency({
-    number: circulating_supply,
-    decimalPlaces: 2,
-    currency: currency,
-  });
-  const totalSupply = abbreviateCurrency({
-    number: total_supply,
-    decimalPlaces: 2,
-    currency: currency,
-  });
+
+  const abbreviate = abbreviateCurrency(currency);
+  const volume = abbreviate({ number: total_volume });
+  const market = abbreviate({ number: market_cap });
+  const circulatingSupply = abbreviate({ number: circulating_supply });
+  const totalSupply = abbreviate({ number: total_supply });
+
+  // const volume = abbreviateCurrency({
+  //   number: total_volume,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const market = abbreviateCurrency({
+  //   number: market_cap,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const circulatingSupply = abbreviateCurrency({
+  //   number: circulating_supply,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
+  // const totalSupply = abbreviateCurrency({
+  //   number: total_supply,
+  //   decimalPlaces: 2,
+  //   currency: currency,
+  // });
   const color = randomColor();
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
